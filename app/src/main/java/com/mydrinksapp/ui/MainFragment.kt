@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,6 +42,12 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         binding = FragmentMainBinding.bind(view)
 
         setupRecyclerView()
+        setupSearView()
+        setupObserver()
+
+    }
+
+    private fun setupObserver() {
         viewModel.fectchTragosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -60,7 +67,22 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 }
             }
         })
+    }
 
+    private fun setupSearView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setTrago(query!!)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
     }
 
     private fun setupRecyclerView() {
