@@ -20,7 +20,7 @@ data class DrinkList(
     @SerializedName("drinks") val drinkList: List<Drink>
 )
 
-@Entity
+@Entity(tableName = "tragosEntity")
 data class DrinkEntity(
     @PrimaryKey val tragoId: String,
     @ColumnInfo(name = "trago_imagen") val imagen: String = "",
