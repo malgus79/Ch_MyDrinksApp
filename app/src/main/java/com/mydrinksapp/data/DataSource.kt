@@ -10,3 +10,14 @@ class DataSource {
         return Resource.Success(RetrofitClient.webservice.getTragoByName(tragoName).drinkList)
     }
 }
+
+/*
+suspend fun getTragoByName(tragoName: String): Resource<List<Drink>> {
+    val resultRequest = RetrofitClient.webservice.getTragoByName(tragoName).drinkList
+    resultRequest?.let {
+        return Resource.Success(it)
+    }
+    val e = Exception("Result Not Found!!")
+    return Resource.Failure(e)
+}
+*/
