@@ -8,17 +8,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.data.DataSource
+import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.databinding.FragmentMainBinding
 import com.mydrinksapp.domain.RepoImpl
 import com.mydrinksapp.ui.viewmodel.MainViewModel
 import com.mydrinksapp.ui.viewmodel.VMFactory
 import com.mydrinksapp.vo.Resource
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
@@ -46,7 +48,7 @@ class MainFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     binding.progessBar.visibility = View.GONE
-                    binding.rvTragos.adapter = MainAdapter(requireContext(), result.data)
+                    binding.rvTragos.adapter = MainAdapter(requireContext(), result.data, this)
                 }
                 is Resource.Failure -> {
                     binding.progessBar.visibility = View.GONE
@@ -69,5 +71,11 @@ class MainFragment : Fragment() {
                 DividerItemDecoration.HORIZONTAL
             )
         )
+    }
+
+    override fun onTragoClick(drink: Drink) {
+        val bundle = Bundle()
+        bundle.putParcelable("drink", drink)
+        findNavController().navigate(R.id.tragosDetalleFragment, bundle)
     }
 }

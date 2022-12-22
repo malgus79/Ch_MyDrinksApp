@@ -11,8 +11,16 @@ import com.mydrinksapp.R
 import com.mydrinksapp.base.BaseViewHolder
 import com.mydrinksapp.data.model.Drink
 
-class MainAdapter(private val context: Context, private val tragosList: List<Drink>) :
+class MainAdapter(
+    private val context: Context,
+    private val tragosList: List<Drink>,
+    private val itemClickListener: OnTragoClickListener
+) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
+
+    interface OnTragoClickListener {
+        fun onTragoClick(drink: Drink)
+    }
 
     //retornar una lista, la inner class (que se va a inflar ?)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -40,7 +48,7 @@ class MainAdapter(private val context: Context, private val tragosList: List<Dri
                 .into(itemView.findViewById(R.id.img_trago))
             itemView.findViewById<TextView>(R.id.txt_titulo).text = item.nombre
             itemView.findViewById<TextView>(R.id.txt_descripcion).text = item.descripcion
-
+            itemView.setOnClickListener { itemClickListener.onTragoClick(item) }
         }
     }
 }
