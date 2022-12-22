@@ -7,17 +7,22 @@
     android:orientation="vertical"
     tools:context=".ui.MainFragment">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/progessBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="LISTA TRAGOS"
-        android:textSize="25sp"/>
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-    <Button
-        android:id="@+id/btn_ir_detalles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ir a detalle"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tragos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
