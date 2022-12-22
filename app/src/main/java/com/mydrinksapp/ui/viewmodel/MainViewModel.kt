@@ -1,9 +1,11 @@
 package com.mydrinksapp.ui.viewmodel
 
 import androidx.lifecycle.*
+import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.domain.Repo
 import com.mydrinksapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainViewModel(private val repo: Repo) : ViewModel() {
 
@@ -26,6 +28,21 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
             }
+        }
+    }
+
+    fun guardarTrago(trago:DrinkEntity) {
+        viewModelScope.launch {
+            repo.insertTrago(trago)
+        }
+    }
+
+    fun getTragosFavoritos() = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try {
+            emit(repo.getTragosFavoritos())
+        } catch (e: Exception) {
+            emit(Resource.Failure(e))
         }
     }
 }

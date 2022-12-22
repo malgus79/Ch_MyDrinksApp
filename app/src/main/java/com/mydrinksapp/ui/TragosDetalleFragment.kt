@@ -4,16 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.mydrinksapp.AppDatabase
 import com.mydrinksapp.R
+import com.mydrinksapp.data.DataSource
 import com.mydrinksapp.data.model.Drink
+import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.databinding.FragmentTragosDetalleBinding
+import com.mydrinksapp.domain.RepoImpl
+import com.mydrinksapp.ui.viewmodel.MainViewModel
+import com.mydrinksapp.ui.viewmodel.VMFactory
 
 class TragosDetalleFragment : Fragment() {
 
     private lateinit var binding: FragmentTragosDetalleBinding
     private lateinit var drink: Drink
+    private val viewModel by activityViewModels<MainViewModel> {
+        VMFactory(
+            RepoImpl(
+                DataSource(
+                    AppDatabase.getDatabase(requireActivity().applicationContext)
+                )
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +60,20 @@ class TragosDetalleFragment : Fragment() {
             binding.txtHasAlcohol.text = "Bebida sin alcohol"
         } else {
             binding.txtHasAlcohol.text = "Bebida con alcohol"
+        }
+
+        binding.btnGuardarTrago.setOnClickListener {
+            viewModel.guardarTrago(
+                DrinkEntity(
+                    drink.tragoId,
+                    drink.imagen,
+                    drink.nombre,
+                    drink.descripcion,
+                    drink.hasAlcohol
+                )
+            )
+            Toast.makeText(requireContext(), "Se guardó el trago en favoritos", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }
