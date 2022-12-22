@@ -8,7 +8,8 @@ import kotlinx.parcelize.Parcelize
 data class Drink(
     @SerializedName("strDrinkThumb") val imagen: String = "",
     @SerializedName("strDrink") val nombre: String = "",
-    @SerializedName("strInstructions") val descripcion: String = ""
+    @SerializedName("strInstructions") val descripcion: String = "",
+    @SerializedName("strAlcoholic") val hasAlcohol: String = "Non_Alcoholic"
 ) : Parcelable
 
 data class DrinkList(
