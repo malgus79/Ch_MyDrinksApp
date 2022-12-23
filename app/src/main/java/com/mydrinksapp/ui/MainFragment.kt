@@ -54,10 +54,16 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         viewModel.fectchTragosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
+                    binding.emptyContainer.root.visibility = View.GONE
                     binding.progessBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
                     binding.progessBar.visibility = View.GONE
+                    if (result.data.toMutableList().isEmpty()) {
+                        binding.emptyContainer.root.visibility = View.VISIBLE
+                        return@Observer
+                    }
+                    binding.emptyContainer.root.visibility = View.GONE
                     binding.rvTragos.adapter = MainAdapter(requireContext(), result.data, this)
                 }
                 is Resource.Failure -> {
@@ -68,6 +74,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                else -> {}
             }
         })
     }
@@ -88,6 +95,12 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         })
     }
 
+    override fun onTragoClick(drink: Drink, position: Int) {
+        val bundle = Bundle()
+        bundle.putParcelable("drink", drink)
+        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
+    }
+
     private fun setupRecyclerView() {
         binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTragos.addItemDecoration(
@@ -96,11 +109,5 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 DividerItemDecoration.HORIZONTAL
             )
         )
-    }
-
-    override fun onTragoClick(drink: Drink, position:Int) {
-        val bundle = Bundle()
-        bundle.putParcelable("drink", drink)
-        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
     }
 }

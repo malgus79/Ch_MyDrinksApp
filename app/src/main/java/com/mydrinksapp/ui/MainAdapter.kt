@@ -22,6 +22,11 @@ class MainAdapter(
         fun onTragoClick(drink: Drink, position: Int)
     }
 
+//    fun deleteDrink(position: Int){
+//        tragosList.removeAt(position)
+//        notifyItemRemoved(position)
+//    }
+
     //retornar una lista, la inner class (que se va a inflar ?)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         return MainViewHolder(
