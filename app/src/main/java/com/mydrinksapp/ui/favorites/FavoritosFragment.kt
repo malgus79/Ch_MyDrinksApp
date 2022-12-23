@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
+import com.mydrinksapp.data.model.asDrinkList
 import com.mydrinksapp.databinding.FragmentFavoritosBinding
 import com.mydrinksapp.ui.MainAdapter
 import com.mydrinksapp.ui.viewmodel.MainViewModel
-import com.mydrinksapp.utils.ext.asDrinkList
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 

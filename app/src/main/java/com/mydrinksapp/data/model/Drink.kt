@@ -17,7 +17,7 @@ data class Drink(
 ) : Parcelable
 
 data class DrinkList(
-    @SerializedName("drinks") val drinkList: List<Drink>
+    @SerializedName("drinks") val drinkList: List<Drink> = listOf()
 )
 
 @Entity(tableName = "tragosEntity")
@@ -28,3 +28,14 @@ data class DrinkEntity(
     @ColumnInfo(name = "trago_descripcion") val descripcion: String = "",
     @ColumnInfo(name = "trago_has_alcohol") val hasAlcohol: String = "Non_Alcoholic"
 )
+
+fun List<DrinkEntity>.asDrinkList(): MutableList<Drink> =
+    this.map {
+        Drink(
+            it.tragoId,
+            it.imagen,
+            it.nombre,
+            it.descripcion,
+            it.hasAlcohol
+        )
+    }.toMutableList()
