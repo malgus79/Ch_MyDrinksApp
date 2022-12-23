@@ -1,4 +1,4 @@
-package com.mydrinksapp.ui
+package com.mydrinksapp.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.databinding.FragmentFavoritosBinding
+import com.mydrinksapp.ui.MainAdapter
 import com.mydrinksapp.ui.viewmodel.MainViewModel
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +52,7 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 is Resource.Success -> {
                     val lista: List<Drink> = result.data.map {
                         Drink(it.tragoId, it.imagen, it.nombre, it.descripcion, it.hasAlcohol)
-                    }
+                    }.toMutableList()
                     adapter = MainAdapter(requireContext(), lista, this)
                     binding.rvTragosFavoritos.adapter = adapter
 

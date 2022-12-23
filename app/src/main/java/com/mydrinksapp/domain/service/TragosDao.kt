@@ -1,4 +1,4 @@
-package com.mydrinksapp.domain
+package com.mydrinksapp.domain.service
 
 import androidx.room.*
 import com.mydrinksapp.data.model.DrinkEntity

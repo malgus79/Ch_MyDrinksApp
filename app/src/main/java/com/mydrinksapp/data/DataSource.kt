@@ -1,4 +1,4 @@
-package com.mydrinksapp.domain
+package com.mydrinksapp.data
 
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity

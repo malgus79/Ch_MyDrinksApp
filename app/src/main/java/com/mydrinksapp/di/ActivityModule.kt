@@ -1,7 +1,7 @@
 package com.mydrinksapp.di
 
+import com.mydrinksapp.data.DataSource
 import com.mydrinksapp.data.DataSourceImpl
-import com.mydrinksapp.domain.DataSource
 import com.mydrinksapp.domain.Repo
 import com.mydrinksapp.domain.RepoImpl
 import dagger.Binds

@@ -2,9 +2,8 @@ package com.mydrinksapp.data
 
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
-import com.mydrinksapp.domain.DataSource
-import com.mydrinksapp.domain.TragosDao
-import com.mydrinksapp.domain.WebService
+import com.mydrinksapp.domain.service.TragosDao
+import com.mydrinksapp.domain.service.WebService
 import com.mydrinksapp.vo.Resource
 import javax.inject.Inject
 

@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.mydrinksapp.AppDatabase
-import com.mydrinksapp.domain.WebService
+import com.mydrinksapp.domain.service.WebService
+import com.mydrinksapp.utils.AppConstants.BASE_URL
+import com.mydrinksapp.utils.AppConstants.TABLE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +26,7 @@ object AppModule {
         Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "tabla_tragos")
+            TABLE_NAME)
             .build()
 
     @Singleton
@@ -34,7 +36,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRetrofitInstance() = Retrofit.Builder()
-        .baseUrl("https://www.thecocktaildb.com/api/json/v1/1/")
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
         .build()
 

@@ -1,4 +1,4 @@
-package com.mydrinksapp.domain
+package com.mydrinksapp.domain.service
 
 import com.mydrinksapp.data.model.DrinkList
 import retrofit2.http.GET

@@ -1,4 +1,4 @@
-package com.mydrinksapp.ui
+package com.mydrinksapp.ui.cocktaildetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
