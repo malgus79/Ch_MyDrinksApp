@@ -39,7 +39,7 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         }
     }
 
-    val getTragosFavoritos = liveData(Dispatchers.IO) {
+    fun getTragosFavoritos() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
         emit(Resource.Loading())
         try{
             emit(repo.getTragosFavoritos())
