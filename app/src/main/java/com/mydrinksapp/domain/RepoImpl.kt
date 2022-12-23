@@ -1,6 +1,5 @@
 package com.mydrinksapp.domain
 
-import com.mydrinksapp.data.DataSource
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.vo.Resource

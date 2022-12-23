@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.AppDatabase
 import com.mydrinksapp.R
-import com.mydrinksapp.data.DataSource
+import com.mydrinksapp.data.DataSourceImpl
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.databinding.FragmentFavoritosBinding
@@ -27,7 +27,7 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
     private val viewModel by activityViewModels<MainViewModel> {
         VMFactory(
             RepoImpl(
-                DataSource(
+                DataSourceImpl(
                     AppDatabase.getDatabase(requireActivity().applicationContext)
                 )
             )
