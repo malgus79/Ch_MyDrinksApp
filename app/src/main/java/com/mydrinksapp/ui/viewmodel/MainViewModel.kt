@@ -45,4 +45,10 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
             emit(Resource.Failure(e))
         }
     }
+
+    fun deleteDrink(drink: DrinkEntity) {
+        viewModelScope.launch {
+            repo.deleteDrink(drink)
+        }
+    }
 }

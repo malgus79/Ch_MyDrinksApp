@@ -108,7 +108,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         )
     }
 
-    override fun onTragoClick(drink: Drink) {
+    override fun onTragoClick(drink: Drink, position:Int) {
         val bundle = Bundle()
         bundle.putParcelable("drink", drink)
         findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)

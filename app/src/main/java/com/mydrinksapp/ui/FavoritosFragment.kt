@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.mydrinksapp.AppDatabase
 import com.mydrinksapp.R
 import com.mydrinksapp.data.DataSource
 import com.mydrinksapp.data.model.Drink
+import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.databinding.FragmentFavoritosBinding
 import com.mydrinksapp.domain.RepoImpl
 import com.mydrinksapp.ui.viewmodel.MainViewModel
@@ -78,7 +80,15 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
         )
     }
 
-    override fun onTragoClick(drink: Drink) {
+    override fun onTragoClick(drink: Drink, position: Int) {
+        viewModel.deleteDrink(DrinkEntity(drink.tragoId, drink.imagen, drink.nombre, drink.descripcion, drink.hasAlcohol))
+        binding.rvTragosFavoritos.adapter?.notifyItemRemoved(position)
+//        binding.rvTragosFavoritos.adapter?.notifyItemRangeRemoved(
+//            position,
+//            binding.rvTragosFavoritos.adapter?.itemCount!!
+//        )
 
+//        adapter.deleteDrink(position)
+        Toast.makeText(requireContext(), "Se borró el trago de favorito", Toast.LENGTH_SHORT).show()
     }
 }

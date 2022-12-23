@@ -19,7 +19,7 @@ class MainAdapter(
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnTragoClickListener {
-        fun onTragoClick(drink: Drink)
+        fun onTragoClick(drink: Drink, position: Int)
     }
 
     //retornar una lista, la inner class (que se va a inflar ?)
@@ -48,7 +48,7 @@ class MainAdapter(
                 .into(itemView.findViewById(R.id.img_trago))
             itemView.findViewById<TextView>(R.id.txt_titulo).text = item.nombre
             itemView.findViewById<TextView>(R.id.txt_descripcion).text = item.descripcion
-            itemView.setOnClickListener { itemClickListener.onTragoClick(item) }
+            itemView.setOnClickListener { itemClickListener.onTragoClick(item, position) }
         }
     }
 }

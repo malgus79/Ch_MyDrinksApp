@@ -19,6 +19,10 @@ class DataSource(private val appDatabase: AppDatabase) {
     suspend fun getTragosFavoritos(): Resource<List<DrinkEntity>> {
         return Resource.Success(appDatabase.tragoDao().getAllFavoriteDrinks())
     }
+
+    suspend fun deleteDrink(drink: DrinkEntity) {
+        appDatabase.tragoDao().deleteDrink(drink)
+    }
 }
 
 /*
