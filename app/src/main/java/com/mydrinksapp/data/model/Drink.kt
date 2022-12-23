@@ -39,3 +39,12 @@ fun List<DrinkEntity>.asDrinkList(): MutableList<Drink> =
             it.hasAlcohol
         )
     }.toMutableList()
+
+fun Drink.asDrinkEntity(): DrinkEntity =
+    DrinkEntity(
+        this.tragoId,
+        this.imagen,
+        this.nombre,
+        this.descripcion,
+        this.hasAlcohol
+    )

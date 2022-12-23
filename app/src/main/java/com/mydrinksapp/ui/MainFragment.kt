@@ -21,11 +21,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private lateinit var binding: FragmentMainBinding
+    private lateinit var mainAdapter:MainAdapter
     private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        mainAdapter = MainAdapter(requireContext(), this)
     }
 
     override fun onCreateView(
@@ -58,12 +60,12 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 }
                 is Resource.Success -> {
                     binding.progessBar.visibility = View.GONE
-                    if (result.data.toMutableList().isEmpty()) {
+                    if (result.data.isEmpty()) {
                         binding.emptyContainer.root.visibility = View.VISIBLE
                         return@Observer
                     }
+                    mainAdapter.setCocktailList(result.data)
                     binding.emptyContainer.root.visibility = View.GONE
-                    binding.rvTragos.adapter = MainAdapter(requireContext(), result.data, this)
                 }
                 is Resource.Failure -> {
                     binding.progessBar.visibility = View.GONE
@@ -109,7 +111,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         }
     }
 
-    override fun onTragoClick(drink: Drink, position: Int) {
+    override fun onCocktailClick(drink: Drink, position: Int) {
         val bundle = Bundle()
         bundle.putParcelable("drink", drink)
         findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
@@ -117,11 +119,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private fun setupRecyclerView() {
         binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragos.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.HORIZONTAL
-            )
-        )
+        binding.rvTragos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.HORIZONTAL))
+        binding.rvTragos.adapter = mainAdapter
     }
 }
