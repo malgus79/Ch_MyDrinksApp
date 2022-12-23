@@ -12,28 +12,18 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mydrinksapp.AppDatabase
 import com.mydrinksapp.R
-import com.mydrinksapp.data.DataSourceImpl
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.databinding.FragmentMainBinding
-import com.mydrinksapp.domain.RepoImpl
 import com.mydrinksapp.ui.viewmodel.MainViewModel
-import com.mydrinksapp.ui.viewmodel.VMFactory
 import com.mydrinksapp.vo.Resource
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private lateinit var binding: FragmentMainBinding
-    private val viewModel by activityViewModels<MainViewModel> {
-        VMFactory(
-            RepoImpl(
-                DataSourceImpl(
-                    AppDatabase.getDatabase(requireActivity().applicationContext)
-                )
-            )
-        )
-    }
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
