@@ -4,10 +4,13 @@ import androidx.lifecycle.*
 import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.domain.Repo
 import com.mydrinksapp.vo.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repo: Repo) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
 
     private val tragosData = MutableLiveData<String>()
 

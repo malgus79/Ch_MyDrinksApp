@@ -3,8 +3,9 @@ package com.mydrinksapp.domain
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.vo.Resource
+import javax.inject.Inject
 
-class RepoImpl(private val datasource: DataSource) : Repo {
+class RepoImpl @Inject constructor(private val datasource: DataSource) : Repo {
 
     override suspend fun getTragosList(tragoName: String): Resource<List<Drink>> {
         return datasource.getTragoByName(tragoName)
