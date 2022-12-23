@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private lateinit var binding: FragmentFavoritosBinding
+    private lateinit var adapter: MainAdapter
     private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +52,8 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
                     val lista: List<Drink> = result.data.map {
                         Drink(it.tragoId, it.imagen, it.nombre, it.descripcion, it.hasAlcohol)
                     }
-                    binding.rvTragosFavoritos.adapter = MainAdapter(requireContext(), lista, this)
+                    adapter = MainAdapter(requireContext(), lista, this)
+                    binding.rvTragosFavoritos.adapter = adapter
 
                     //Log.d("LISTA DE FAVORITOS: ", "${result.data}")
                 }

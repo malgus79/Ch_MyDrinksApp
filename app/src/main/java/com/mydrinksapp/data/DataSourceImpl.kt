@@ -4,14 +4,17 @@ import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.domain.DataSource
 import com.mydrinksapp.domain.TragosDao
+import com.mydrinksapp.domain.WebService
 import com.mydrinksapp.vo.Resource
-import com.mydrinksapp.vo.RetrofitClient
 import javax.inject.Inject
 
-class DataSourceImpl @Inject constructor(private val tragosDao: TragosDao) : DataSource {
+class DataSourceImpl @Inject constructor(
+    private val tragosDao: TragosDao,
+    private val webService: WebService
+) : DataSource {
 
     override suspend fun getTragoByName(tragoName: String): Resource<List<Drink>> {
-        return Resource.Success(RetrofitClient.webservice.getTragoByName(tragoName).drinkList)
+        return Resource.Success(webService.getTragoByName(tragoName).drinkList)
     }
 
     override suspend fun insertTragoIntoRoom(trago: DrinkEntity) {
