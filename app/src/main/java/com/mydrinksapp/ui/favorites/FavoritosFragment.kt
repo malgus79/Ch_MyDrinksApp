@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
-import com.mydrinksapp.data.model.asDrinkList
 import com.mydrinksapp.databinding.FragmentFavoritosBinding
 import com.mydrinksapp.ui.MainAdapter
 import com.mydrinksapp.ui.viewmodel.MainViewModel
@@ -47,7 +46,7 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
             when (result) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    val lista = result.data.asDrinkList()
+                    val lista = result.data
                     adapter = MainAdapter(requireContext(), lista, this)
                     binding.rvTragosFavoritos.adapter = adapter
 

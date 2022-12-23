@@ -2,6 +2,7 @@ package com.mydrinksapp.data
 
 import com.mydrinksapp.data.model.Drink
 import com.mydrinksapp.data.model.DrinkEntity
+import com.mydrinksapp.data.model.asDrinkList
 import com.mydrinksapp.domain.service.TragosDao
 import com.mydrinksapp.domain.service.WebService
 import com.mydrinksapp.vo.Resource
@@ -20,8 +21,8 @@ class DataSourceImpl @Inject constructor(
         tragosDao.insertFavorite(trago)
     }
 
-    override suspend fun getTragosFavoritos(): Resource<List<DrinkEntity>> {
-        return Resource.Success(tragosDao.getAllFavoriteDrinks())
+    override suspend fun getTragosFavoritos(): Resource<MutableList<Drink>> {
+        return Resource.Success(tragosDao.getAllFavoriteDrinks().asDrinkList())
     }
 
     override suspend fun deleteDrink(drink: DrinkEntity) {
