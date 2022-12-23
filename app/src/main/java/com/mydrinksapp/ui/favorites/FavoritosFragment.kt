@@ -16,6 +16,7 @@ import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.databinding.FragmentFavoritosBinding
 import com.mydrinksapp.ui.MainAdapter
 import com.mydrinksapp.ui.viewmodel.MainViewModel
+import com.mydrinksapp.utils.ext.asDrinkList
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,10 +26,6 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
     private lateinit var binding: FragmentFavoritosBinding
     private lateinit var adapter: MainAdapter
     private val viewModel by activityViewModels<MainViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,15 +47,19 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
             when (result) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    val lista: List<Drink> = result.data.map {
-                        Drink(it.tragoId, it.imagen, it.nombre, it.descripcion, it.hasAlcohol)
-                    }.toMutableList()
+                    val lista = result.data.asDrinkList()
                     adapter = MainAdapter(requireContext(), lista, this)
                     binding.rvTragosFavoritos.adapter = adapter
 
                     //Log.d("LISTA DE FAVORITOS: ", "${result.data}")
                 }
-                is Resource.Failure -> {}
+                is Resource.Failure -> {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ocurrió un error ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         })
     }

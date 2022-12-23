@@ -46,11 +46,6 @@ class TragosDetalleFragment : Fragment() {
             .into(binding.imgTrago)
         binding.tragoTitle.text = drink.nombre
         binding.tragoDesc.text = drink.descripcion
-        if (drink.hasAlcohol.equals("Non_Alcoholic")) {
-            binding.txtHasAlcohol.text = "Bebida sin alcohol"
-        } else {
-            binding.txtHasAlcohol.text = "Bebida con alcohol"
-        }
 
         binding.btnGuardarTrago.setOnClickListener {
             viewModel.guardarTrago(
