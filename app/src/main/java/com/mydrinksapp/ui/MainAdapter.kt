@@ -24,6 +24,7 @@ class MainAdapter(
 
 //    fun deleteDrink(position: Int){
 //        tragosList.removeAt(position)
+//        notifyDataSetChanged()
 //        notifyItemRemoved(position)
 //    }
 

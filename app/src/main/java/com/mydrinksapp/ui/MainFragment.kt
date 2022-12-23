@@ -1,9 +1,7 @@
 package com.mydrinksapp.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -27,6 +25,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -44,9 +43,9 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         setupSearView()
         setupObserver()
 
-        binding.btnIrFavoritos.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
-        }
+//        binding.btnIrFavoritos.setOnClickListener {
+//            findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
+//        }
 
     }
 
@@ -93,6 +92,21 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
             }
 
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.favoritos -> {
+                findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
+                false
+            }
+            else -> false
+        }
     }
 
     override fun onTragoClick(drink: Drink, position: Int) {
