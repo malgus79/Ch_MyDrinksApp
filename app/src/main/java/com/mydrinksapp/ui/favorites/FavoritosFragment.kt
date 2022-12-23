@@ -43,7 +43,7 @@ class FavoritosFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     private fun setupObserver() {
-        viewModel.getTragosFavoritos().observe(viewLifecycleOwner, Observer { result ->
+        viewModel.getTragosFavoritos.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {

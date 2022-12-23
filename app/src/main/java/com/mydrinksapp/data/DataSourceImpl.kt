@@ -12,8 +12,8 @@ class DataSourceImpl @Inject constructor(
     private val webService: WebService
 ) : DataSource {
 
-    override suspend fun getTragoByName(tragoName: String): Resource<List<Drink>> {
-        return Resource.Success(webService.getTragoByName(tragoName).drinkList)
+    override suspend fun getTragoByName(nombreTrago: String): Resource<List<Drink>> {
+        return Resource.Success(webService.getTragoByName(nombreTrago).drinkList)
     }
 
     override suspend fun insertTragoIntoRoom(trago: DrinkEntity) {

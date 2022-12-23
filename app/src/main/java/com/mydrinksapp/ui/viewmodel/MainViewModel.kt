@@ -22,9 +22,8 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         setTrago("margarita")
     }
 
-
     val fectchTragosList = tragosData.distinctUntilChanged().switchMap { nombreTrago ->
-        liveData(Dispatchers.IO) {
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
                 emit(repo.getTragosList(nombreTrago))
@@ -40,11 +39,11 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         }
     }
 
-    fun getTragosFavoritos() = liveData(Dispatchers.IO) {
+    val getTragosFavoritos = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
-        try {
+        try{
             emit(repo.getTragosFavoritos())
-        } catch (e: Exception) {
+        }catch (e: Exception){
             emit(Resource.Failure(e))
         }
     }
