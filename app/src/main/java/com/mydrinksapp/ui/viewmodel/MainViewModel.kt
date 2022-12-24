@@ -1,8 +1,8 @@
 package com.mydrinksapp.ui.viewmodel
 
 import androidx.lifecycle.*
-import com.mydrinksapp.data.model.FavoritesEntity
-import com.mydrinksapp.domain.Repo
+import com.mydrinksapp.data.CocktailDataSource
+import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
+class MainViewModel @Inject constructor (private val dataSource: CocktailDataSource) : ViewModel() {
 
     private val mutableCocktailName = MutableLiveData<String>()
 
@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
-                repo.getCocktailList(cocktailName).collect {
+                dataSource.getCocktailByName(cocktailName).collect {
                     emit(it)
                 }
             } catch (e: Exception) {
@@ -35,27 +35,36 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         }
     }
 
-    fun saveCocktail(cocktail: FavoritesEntity) {
+    fun saveOrDeleteFavoriteCocktail(cocktail: Cocktail) {
         viewModelScope.launch {
-            repo.saveCocktail(cocktail)
+            if (dataSource.isCocktailFavorite(cocktail)) {
+                dataSource.deleteFavoriteCocktail(cocktail)
+//                Toast.makeText(this@MainViewModel, "", Toast.LENGTH_SHORT).show()
+//                toastHelper.sendToast("Cocktail deleted from favorites")
+            } else {
+                dataSource.saveFavoriteCocktail(cocktail)
+//                toastHelper.sendToast("Cocktail saved to favorites")
+            }
         }
     }
 
-    fun getFavoriteCocktails() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-        emit(Resource.Loading())
-        try{
-            emit(repo.getFavoriteCocktails())
-        }catch (e: Exception){
-            emit(Resource.Failure(e))
+    fun getFavoriteCocktails() =
+        liveData<Resource<List<Cocktail>>>(viewModelScope.coroutineContext + Dispatchers.IO) {
+            emit(Resource.Loading())
+            try {
+                emitSource(dataSource.getFavoritesCocktails().map { Resource.Success(it) })
+            } catch (e: Exception) {
+                emit(Resource.Failure(e))
+            }
+        }
+
+    fun deleteFavoriteCocktail(cocktail: Cocktail) {
+        viewModelScope.launch {
+            dataSource.deleteFavoriteCocktail(cocktail)
+//            toastHelper.sendToast("Cocktail deleted from favorites")
         }
     }
 
-    fun deleteCocktail(cocktail: FavoritesEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
-        emit(Resource.Loading())
-        try{
-            emit(repo.deleteCocktail(cocktail))
-        }catch (e: Exception){
-            emit(Resource.Failure(e))
-        }
-    }
+    suspend fun isCocktailFavorite(cocktail: Cocktail): Boolean =
+        dataSource.isCocktailFavorite(cocktail)
 }

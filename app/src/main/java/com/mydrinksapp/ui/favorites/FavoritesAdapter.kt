@@ -3,18 +3,16 @@ package com.mydrinksapp.ui.favorites
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mydrinksapp.base.BaseViewHolder
 import com.mydrinksapp.data.model.Cocktail
-import com.mydrinksapp.data.model.FavoritesEntity
-import com.mydrinksapp.data.model.asFavoriteEntity
 import com.mydrinksapp.databinding.TragosRowBinding
 
 class FavoritesAdapter(
     private val context: Context,
-    private val itemClickLister: OnCocktailClickListener
+    private val itemClickListener: OnCocktailClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
@@ -22,7 +20,7 @@ class FavoritesAdapter(
 
     interface OnCocktailClickListener {
         fun onCocktailClick(cocktail: Cocktail, position: Int)
-        fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int)
+        fun onCocktailLongClick(cocktail: Cocktail, position: Int)
     }
 
     fun setCocktailList(cocktailList: List<Cocktail>) {
@@ -34,29 +32,28 @@ class FavoritesAdapter(
         val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
 //        return MainViewHolder(itemBinding)
 
-        val vh = MainViewHolder(itemBinding)
+        val holder = MainViewHolder(itemBinding)
 
-        vh.itemView.setOnClickListener {
-            val pos = vh.adapterPosition
-            if (pos != DiffUtil.DiffResult.NO_POSITION) {
-                itemClickLister.onCocktailClick(cocktailList[pos], pos)
-            }
+        holder.itemView.setOnClickListener {
+            val position = holder.adapterPosition.takeIf { it != NO_POSITION }
+                ?: return@setOnClickListener
+
+            itemClickListener.onCocktailClick(cocktailList[position], position)
         }
 
-        vh.itemView.setOnLongClickListener {
-            val pos = vh.adapterPosition
-            if (pos != DiffUtil.DiffResult.NO_POSITION) {
-                itemClickLister.onCocktailDeleteLongClick(cocktailList[pos].asFavoriteEntity(), pos)
-            }
+        holder.itemView.setOnLongClickListener {
+            val position = holder.adapterPosition.takeIf { it != NO_POSITION }
+                ?: return@setOnLongClickListener true
+
+            itemClickListener.onCocktailLongClick(cocktailList[position], position)
+
             return@setOnLongClickListener true
         }
 
-        return vh
+        return holder
     }
 
-    override fun getItemCount(): Int {
-        return cocktailList.size
-    }
+    override fun getItemCount(): Int = cocktailList.size
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {

@@ -1,4 +1,4 @@
-package com.mydrinksapp.domain.remote
+package com.mydrinksapp.data.remote
 
 import com.mydrinksapp.data.model.CocktailList
 import retrofit2.http.GET

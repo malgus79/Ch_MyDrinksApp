@@ -1,9 +1,11 @@
 package com.mydrinksapp.data
 
+import androidx.lifecycle.LiveData
+import com.mydrinksapp.data.local.LocalDataSource
 import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.data.model.CocktailEntity
-import com.mydrinksapp.data.model.FavoritesEntity
 import com.mydrinksapp.data.model.asCocktailEntity
+import com.mydrinksapp.data.remote.NetworkDataSource
 import com.mydrinksapp.vo.Resource
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
@@ -12,11 +14,11 @@ import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
 class DefaultCocktailDataSource @Inject constructor(
-    private val networkDataSource: DataSource,
-    private val localDataSource: DataSource
-) : DataSource {
+    private val networkDataSource: NetworkDataSource,
+    private val localDataSource: LocalDataSource
+) : CocktailDataSource {
 
-    override suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<Cocktail>>?> =
+    override suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<Cocktail>>> =
         callbackFlow {
 
             trySend(getCachedCocktails(cocktailName))
@@ -38,23 +40,26 @@ class DefaultCocktailDataSource @Inject constructor(
             awaitClose { cancel() }
         }
 
-    override suspend fun saveFavoriteCocktail(cocktail: FavoritesEntity) {
+    override suspend fun saveFavoriteCocktail(cocktail: Cocktail) {
         localDataSource.saveFavoriteCocktail(cocktail)
     }
+
+    override suspend fun isCocktailFavorite(cocktail: Cocktail): Boolean =
+        localDataSource.isCocktailFavorite(cocktail)
 
     override suspend fun saveCocktail(cocktail: CocktailEntity) {
         localDataSource.saveCocktail(cocktail)
     }
 
-    override suspend fun getFavoritesCocktails(): Resource<List<Cocktail>> {
+    override fun getFavoritesCocktails(): LiveData<List<Cocktail>> {
         return localDataSource.getFavoritesCocktails()
     }
 
-    override suspend fun deleteCocktail(cocktail: FavoritesEntity) {
+    override suspend fun deleteFavoriteCocktail(cocktail: Cocktail) {
         localDataSource.deleteCocktail(cocktail)
     }
 
-    override suspend fun getCachedCocktails(cocktailName: String): Resource<List<Cocktail>>? {
+    override suspend fun getCachedCocktails(cocktailName: String): Resource<List<Cocktail>> {
         return localDataSource.getCachedCocktails(cocktailName)
     }
 }

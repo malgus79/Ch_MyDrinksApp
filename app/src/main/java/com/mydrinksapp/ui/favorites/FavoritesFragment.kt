@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Cocktail
-import com.mydrinksapp.data.model.FavoritesEntity
 import com.mydrinksapp.databinding.FavoriteFragmentBinding
 import com.mydrinksapp.ui.viewmodel.MainViewModel
 import com.mydrinksapp.vo.Resource
@@ -80,31 +79,37 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
-        val bundle = Bundle()
-        bundle.putParcelable("drink", cocktail)
-        findNavController().navigate(R.id.action_favoritosFragment_to_tragosDetalleFragment, bundle)
+        findNavController().navigate(FavoritesFragmentDirections.actionFavoritosFragmentToTragosDetalleFragment(cocktail))
+//        val bundle = Bundle()
+//        bundle.putParcelable("drink", cocktail)
+//        findNavController().navigate(R.id.action_favoritosFragment_to_tragosDetalleFragment, bundle)
     }
 
-    override fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int) {
-        viewModel.deleteCocktail(favorites).observe(viewLifecycleOwner, Observer { result ->
-            when (result) {
-                is Resource.Loading -> {}
-                is Resource.Success -> {
-                    if (result.data.isEmpty()) {
-                        binding.emptyContainer.root.visibility = View.VISIBLE
-                        return@Observer
-                    }
-                    Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
-                    favoritesAdapter.setCocktailList(result.data)
-                }
-                is Resource.Failure -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "An error occurred ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
+    override fun onCocktailLongClick(cocktail: Cocktail, position: Int) {
+        viewModel.deleteFavoriteCocktail(cocktail)
+        Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
     }
+
+//    override fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int) {
+//        viewModel.deleteCocktail(favorites).observe(viewLifecycleOwner, Observer { result ->
+//            when (result) {
+//                is Resource.Loading -> {}
+//                is Resource.Success -> {
+//                    if (result.data.isEmpty()) {
+//                        binding.emptyContainer.root.visibility = View.VISIBLE
+//                        return@Observer
+//                    }
+//                    Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
+//                    favoritesAdapter.setCocktailList(result.data)
+//                }
+//                is Resource.Failure -> {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "An error occurred ${result.exception}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//        })
+//    }
 }

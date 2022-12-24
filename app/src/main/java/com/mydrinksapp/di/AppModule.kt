@@ -3,8 +3,8 @@ package com.mydrinksapp.di
 import android.content.Context
 import androidx.room.Room
 import com.google.gson.GsonBuilder
-import com.mydrinksapp.AppDatabase
-import com.mydrinksapp.domain.remote.WebService
+import com.mydrinksapp.data.local.AppDatabase
+import com.mydrinksapp.data.remote.WebService
 import com.mydrinksapp.utils.AppConstants.BASE_URL
 import com.mydrinksapp.utils.AppConstants.TABLE_NAME
 import dagger.Module

@@ -1,7 +1,7 @@
 package com.mydrinksapp.vo
 
 import com.google.gson.GsonBuilder
-import com.mydrinksapp.domain.remote.WebService
+import com.mydrinksapp.data.remote.WebService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

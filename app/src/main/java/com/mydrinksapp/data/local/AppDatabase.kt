@@ -1,10 +1,9 @@
-package com.mydrinksapp
+package com.mydrinksapp.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.mydrinksapp.data.model.CocktailEntity
 import com.mydrinksapp.data.model.FavoritesEntity
-import com.mydrinksapp.domain.local.CocktailDao
 
 @Database(
     entities = [FavoritesEntity::class, CocktailEntity::class],
