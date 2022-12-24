@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.data.model.FavoritesEntity
-import com.mydrinksapp.databinding.FragmentFavoritosBinding
+import com.mydrinksapp.databinding.FavoriteFragmentBinding
 import com.mydrinksapp.ui.viewmodel.MainViewModel
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,8 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
 
-    private lateinit var binding: FragmentFavoritosBinding
-    private lateinit var favoritesAdapter:FavoritesAdapter
+    private lateinit var binding: FavoriteFragmentBinding
+    private lateinit var favoritesAdapter: FavoritesAdapter
     private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +35,12 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_favoritos, container, false)
+        return inflater.inflate(R.layout.favorite_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentFavoritosBinding.bind(view)
+        binding = FavoriteFragmentBinding.bind(view)
 
         setupRecyclerView()
         setupObserver()

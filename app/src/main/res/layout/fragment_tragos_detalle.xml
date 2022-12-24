@@ -12,12 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="300dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save_cocktail"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_save" />
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:padding="4dp">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_save_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_save" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/cocktail_title"
@@ -28,10 +37,12 @@
         android:textStyle="bold"
         tools:text="Margarita Blue" />
 
-      <TextView
+    <TextView
         android:id="@+id/cocktail_desc"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:textSize="15sp" />
 
 </LinearLayout>

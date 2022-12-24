@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
                 app:iconifiedByDefault="false"
+                app:defaultQueryHint="Search cocktail recipe"
                 app:queryBackground="@android:color/transparent"
                 app:queryHint="Search cocktail recipe" />
 
