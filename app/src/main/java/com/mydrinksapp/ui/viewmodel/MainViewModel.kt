@@ -26,8 +26,9 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
-                emit(repo.getCachedCocktails(cocktailName))
-                emit(repo.getCocktailList(cocktailName))
+                repo.getCocktailList(cocktailName).collect {
+                    emit(it)
+                }
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
             }

@@ -6,23 +6,25 @@ import com.mydrinksapp.data.model.CocktailEntity
 import com.mydrinksapp.data.model.FavoritesEntity
 import com.mydrinksapp.domain.remote.WebService
 import com.mydrinksapp.vo.Resource
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
     private val webService: WebService
 ) : DataSource {
 
-    override suspend fun getCocktailByName(cocktailName: String): Resource<List<Cocktail>> {
-        return Resource.Success(
-            webService.getCocktailByName(cocktailName)?.cocktailList ?: listOf()
-        )
+    override suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<Cocktail>>> = callbackFlow {
+        trySend(Resource.Success(webService.getCocktailByName(cocktailName)?.cocktailList?: listOf()))
+        awaitClose { close() }
     }
 
-    override suspend fun saveCocktail(cocktail: CocktailEntity) {
+    override suspend fun getCachedCocktails(cocktailName: String): Resource<List<Cocktail>>? {
         TODO("not implemented")
     }
 
-    override suspend fun getCocktails(cocktailName: String): Resource<List<Cocktail>>? {
+    override suspend fun saveCocktail(cocktail: CocktailEntity) {
         TODO("not implemented")
     }
 
