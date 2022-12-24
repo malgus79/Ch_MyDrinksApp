@@ -3,6 +3,7 @@ package com.mydrinksapp.ui.favorites
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mydrinksapp.base.BaseViewHolder
@@ -31,7 +32,26 @@ class FavoritesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
-        return MainViewHolder(itemBinding)
+//        return MainViewHolder(itemBinding)
+
+        val vh = MainViewHolder(itemBinding)
+
+        vh.itemView.setOnClickListener {
+            val pos = vh.adapterPosition
+            if (pos != DiffUtil.DiffResult.NO_POSITION) {
+                itemClickLister.onCocktailClick(cocktailList[pos], pos)
+            }
+        }
+
+        vh.itemView.setOnLongClickListener {
+            val pos = vh.adapterPosition
+            if (pos != DiffUtil.DiffResult.NO_POSITION) {
+                itemClickLister.onCocktailDeleteLongClick(cocktailList[pos].asFavoriteEntity(), pos)
+            }
+            return@setOnLongClickListener true
+        }
+
+        return vh
     }
 
     override fun getItemCount(): Int {
@@ -49,15 +69,6 @@ class FavoritesAdapter(
             Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
             txtTitulo.text = item.name
             txtDescripcion.text = item.description
-
-            root.setOnLongClickListener {
-                itemClickLister.onCocktailDeleteLongClick(item.asFavoriteEntity(), position)
-                return@setOnLongClickListener true
-            }
-
-            root.setOnClickListener {
-                itemClickLister.onCocktailClick(item, position)
-            }
         }
     }
 }

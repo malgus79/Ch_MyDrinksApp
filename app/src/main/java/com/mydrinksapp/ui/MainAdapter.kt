@@ -3,6 +3,7 @@ package com.mydrinksapp.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mydrinksapp.base.BaseViewHolder
@@ -29,7 +30,16 @@ class MainAdapter(
     //retornar una lista, la inner class (que se va a inflar ?)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
-        return MainViewHolder(itemBinding)
+//        return MainViewHolder(itemBinding)
+
+        val vh = MainViewHolder(itemBinding)
+        vh.itemView.setOnClickListener {
+            val pos = vh.adapterPosition
+            if (pos != DiffUtil.DiffResult.NO_POSITION) {
+                itemClickLister.onCocktailClick(cocktailList[pos], pos)
+            }
+        }
+        return vh
     }
 
     //bindear los datos (cual es el holder que se va a bindear ? )
@@ -49,7 +59,6 @@ class MainAdapter(
             Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
             txtTitulo.text = item.name
             txtDescripcion.text = item.description
-            root.setOnClickListener { itemClickLister.onCocktailClick(item,position) }
         }
     }
 }
