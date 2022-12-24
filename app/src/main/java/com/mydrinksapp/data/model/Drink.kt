@@ -9,11 +9,16 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Drink(
-    @SerializedName("idDrink") val tragoId: String = "",
-    @SerializedName("strDrinkThumb") val imagen: String = "",
-    @SerializedName("strDrink") val nombre: String = "",
-    @SerializedName("strInstructions") val descripcion: String = "",
-    @SerializedName("strAlcoholic") val hasAlcohol: String = "Non_Alcoholic"
+    @SerializedName("idDrink")
+    val cocktailId: String = "",
+    @SerializedName("strDrinkThumb")
+    val image: String = "",
+    @SerializedName("strDrink")
+    val name: String = "",
+    @SerializedName("strInstructions")
+    val description: String = "",
+    @SerializedName("strAlcoholic")
+    val hasAlcohol: String = "Non_Alcoholic"
 ) : Parcelable
 
 data class DrinkList(
@@ -22,29 +27,34 @@ data class DrinkList(
 
 @Entity(tableName = "tragosEntity")
 data class DrinkEntity(
-    @PrimaryKey val tragoId: String,
-    @ColumnInfo(name = "trago_imagen") val imagen: String = "",
-    @ColumnInfo(name = "trago_nombre") val nombre: String = "",
-    @ColumnInfo(name = "trago_descripcion") val descripcion: String = "",
-    @ColumnInfo(name = "trago_has_alcohol") val hasAlcohol: String = "Non_Alcoholic"
+    @PrimaryKey
+    val cocktailId: String,
+    @ColumnInfo(name = "trago_imagen")
+    val image: String = "",
+    @ColumnInfo(name = "trago_nombre")
+    val name: String = "",
+    @ColumnInfo(name = "trago_descripcion")
+    val description: String = "",
+    @ColumnInfo(name = "trago_has_alcohol")
+    val hasAlcohol: String = "Non_Alcoholic"
 )
 
 fun List<DrinkEntity>.asDrinkList(): MutableList<Drink> =
     this.map {
         Drink(
-            it.tragoId,
-            it.imagen,
-            it.nombre,
-            it.descripcion,
+            it.cocktailId,
+            it.image,
+            it.name,
+            it.description,
             it.hasAlcohol
         )
     }.toMutableList()
 
 fun Drink.asDrinkEntity(): DrinkEntity =
     DrinkEntity(
-        this.tragoId,
-        this.imagen,
-        this.nombre,
-        this.descripcion,
+        this.cocktailId,
+        this.image,
+        this.name,
+        this.description,
         this.hasAlcohol
     )

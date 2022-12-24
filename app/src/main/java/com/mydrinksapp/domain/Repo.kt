@@ -5,8 +5,8 @@ import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.vo.Resource
 
 interface Repo {
-    suspend fun getTragosList(tragoName: String): Resource<List<Drink>>?
-    suspend fun getTragosFavoritos(): Resource<List<Drink>>
-    suspend fun insertTrago(trago: DrinkEntity)
-    suspend fun deleteDrink(drink: DrinkEntity): Resource<List<Drink>>
+    suspend fun getCocktailList(cocktailName:String): Resource<List<Drink>>?
+    suspend fun getFavoriteCocktails(): Resource<List<Drink>>
+    suspend fun insertCocktail(cocktail:DrinkEntity)
+    suspend fun deleteCocktail(cocktail: DrinkEntity):Resource<List<Drink>>
 }

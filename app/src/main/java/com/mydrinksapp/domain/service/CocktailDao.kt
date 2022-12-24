@@ -4,7 +4,7 @@ import androidx.room.*
 import com.mydrinksapp.data.model.DrinkEntity
 
 @Dao
-interface TragosDao {
+interface CocktailDao {
 
     @Query("SELECT * FROM tragosEntity")
     suspend fun getAllFavoriteDrinks(): List<DrinkEntity>
@@ -13,5 +13,5 @@ interface TragosDao {
     suspend fun insertFavorite(trago: DrinkEntity)
 
     @Delete
-    suspend fun deleteDrink(drink: DrinkEntity)
+    suspend fun deleteCoktail(drink: DrinkEntity)
 }

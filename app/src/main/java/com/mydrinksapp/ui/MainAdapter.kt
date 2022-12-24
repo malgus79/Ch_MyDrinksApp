@@ -49,11 +49,11 @@ class MainAdapter(
 
     private inner class MainViewHolder(itemView: View) : BaseViewHolder<Drink>(itemView) {
         override fun bind(item: Drink, position: Int) {
-            Glide.with(context).load(item.imagen)
+            Glide.with(context).load(item.image)
                 .centerCrop()
-                .into(itemView.findViewById(R.id.img_trago))
-            itemView.findViewById<TextView>(R.id.txt_titulo).text = item.nombre
-            itemView.findViewById<TextView>(R.id.txt_descripcion).text = item.descripcion
+                .into(itemView.findViewById(R.id.img_cocktail))
+            itemView.findViewById<TextView>(R.id.txt_titulo).text = item.name
+            itemView.findViewById<TextView>(R.id.txt_descripcion).text = item.description
             itemView.setOnClickListener { itemClickLister.onCocktailClick(item, position) }
         }
     }

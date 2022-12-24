@@ -6,22 +6,22 @@ import com.mydrinksapp.data.model.DrinkEntity
 import com.mydrinksapp.vo.Resource
 import javax.inject.Inject
 
-class RepoImpl @Inject constructor(private val datasource: DataSource) : Repo {
+class RepoImpl @Inject constructor(private val dataSource: DataSource) : Repo {
 
-    override suspend fun getTragosList(tragoName: String): Resource<List<Drink>> {
-        return datasource.getTragoByName(tragoName)!!
+    override suspend fun getCocktailList(cocktailName:String): Resource<List<Drink>> {
+        return dataSource.getCocktailByName(cocktailName)!!
     }
 
-    override suspend fun getTragosFavoritos(): Resource<List<Drink>> {
-        return datasource.getTragosFavoritos()
+    override suspend fun getFavoriteCocktails(): Resource<List<Drink>> {
+        return dataSource.getFavoritesCocktails()
     }
 
-    override suspend fun insertTrago(trago: DrinkEntity) {
-        datasource.insertTragoIntoRoom(trago)
+    override suspend fun insertCocktail(cocktail: DrinkEntity) {
+        dataSource.insertCocktailIntoRoom(cocktail)
     }
 
-    override suspend fun deleteDrink(drink: DrinkEntity): Resource<List<Drink>> {
-        datasource.deleteDrink(drink)
-        return getTragosFavoritos()
+    override suspend fun deleteCocktail(cocktail: DrinkEntity): Resource<List<Drink>> {
+        dataSource.deleteCocktail(cocktail)
+        return getFavoriteCocktails()
     }
 }

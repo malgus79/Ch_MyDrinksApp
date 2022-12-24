@@ -16,7 +16,7 @@ import com.mydrinksapp.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TragosDetalleFragment : Fragment() {
+class CocktailsDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentTragosDetalleBinding
     private lateinit var drink: Drink
@@ -41,19 +41,19 @@ class TragosDetalleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTragosDetalleBinding.bind(view)
         Glide.with(requireContext())
-            .load(drink.imagen)
+            .load(drink.image)
             .centerCrop()
-            .into(binding.imgTrago)
-        binding.tragoTitle.text = drink.nombre
-        binding.tragoDesc.text = drink.descripcion
+            .into(binding.imgCocktail)
+        binding.cocktailTitle.text = drink.name
+        binding.cocktailDesc.text = drink.description
 
-        binding.btnGuardarTrago.setOnClickListener {
-            viewModel.guardarTrago(
+        binding.btnSaveCocktail.setOnClickListener {
+            viewModel.saveCocktail(
                 DrinkEntity(
-                    drink.tragoId,
-                    drink.imagen,
-                    drink.nombre,
-                    drink.descripcion,
+                    drink.cocktailId,
+                    drink.image,
+                    drink.name,
+                    drink.description,
                     drink.hasAlcohol
                 )
             )

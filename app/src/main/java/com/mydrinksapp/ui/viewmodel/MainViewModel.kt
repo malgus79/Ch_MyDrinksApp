@@ -12,46 +12,46 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
 
-    private val tragosData = MutableLiveData<String>()
+    private val mutableCocktailName = MutableLiveData<String>()
 
-    fun setTrago(tragoName: String) {
-        tragosData.value = tragoName
+    fun setCocktail(cocktailName: String) {
+        mutableCocktailName.value = cocktailName
     }
 
     init {
-        setTrago("margarita")
+        setCocktail("margarita")
     }
 
-    val fectchTragosList = tragosData.distinctUntilChanged().switchMap { nombreTrago ->
+    val fetchCocktailList = mutableCocktailName.distinctUntilChanged().switchMap { cocktailName ->
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
-                emit(repo.getTragosList(nombreTrago))
+                emit(repo.getCocktailList(cocktailName))
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
             }
         }
     }
 
-    fun guardarTrago(trago:DrinkEntity) {
+    fun saveCocktail(cocktail: DrinkEntity) {
         viewModelScope.launch {
-            repo.insertTrago(trago)
+            repo.insertCocktail(cocktail)
         }
     }
 
-    fun getTragosFavoritos() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+    fun getFavoriteCocktails() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
         emit(Resource.Loading())
         try{
-            emit(repo.getTragosFavoritos())
+            emit(repo.getFavoriteCocktails())
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }
     }
 
-    fun deleteDrink(drink: DrinkEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
+    fun deleteCocktail(cocktail: DrinkEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
         emit(Resource.Loading())
         try{
-            emit(repo.deleteDrink(drink))
+            emit(repo.deleteCocktail(cocktail))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }

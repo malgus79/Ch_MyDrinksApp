@@ -45,14 +45,10 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         setupSearView()
         setupObserver()
 
-//        binding.btnIrFavoritos.setOnClickListener {
-//            findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
-//        }
-
     }
 
     private fun setupObserver() {
-        viewModel.fectchTragosList.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
                     binding.emptyContainer.root.visibility = View.GONE
@@ -85,7 +81,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.setTrago(query!!)
+                viewModel.setCocktail(query!!)
                 return false
             }
 
