@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.mydrinksapp.R
-import com.mydrinksapp.data.model.Drink
-import com.mydrinksapp.data.model.DrinkEntity
+import com.mydrinksapp.data.model.Cocktail
+import com.mydrinksapp.data.model.FavoritesEntity
 import com.mydrinksapp.databinding.FragmentTragosDetalleBinding
 import com.mydrinksapp.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,13 +19,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class CocktailsDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentTragosDetalleBinding
-    private lateinit var drink: Drink
+    private lateinit var cocktail: Cocktail
     private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireArguments().let {
-            drink = it.getParcelable<Drink>("drink")!!
+            cocktail = it.getParcelable("drink")!!
 
         }
     }
@@ -41,20 +41,20 @@ class CocktailsDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTragosDetalleBinding.bind(view)
         Glide.with(requireContext())
-            .load(drink.image)
+            .load(cocktail.image)
             .centerCrop()
             .into(binding.imgCocktail)
-        binding.cocktailTitle.text = drink.name
-        binding.cocktailDesc.text = drink.description
+        binding.cocktailTitle.text = cocktail.name
+        binding.cocktailDesc.text = cocktail.description
 
         binding.btnSaveCocktail.setOnClickListener {
             viewModel.saveCocktail(
-                DrinkEntity(
-                    drink.cocktailId,
-                    drink.image,
-                    drink.name,
-                    drink.description,
-                    drink.hasAlcohol
+                FavoritesEntity(
+                    cocktail.cocktailId,
+                    cocktail.image,
+                    cocktail.name,
+                    cocktail.description,
+                    cocktail.hasAlcohol
                 )
             )
             Toast.makeText(requireContext(), "Se guardó el trago en favoritos", Toast.LENGTH_SHORT)

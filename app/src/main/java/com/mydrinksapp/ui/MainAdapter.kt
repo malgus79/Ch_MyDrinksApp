@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mydrinksapp.R
 import com.mydrinksapp.base.BaseViewHolder
-import com.mydrinksapp.data.model.Drink
+import com.mydrinksapp.data.model.Cocktail
 
 class MainAdapter(
     private val context: Context,
@@ -17,13 +17,13 @@ class MainAdapter(
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
-    private var cocktailList = listOf<Drink>()
+    private var cocktailList = listOf<Cocktail>()
 
     interface OnTragoClickListener {
-        fun onCocktailClick(drink: Drink, position: Int)
+        fun onCocktailClick(cocktail: Cocktail, position: Int)
     }
 
-    fun setCocktailList(cocktailList:List<Drink>){
+    fun setCocktailList(cocktailList: List<Cocktail>) {
         this.cocktailList = cocktailList
         notifyDataSetChanged()
     }
@@ -47,8 +47,8 @@ class MainAdapter(
         return cocktailList.size
     }
 
-    private inner class MainViewHolder(itemView: View) : BaseViewHolder<Drink>(itemView) {
-        override fun bind(item: Drink, position: Int) {
+    private inner class MainViewHolder(itemView: View) : BaseViewHolder<Cocktail>(itemView) {
+        override fun bind(item: Cocktail, position: Int) {
             Glide.with(context).load(item.image)
                 .centerCrop()
                 .into(itemView.findViewById(R.id.img_cocktail))

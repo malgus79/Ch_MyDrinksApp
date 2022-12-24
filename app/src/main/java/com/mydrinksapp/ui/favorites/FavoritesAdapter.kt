@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mydrinksapp.R
 import com.mydrinksapp.base.BaseViewHolder
-import com.mydrinksapp.data.model.Drink
-import com.mydrinksapp.data.model.DrinkEntity
-import com.mydrinksapp.data.model.asDrinkEntity
+import com.mydrinksapp.data.model.Cocktail
+import com.mydrinksapp.data.model.FavoritesEntity
+import com.mydrinksapp.data.model.asFavoriteEntity
 
 class FavoritesAdapter(
     private val context: Context,
@@ -19,14 +19,14 @@ class FavoritesAdapter(
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
-    private var cocktailList = listOf<Drink>()
+    private var cocktailList = listOf<Cocktail>()
 
     interface OnCocktailClickListener {
-        fun onCocktailClick(drink: Drink, position: Int)
-        fun onCocktailDeleteLongClick(drink: DrinkEntity, position: Int)
+        fun onCocktailClick(cocktail: Cocktail, position: Int)
+        fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int)
     }
 
-    fun setCocktailList(cocktailList: List<Drink>) {
+    fun setCocktailList(cocktailList: List<Cocktail>) {
         this.cocktailList = cocktailList
         notifyDataSetChanged()
     }
@@ -47,15 +47,15 @@ class FavoritesAdapter(
         }
     }
 
-    private inner class MainViewHolder(itemView: View) : BaseViewHolder<Drink>(itemView) {
-        override fun bind(item: Drink, position: Int) {
+    private inner class MainViewHolder(itemView: View) : BaseViewHolder<Cocktail>(itemView) {
+        override fun bind(item: Cocktail, position: Int) {
             Glide.with(context).load(item.image).centerCrop()
                 .into(itemView.findViewById(R.id.img_cocktail))
             itemView.findViewById<TextView>(R.id.txt_titulo).text = item.name
             itemView.findViewById<TextView>(R.id.txt_descripcion).text = item.description
 
             itemView.setOnLongClickListener {
-                itemClickLister.onCocktailDeleteLongClick(item.asDrinkEntity(), position)
+                itemClickLister.onCocktailDeleteLongClick(item.asFavoriteEntity(), position)
                 return@setOnLongClickListener true
             }
 

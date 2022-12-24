@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
-import com.mydrinksapp.data.model.Drink
-import com.mydrinksapp.data.model.DrinkEntity
+import com.mydrinksapp.data.model.Cocktail
+import com.mydrinksapp.data.model.FavoritesEntity
 import com.mydrinksapp.databinding.FragmentFavoritosBinding
 import com.mydrinksapp.ui.viewmodel.MainViewModel
 import com.mydrinksapp.vo.Resource
@@ -66,20 +66,25 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
 
     private fun setupRecyclerView() {
         binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragosFavoritos.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL))
+        binding.rvTragosFavoritos.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.HORIZONTAL
+            )
+        )
         binding.rvTragosFavoritos.adapter = favoritesAdapter
     }
 
-    override fun onCocktailClick(drink: Drink, position: Int) {
+    override fun onCocktailClick(cocktail: Cocktail, position: Int) {
         val bundle = Bundle()
-        bundle.putParcelable("drink", drink)
+        bundle.putParcelable("drink", cocktail)
         findNavController().navigate(R.id.action_favoritosFragment_to_tragosDetalleFragment, bundle)
     }
 
-    override fun onCocktailDeleteLongClick(drink: DrinkEntity, position: Int) {
-        viewModel.deleteCocktail(drink).observe(viewLifecycleOwner, Observer { result ->
-            when(result){
-                is Resource.Loading -> { }
+    override fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int) {
+        viewModel.deleteCocktail(favorites).observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Resource.Loading -> {}
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
                     favoritesAdapter.setCocktailList(result.data)

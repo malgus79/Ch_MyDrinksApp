@@ -1,7 +1,7 @@
 package com.mydrinksapp.ui.viewmodel
 
 import androidx.lifecycle.*
-import com.mydrinksapp.data.model.DrinkEntity
+import com.mydrinksapp.data.model.FavoritesEntity
 import com.mydrinksapp.domain.Repo
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,6 +26,7 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
+                emit(repo.getCachedCocktails(cocktailName))
                 emit(repo.getCocktailList(cocktailName))
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
@@ -33,9 +34,9 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         }
     }
 
-    fun saveCocktail(cocktail: DrinkEntity) {
+    fun saveCocktail(cocktail: FavoritesEntity) {
         viewModelScope.launch {
-            repo.insertCocktail(cocktail)
+            repo.saveCocktail(cocktail)
         }
     }
 
@@ -48,7 +49,7 @@ class MainViewModel @Inject constructor (private val repo: Repo) : ViewModel() {
         }
     }
 
-    fun deleteCocktail(cocktail: DrinkEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
+    fun deleteCocktail(cocktail: FavoritesEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
         emit(Resource.Loading())
         try{
             emit(repo.deleteCocktail(cocktail))
