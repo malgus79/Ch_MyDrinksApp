@@ -3,7 +3,7 @@ package com.mydrinksapp.ui.viewmodel
 import androidx.lifecycle.*
 import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.domain.CocktailRepository
-import com.mydrinksapp.vo.Resource
+import com.mydrinksapp.base.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor (private val repository: CocktailReposit
 
     val fetchCocktailList = mutableCocktailName.distinctUntilChanged().switchMap { cocktailName ->
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-            emit(Resource.Loading())
+            emit(Resource.Loading)
             try {
                 repository.getCocktailByName(cocktailName).collect {
                     emit(it)
@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor (private val repository: CocktailReposit
 
     fun getFavoriteCocktails() =
         liveData<Resource<List<Cocktail>>>(viewModelScope.coroutineContext + Dispatchers.IO) {
-            emit(Resource.Loading())
+            emit(Resource.Loading)
             try {
                 emitSource(repository.getFavoritesCocktails().map { Resource.Success(it) })
             } catch (e: Exception) {

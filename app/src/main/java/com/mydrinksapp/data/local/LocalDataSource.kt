@@ -3,7 +3,7 @@ package com.mydrinksapp.data.local
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.mydrinksapp.data.model.*
-import com.mydrinksapp.vo.Resource
+import com.mydrinksapp.base.Resource
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(private val cocktailDao: CocktailDao) {

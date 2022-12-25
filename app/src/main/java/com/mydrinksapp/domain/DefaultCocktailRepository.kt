@@ -6,7 +6,7 @@ import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.data.model.CocktailEntity
 import com.mydrinksapp.data.model.asCocktailEntity
 import com.mydrinksapp.data.remote.NetworkDataSource
-import com.mydrinksapp.vo.Resource
+import com.mydrinksapp.base.Resource
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow

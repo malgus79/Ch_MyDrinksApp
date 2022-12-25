@@ -1,7 +1,7 @@
 package com.mydrinksapp.data.remote
 
 import com.mydrinksapp.data.model.Cocktail
-import com.mydrinksapp.vo.Resource
+import com.mydrinksapp.base.Resource
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow

@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
@@ -15,7 +16,7 @@ import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
 import com.mydrinksapp.utils.showIf
 import com.mydrinksapp.utils.showToast
-import com.mydrinksapp.vo.Resource
+import com.mydrinksapp.base.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +50,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     private fun setupObserver() {
-        viewModel.fetchCocktailList.observe(viewLifecycleOwner) Observer@{ result ->
+        viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer{ result ->
             binding.progressBar.showIf { result is Resource.Loading }
             when (result) {
                 is Resource.Loading -> {
@@ -78,7 +79,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 }
 //                else -> {}
             }
-        }
+        })
     }
 
     private fun setupSearView() {

@@ -3,7 +3,7 @@ package com.mydrinksapp.domain
 import androidx.lifecycle.LiveData
 import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.data.model.CocktailEntity
-import com.mydrinksapp.vo.Resource
+import com.mydrinksapp.base.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface CocktailRepository {

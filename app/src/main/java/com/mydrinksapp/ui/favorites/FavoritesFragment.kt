@@ -15,7 +15,7 @@ import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.databinding.FavoriteFragmentBinding
 import com.mydrinksapp.ui.viewmodel.MainViewModel
-import com.mydrinksapp.vo.Resource
+import com.mydrinksapp.base.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
