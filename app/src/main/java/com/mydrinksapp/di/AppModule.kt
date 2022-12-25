@@ -3,10 +3,10 @@ package com.mydrinksapp.di
 import android.content.Context
 import androidx.room.Room
 import com.google.gson.GsonBuilder
+import com.mydrinksapp.base.AppConstants.BASE_URL
+import com.mydrinksapp.base.AppConstants.DATABASE_NAME
 import com.mydrinksapp.data.local.AppDatabase
 import com.mydrinksapp.data.remote.WebService
-import com.mydrinksapp.utils.AppConstants.BASE_URL
-import com.mydrinksapp.utils.AppConstants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,7 +35,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitInstance() = Retrofit.Builder()
+    fun provideRetrofitInstance(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
         .build()

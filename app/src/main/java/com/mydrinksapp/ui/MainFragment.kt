@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Cocktail
@@ -116,7 +115,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private fun setupRecyclerView() {
         binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.HORIZONTAL))
+//        binding.rvTragos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.HORIZONTAL))
         binding.rvTragos.adapter = mainAdapter
     }
 }

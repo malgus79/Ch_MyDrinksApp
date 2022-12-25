@@ -1,4 +1,4 @@
-package com.mydrinksapp.utils
+package com.mydrinksapp.base
 
 object AppConstants {
 
