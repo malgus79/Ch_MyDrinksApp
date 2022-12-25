@@ -5,7 +5,6 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
@@ -14,6 +13,7 @@ import com.mydrinksapp.databinding.FragmentMainBinding
 import com.mydrinksapp.ui.viewmodel.MainViewModel
 import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
+import com.mydrinksapp.utils.showIf
 import com.mydrinksapp.utils.showToast
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,14 +49,15 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     private fun setupObserver() {
-        viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.fetchCocktailList.observe(viewLifecycleOwner) Observer@{ result ->
+            binding.progressBar.showIf { result is Resource.Loading }
             when (result) {
                 is Resource.Loading -> {
                     binding.emptyContainer.root.hide()
-                    binding.progressBar.show()
+//                    binding.progressBar.show()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.hide()
+//                    binding.progressBar.hide()
                     if (result.data.isEmpty()) {
                         binding.rvTragos.hide()
                         binding.emptyContainer.root.show()
@@ -67,17 +68,17 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                     binding.emptyContainer.root.hide()
                 }
                 is Resource.Failure -> {
-                    binding.progressBar.hide()
+//                    binding.progressBar.hide()
                     showToast("Ocurrió un error al traer los datos ${result.exception}")
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Ocurrio un error al trae los datos ${result.exception}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+    //                    Toast.makeText(
+    //                        requireContext(),
+    //                        "Ocurrio un error al trae los datos ${result.exception}",
+    //                        Toast.LENGTH_SHORT
+    //                    ).show()
                 }
-                else -> {}
+//                else -> {}
             }
-        })
+        }
     }
 
     private fun setupSearView() {
