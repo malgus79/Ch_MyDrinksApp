@@ -108,9 +108,10 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
-        val bundle = Bundle()
-        bundle.putParcelable("drink", cocktail)
-        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToTragosDetalleFragment(cocktail))
+//        val bundle = Bundle()
+//        bundle.putParcelable("drink", cocktail)
+//        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
     }
 
     private fun setupRecyclerView() {

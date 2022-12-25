@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import com.mydrinksapp.data.local.AppDatabase
 import com.mydrinksapp.data.remote.WebService
 import com.mydrinksapp.utils.AppConstants.BASE_URL
-import com.mydrinksapp.utils.AppConstants.TABLE_NAME
+import com.mydrinksapp.utils.AppConstants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +26,7 @@ object AppModule {
         Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            TABLE_NAME
+            DATABASE_NAME
         ).fallbackToDestructiveMigration().build()
 
     @Singleton
