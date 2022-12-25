@@ -3,7 +3,6 @@ package com.mydrinksapp.ui
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -13,6 +12,9 @@ import com.mydrinksapp.R
 import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.databinding.FragmentMainBinding
 import com.mydrinksapp.ui.viewmodel.MainViewModel
+import com.mydrinksapp.utils.hide
+import com.mydrinksapp.utils.show
+import com.mydrinksapp.utils.showToast
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,25 +52,28 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
-                    binding.emptyContainer.root.visibility = View.GONE
-                    binding.progessBar.visibility = View.VISIBLE
+                    binding.emptyContainer.root.hide()
+                    binding.progressBar.show()
                 }
                 is Resource.Success -> {
-                    binding.progessBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     if (result.data.isEmpty()) {
-                        binding.emptyContainer.root.visibility = View.VISIBLE
+                        binding.rvTragos.hide()
+                        binding.emptyContainer.root.show()
                         return@Observer
                     }
+                    binding.rvTragos.show()
                     mainAdapter.setCocktailList(result.data)
-                    binding.emptyContainer.root.visibility = View.GONE
+                    binding.emptyContainer.root.hide()
                 }
                 is Resource.Failure -> {
-                    binding.progessBar.visibility = View.GONE
-                    Toast.makeText(
-                        requireContext(),
-                        "Ocurrio un error al trae los datos ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    binding.progressBar.hide()
+                    showToast("Ocurrió un error al traer los datos ${result.exception}")
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Ocurrio un error al trae los datos ${result.exception}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
                 }
                 else -> {}
             }
