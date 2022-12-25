@@ -1,4 +1,4 @@
-package com.mydrinksapp.data
+package com.mydrinksapp.domain
 
 import androidx.lifecycle.LiveData
 import com.mydrinksapp.data.local.LocalDataSource
@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
-class DefaultCocktailDataSource @Inject constructor(
+class DefaultCocktailRepository @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource
-) : CocktailDataSource {
+) : CocktailRepository {
 
     override suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<Cocktail>>> =
         callbackFlow {

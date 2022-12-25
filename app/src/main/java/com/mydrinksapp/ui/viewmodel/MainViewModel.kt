@@ -1,7 +1,7 @@
 package com.mydrinksapp.ui.viewmodel
 
 import androidx.lifecycle.*
-import com.mydrinksapp.data.CocktailDataSource
+import com.mydrinksapp.domain.CocktailRepository
 import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.vo.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor (private val dataSource: CocktailDataSource) : ViewModel() {
+class MainViewModel @Inject constructor (private val dataSource: CocktailRepository) : ViewModel() {
 
     private val mutableCocktailName = MutableLiveData<String>()
 

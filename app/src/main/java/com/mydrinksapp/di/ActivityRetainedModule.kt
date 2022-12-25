@@ -1,7 +1,7 @@
 package com.mydrinksapp.di
 
-import com.mydrinksapp.data.CocktailDataSource
-import com.mydrinksapp.data.DefaultCocktailDataSource
+import com.mydrinksapp.domain.CocktailRepository
+import com.mydrinksapp.domain.DefaultCocktailRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,5 +11,5 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 @InstallIn(ActivityRetainedComponent::class)
 abstract class ActivityRetainedModule {
     @Binds
-    abstract fun dataSource(impl: DefaultCocktailDataSource): CocktailDataSource
+    abstract fun dataSource(impl: DefaultCocktailRepository): CocktailRepository
 }
