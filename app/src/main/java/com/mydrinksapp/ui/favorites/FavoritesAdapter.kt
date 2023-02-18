@@ -6,15 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mydrinksapp.base.BaseViewHolder
-import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.databinding.TragosRowBinding
+import com.mydrinksapp.model.data.Cocktail
 
 class FavoritesAdapter(
     private val context: Context,
     private val itemClickListener: OnCocktailClickListener
-) :
-    RecyclerView.Adapter<BaseViewHolder<*>>() {
+) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
 
     private var cocktailList = listOf<Cocktail>()
 
@@ -28,11 +26,11 @@ class FavoritesAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
 //        return MainViewHolder(itemBinding)
 
-        val holder = MainViewHolder(itemBinding)
+        val holder = ViewHolder(itemBinding)
 
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition.takeIf { it != NO_POSITION }
@@ -55,14 +53,13 @@ class FavoritesAdapter(
 
     override fun getItemCount(): Int = cocktailList.size
 
-    override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
-        when (holder) {
-            is MainViewHolder -> holder.bind(cocktailList[position], position)
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setData(cocktailList[position])
     }
 
-    private inner class MainViewHolder(private val binding: TragosRowBinding) : BaseViewHolder<Cocktail>(binding.root) {
-        override fun bind(item: Cocktail, position: Int) = with(binding) {
+    inner class ViewHolder(private val binding: TragosRowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun setData(item: Cocktail) = with(binding) {
             Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
             txtTitulo.text = item.name
             txtDescripcion.text = item.description

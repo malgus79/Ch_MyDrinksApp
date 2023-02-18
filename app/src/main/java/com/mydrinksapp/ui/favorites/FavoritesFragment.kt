@@ -6,40 +6,40 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
-import com.mydrinksapp.data.model.Cocktail
-import com.mydrinksapp.databinding.FavoriteFragmentBinding
-import com.mydrinksapp.ui.viewmodel.MainViewModel
 import com.mydrinksapp.base.Resource
+import com.mydrinksapp.model.data.Cocktail
+import com.mydrinksapp.databinding.FragmentFavoriteBinding
+import com.mydrinksapp.ui.viewmodel.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
 
-    private lateinit var binding: FavoriteFragmentBinding
+    private lateinit var binding: FragmentFavoriteBinding
     private lateinit var favoritesAdapter: FavoritesAdapter
-    private val viewModel by activityViewModels<MainViewModel>()
+    private val viewModel: FavoritesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        favoritesAdapter = FavoritesAdapter(requireContext(),this)
+        favoritesAdapter = FavoritesAdapter(requireContext(), this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.favorite_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FavoriteFragmentBinding.bind(view)
+        binding = FragmentFavoriteBinding.bind(view)
 
         setupRecyclerView()
         setupObserver()
@@ -79,7 +79,11 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
-        findNavController().navigate(FavoritesFragmentDirections.actionFavoritosFragmentToTragosDetalleFragment(cocktail))
+        findNavController().navigate(
+            FavoritesFragmentDirections.actionFavoritesFragmentToDetailFragment(
+                cocktail
+            )
+        )
 //        val bundle = Bundle()
 //        bundle.putParcelable("drink", cocktail)
 //        findNavController().navigate(R.id.action_favoritosFragment_to_tragosDetalleFragment, bundle)

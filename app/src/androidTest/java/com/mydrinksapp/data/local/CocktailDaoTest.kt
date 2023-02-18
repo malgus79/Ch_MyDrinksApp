@@ -6,9 +6,11 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.*
-import com.mydrinksapp.data.model.CocktailEntity
-import com.mydrinksapp.data.model.FavoritesEntity
 import com.mydrinksapp.getOrAwaitValue
+import com.mydrinksapp.model.local.AppDatabase
+import com.mydrinksapp.model.local.CocktailDao
+import com.mydrinksapp.model.local.CocktailEntity
+import com.mydrinksapp.model.local.FavoritesEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After

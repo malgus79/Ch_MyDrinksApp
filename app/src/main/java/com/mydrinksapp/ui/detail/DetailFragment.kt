@@ -1,25 +1,25 @@
-package com.mydrinksapp.ui.cocktaildetails
+package com.mydrinksapp.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.mydrinksapp.R
-import com.mydrinksapp.data.model.Cocktail
-import com.mydrinksapp.databinding.FragmentCocktailDetailsBinding
-import com.mydrinksapp.ui.viewmodel.MainViewModel
+import com.mydrinksapp.databinding.FragmentDetailBinding
+import com.mydrinksapp.model.data.Cocktail
+import com.mydrinksapp.ui.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CocktailDetailsFragment : Fragment() {
+class DetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentCocktailDetailsBinding
-    private val viewModel by activityViewModels<MainViewModel>()
+    private lateinit var binding: FragmentDetailBinding
+    private val viewModel: DetailViewModel by viewModels()
 //    private val args by navArgs<FavoritesFragmentArgs>()
 
     private lateinit var cocktail: Cocktail
@@ -29,7 +29,7 @@ class CocktailDetailsFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         requireArguments().let {
-            CocktailDetailsFragmentArgs.fromBundle(it).also { args ->
+            DetailFragmentArgs.fromBundle(it).also { args ->
                 cocktail = args.drink
             }
         }
@@ -39,12 +39,12 @@ class CocktailDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cocktail_details, container, false)
+        return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentCocktailDetailsBinding.bind(view)
+        binding = FragmentDetailBinding.bind(view)
         Glide.with(requireContext())
             .load(cocktail.image)
             .centerCrop()

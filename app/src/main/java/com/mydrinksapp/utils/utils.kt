@@ -2,22 +2,9 @@ package com.mydrinksapp.utils
 
 import android.content.Context
 import android.view.View
-import android.widget.SearchView
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-
-inline fun SearchView.onQueryTextChanged(crossinline onQueryTextChanged: (String) -> Unit) {
-    setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String): Boolean {
-            onQueryTextChanged(query)
-            return false
-        }
-
-        override fun onQueryTextChange(newText: String?): Boolean {
-            return false
-        }
-    })
-}
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -49,4 +36,9 @@ fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 
 fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     requireContext().showToast(message, duration)
+}
+
+fun View.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
 }

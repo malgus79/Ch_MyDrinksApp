@@ -1,20 +1,18 @@
-package com.mydrinksapp.data.remote
+package com.mydrinksapp.model.remote
 
-import com.mydrinksapp.data.model.Cocktail
 import com.mydrinksapp.base.Resource
+import com.mydrinksapp.model.data.Cocktail
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
-class NetworkDataSource @Inject constructor(
-    private val webService: WebService
-) {
+class RemoteDataSource @Inject constructor(private val api: ApiService) {
     suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<Cocktail>>> =
         callbackFlow {
             trySend(
                 Resource.Success(
-                    webService.getCocktailByName(cocktailName)?.cocktailList ?: listOf()
+                    api.getCocktailByName(cocktailName)?.cocktailList ?: listOf()
                 )
             )
             awaitClose { close() }

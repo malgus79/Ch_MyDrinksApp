@@ -3,63 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/searchFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.mydrinksapp.ui.MainFragment"
-        android:label="Cocktails"
-        tools:layout="@layout/fragment_main">
+        android:id="@+id/searchFragment"
+        android:name="com.mydrinksapp.ui.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search">
         <action
-            android:id="@+id/action_mainFragment_to_tragosDetalleFragment"
-            app:destination="@id/tragosDetalleFragment"
+            android:id="@+id/action_searchFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-
-            <argument
-                android:name="drink"
-                app:argType="com.mydrinksapp.data.model.Cocktail"
-                app:nullable="false" />
-        </action>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_mainFragment_to_favoritosFragment"
-            app:destination="@id/favoritosFragment"
+            android:id="@+id/action_searchFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/tragosDetalleFragment"
-        android:name="com.mydrinksapp.ui.cocktaildetails.CocktailDetailsFragment"
-        android:label="Details"
-        tools:layout="@layout/fragment_cocktail_details">
+        android:id="@+id/detailFragment"
+        android:name="com.mydrinksapp.ui.detail.DetailFragment"
+        android:label="@string/detail"
+        tools:layout="@layout/fragment_detail">
 
         <argument
             android:name="drink"
-            app:argType="com.mydrinksapp.data.model.Cocktail"
-            app:nullable="false" />
+            app:argType="com.mydrinksapp.model.data.Cocktail" />
     </fragment>
     <fragment
-        android:id="@+id/favoritosFragment"
+        android:id="@+id/favoritesFragment"
         android:name="com.mydrinksapp.ui.favorites.FavoritesFragment"
-        android:label="My Favorites"
-        tools:layout="@layout/favorite_fragment">
+        android:label="@string/favorites"
+        tools:layout="@layout/fragment_favorite">
         <action
-            android:id="@+id/action_favoritosFragment_to_tragosDetalleFragment"
-            app:destination="@id/tragosDetalleFragment"
+            android:id="@+id/action_favoritesFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/favoritosFragment">
-
-            <argument
-                android:name="drink"
-                app:argType="com.mydrinksapp.data.model.Cocktail"
-                app:nullable="false" />
-        </action>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

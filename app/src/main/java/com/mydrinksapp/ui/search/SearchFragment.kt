@@ -1,4 +1,4 @@
-package com.mydrinksapp.ui
+package com.mydrinksapp.ui.search
 
 import android.os.Bundle
 import android.view.*
@@ -9,39 +9,39 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
-import com.mydrinksapp.data.model.Cocktail
-import com.mydrinksapp.databinding.FragmentMainBinding
-import com.mydrinksapp.ui.viewmodel.MainViewModel
+import com.mydrinksapp.base.Resource
+import com.mydrinksapp.model.data.Cocktail
+import com.mydrinksapp.databinding.FragmentSearchBinding
+import com.mydrinksapp.ui.viewmodel.SearchViewModel
 import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
 import com.mydrinksapp.utils.showIf
 import com.mydrinksapp.utils.showToast
-import com.mydrinksapp.base.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
+class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
 
-    private lateinit var binding: FragmentMainBinding
-    private lateinit var mainAdapter:MainAdapter
-    private val viewModel by activityViewModels<MainViewModel>()
+    private lateinit var binding: FragmentSearchBinding
+    private lateinit var searchAdapter: SearchAdapter
+    private val viewModel by activityViewModels<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        mainAdapter = MainAdapter(requireContext(), this)
+        searchAdapter = SearchAdapter(requireContext(), this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMainBinding.bind(view)
+        binding = FragmentSearchBinding.bind(view)
 
         setupRecyclerView()
         setupSearView()
@@ -50,34 +50,25 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     private fun setupObserver() {
-        viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer{ result ->
+        viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer { result ->
             binding.progressBar.showIf { result is Resource.Loading }
             when (result) {
                 is Resource.Loading -> {
                     binding.emptyContainer.root.hide()
-//                    binding.progressBar.show()
                 }
                 is Resource.Success -> {
-//                    binding.progressBar.hide()
                     if (result.data.isEmpty()) {
                         binding.rvTragos.hide()
                         binding.emptyContainer.root.show()
                         return@Observer
                     }
                     binding.rvTragos.show()
-                    mainAdapter.setCocktailList(result.data)
+                    searchAdapter.setCocktailList(result.data)
                     binding.emptyContainer.root.hide()
                 }
                 is Resource.Failure -> {
-//                    binding.progressBar.hide()
                     showToast("Ocurrió un error al traer los datos ${result.exception}")
-    //                    Toast.makeText(
-    //                        requireContext(),
-    //                        "Ocurrio un error al trae los datos ${result.exception}",
-    //                        Toast.LENGTH_SHORT
-    //                    ).show()
                 }
-//                else -> {}
             }
         })
     }
@@ -100,13 +91,13 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main_menu,menu)
+        inflater.inflate(R.menu.main_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.favoritos -> {
-                findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
+                findNavController().navigate(R.id.action_searchFragment_to_favoritesFragment)
                 false
             }
             else -> false
@@ -114,7 +105,11 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToTragosDetalleFragment(cocktail))
+        findNavController().navigate(
+            SearchFragmentDirections.actionSearchFragmentToDetailFragment(
+                cocktail
+            )
+        )
 //        val bundle = Bundle()
 //        bundle.putParcelable("drink", cocktail)
 //        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
@@ -122,7 +117,6 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private fun setupRecyclerView() {
         binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
-//        binding.rvTragos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.HORIZONTAL))
-        binding.rvTragos.adapter = mainAdapter
+        binding.rvTragos.adapter = searchAdapter
     }
 }

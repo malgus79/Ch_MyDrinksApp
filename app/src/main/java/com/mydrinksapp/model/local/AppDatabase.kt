@@ -1,13 +1,11 @@
-package com.mydrinksapp.data.local
+package com.mydrinksapp.model.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.mydrinksapp.data.model.CocktailEntity
-import com.mydrinksapp.data.model.FavoritesEntity
 
 @Database(
     entities = [FavoritesEntity::class, CocktailEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
