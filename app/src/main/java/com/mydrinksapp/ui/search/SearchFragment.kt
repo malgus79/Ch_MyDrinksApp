@@ -1,7 +1,9 @@
 package com.mydrinksapp.ui.search
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -10,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.base.Resource
-import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.databinding.FragmentSearchBinding
+import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.ui.viewmodel.SearchViewModel
 import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
@@ -28,7 +30,7 @@ class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
         searchAdapter = SearchAdapter(requireContext(), this)
     }
 
@@ -89,20 +91,20 @@ class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main_menu, menu)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.main_menu, menu)
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.favoritos -> {
-                findNavController().navigate(R.id.action_searchFragment_to_favoritesFragment)
-                false
-            }
-            else -> false
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.favoritos -> {
+//                findNavController().navigate(R.id.action_searchFragment_to_favoritesFragment)
+//                false
+//            }
+//            else -> false
+//        }
+//    }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
         findNavController().navigate(

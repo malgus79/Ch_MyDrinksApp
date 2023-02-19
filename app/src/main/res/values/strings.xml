@@ -1,7 +1,13 @@
 <resources>
-    <string name="app_name">MyDrinksApp</string>
+    <string name="app_name">Drinks App</string>
     <string name="search_no_results">No cocktails found</string>
     <string name="search">Search</string>
     <string name="detail">Detail</string>
     <string name="favorites">Favorites</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="toolbar_title">Drinks</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="exit">Exit</string>
 </resources>

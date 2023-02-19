@@ -3,9 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/favoritos"
-        android:title="Favoritos"
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_baseline_favorite_24"
-        app:showAsAction="always"/>
+        android:title="@string/favorites"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/exit"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/exit"
+        app:showAsAction="never" />
 
 </menu>
