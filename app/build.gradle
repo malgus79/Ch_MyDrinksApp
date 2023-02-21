@@ -92,6 +92,8 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     // Swipe to refresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    // RecyclerView Animators
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
 
     // Local Unit Tests
     testImplementation "com.google.truth:truth:1.1.3"

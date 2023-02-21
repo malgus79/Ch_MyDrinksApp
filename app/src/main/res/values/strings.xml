@@ -12,7 +12,7 @@
     <string name="the_cocktail_of_the_day">The cocktail of the day</string>
     <string name="img_random_cocktail">Image random cocktail</string>
     <string name="categories_title">Categories</string>
-    <string name="title_popular_cocktail">Popular Cocktail</string>
+    <string name="title_popular_cocktail">"Popular Cocktail: "</string>
     <string name="error_detail">An error occurred while obtaining the information</string>
     <!-- zzz -->
 

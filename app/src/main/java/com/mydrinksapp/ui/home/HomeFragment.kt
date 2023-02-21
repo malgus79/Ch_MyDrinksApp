@@ -3,6 +3,7 @@ package com.mydrinksapp.ui.home
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -23,11 +25,15 @@ import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
 import com.mydrinksapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.LandingAnimator
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private val adapterPopular: PopularAdapter = PopularAdapter()
+
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -38,6 +44,7 @@ class HomeFragment : Fragment() {
 
         swipeRefresh()
         setupRandomCocktails()
+        setupPopularCocktails()
         onBackPressedCallback()
 
         return binding.root
@@ -51,6 +58,7 @@ class HomeFragment : Fragment() {
             )
             Handler(Looper.getMainLooper()).postDelayed({
                 setupRandomCocktails()
+                setupPopularCocktails()
             }, 500)
         }
     }
@@ -103,6 +111,55 @@ class HomeFragment : Fragment() {
                     item
                 )
             )
+        }
+    }
+
+    private fun setupPopularCocktails(){
+        val categoriesNames = arrayOf(
+            "Ordinary Drink", "Cocktail", "Shake", "Other / Unknown", "Cocoa", "Shot",
+            "Coffee / Tea", "Homemade Liqueur", "Punch / Party Drink", "Beer", "Soft Drink"
+        )
+        val randomCategory = categoriesNames[Random.nextInt(categoriesNames.size)]
+        val titlePopularMeals = "${getString(R.string.title_popular_cocktail)} $randomCategory "
+
+        viewModel.fetchPopularCocktails(randomCategory).observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> {
+                    Log.d("STATUSSS","Loading")
+                    binding.progressBar.show()
+                }
+                is Resource.Success -> {
+                    Log.d("STATUSSS","OK")
+                    binding.progressBar.hide()
+                    if (it.data.drinks.isEmpty()) {
+                        binding.rvPopularCocktail.hide()
+                        return@observe
+                    }
+                    setupPopularCocktailsRecyclerView()
+                    adapterPopular.setCocktailPopularList(it.data.drinks)
+                    binding.txtTitlePopular.text = titlePopularMeals
+                }
+                is Resource.Failure -> {
+                    Log.d("STATUSSS","Error ${it.exception}")
+                    binding.progressBar.hide()
+                }
+            }
+        }
+    }
+
+    private fun setupPopularCocktailsRecyclerView() {
+        binding.rvPopularCocktail.apply {
+            adapter = adapterPopular
+            layoutManager =
+                GridLayoutManager(
+                    requireContext(),
+                    resources.getInteger(R.integer.columns_popular),
+                    GridLayoutManager.HORIZONTAL,
+                    false
+                )
+            itemAnimator = LandingAnimator().apply { addDuration = 300 }
+            setHasFixedSize(true)
+            show()
         }
     }
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mydrinksapp.databinding.TragosRowBinding
+import com.mydrinksapp.databinding.ItemCocktailBinding
 import com.mydrinksapp.model.data.Cocktail
 
 class SearchAdapter(
@@ -27,7 +27,7 @@ class SearchAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
+        val itemBinding = ItemCocktailBinding.inflate(LayoutInflater.from(context), parent, false)
 //        return MainViewHolder(itemBinding)
 
         val vh = ViewHolder(itemBinding)
@@ -48,12 +48,12 @@ class SearchAdapter(
         return cocktailList.size
     }
 
-    inner class ViewHolder(private val binding: TragosRowBinding) :
+    inner class ViewHolder(private val binding: ItemCocktailBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(item: Cocktail) = with(binding) {
             Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
-            txtTitulo.text = item.name
-            txtDescripcion.text = item.description
+            txtTitle.text = item.name
+            txtDescription.text = item.description
         }
     }
 }

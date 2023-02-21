@@ -20,4 +20,14 @@ class HomeViewModel @Inject constructor(private val repo: CocktailRepository) : 
             emit(Resource.Failure(e))
         }
     }
+
+    fun fetchPopularCocktails(categoryName: String) =
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+        emit(Resource.Loading)
+            try {
+                emit(Resource.Success(repo.getPopularCocktails(categoryName)))
+            } catch (e:Exception) {
+                emit(Resource.Failure(e))
+            }
+        }
 }

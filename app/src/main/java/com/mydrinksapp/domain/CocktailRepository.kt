@@ -3,6 +3,7 @@ package com.mydrinksapp.domain
 import androidx.lifecycle.LiveData
 import com.mydrinksapp.base.Resource
 import com.mydrinksapp.model.data.Cocktail
+import com.mydrinksapp.model.data.CocktailByCategoryList
 import com.mydrinksapp.model.data.CocktailList
 import com.mydrinksapp.model.data.asCocktailEntity
 import com.mydrinksapp.model.local.CocktailEntity
@@ -69,5 +70,10 @@ class CocktailRepository @Inject constructor(
     /*------------------------------ Random ------------------------------*/
     override suspend fun getRandomCocktails(): CocktailList {
         return remoteDataSource.getRandomCocktails()
+    }
+
+    /*------------------------------ Random ------------------------------*/
+    override suspend fun getPopularCocktails(categoryName: String): CocktailByCategoryList {
+        return remoteDataSource.getPopularCocktails(categoryName)
     }
 }

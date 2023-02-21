@@ -15,6 +15,6 @@
         android:id="@+id/rv_tragos_favoritos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/tragos_row" />
+        tools:listitem="@layout/item_cocktail" />
 
 </FrameLayout>
