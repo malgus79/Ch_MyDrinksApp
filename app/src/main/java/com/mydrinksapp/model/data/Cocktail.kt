@@ -14,5 +14,5 @@ data class Cocktail(
 ) : Parcelable
 
 data class CocktailList(
-    @SerializedName("drinks") val cocktailList: List<Cocktail> = listOf()
+    @SerializedName("drinks") val drinks: List<Cocktail> = listOf()
 )

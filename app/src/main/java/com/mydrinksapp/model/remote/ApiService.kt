@@ -9,4 +9,7 @@ interface ApiService {
     suspend fun getCocktailByName(
         @Query(value = "s") cocktailName: String
     ): CocktailList?
+
+    @GET("random.php")
+    suspend fun getRandomCocktails(): CocktailList
 }

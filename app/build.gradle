@@ -90,6 +90,8 @@ dependencies {
     // Drawer layout
     implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+    // Swipe to refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     // Local Unit Tests
     testImplementation "com.google.truth:truth:1.1.3"

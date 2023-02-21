@@ -4,10 +4,16 @@
     <string name="search">Search</string>
     <string name="detail">Detail</string>
     <string name="favorites">Favorites</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Home -->
     <string name="home">Home</string>
     <string name="toolbar_title">Drinks</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="exit">Exit</string>
+    <string name="the_cocktail_of_the_day">The cocktail of the day</string>
+    <string name="img_random_cocktail">Image random cocktail</string>
+    <string name="categories_title">Categories</string>
+    <string name="title_popular_cocktail">Popular Cocktail</string>
+    <string name="error_detail">An error occurred while obtaining the information</string>
+    <!-- zzz -->
+
 </resources>

@@ -3,6 +3,7 @@ package com.mydrinksapp.domain
 import androidx.lifecycle.LiveData
 import com.mydrinksapp.base.Resource
 import com.mydrinksapp.model.data.Cocktail
+import com.mydrinksapp.model.data.CocktailList
 import com.mydrinksapp.model.data.asCocktailEntity
 import com.mydrinksapp.model.local.CocktailEntity
 import com.mydrinksapp.model.local.LocalDataSource
@@ -18,6 +19,7 @@ class CocktailRepository @Inject constructor(
     private val localDataSource: LocalDataSource
 ) : CocktailRepoInterface {
 
+    /*------------------------------ Search ------------------------------*/
     override suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<Cocktail>>> =
         callbackFlow {
 
@@ -40,6 +42,7 @@ class CocktailRepository @Inject constructor(
             awaitClose { cancel() }
         }
 
+    /*------------------------------ Favorites ------------------------------*/
     override suspend fun saveFavoriteCocktail(cocktail: Cocktail) {
         localDataSource.saveFavoriteCocktail(cocktail)
     }
@@ -61,5 +64,10 @@ class CocktailRepository @Inject constructor(
 
     override suspend fun getCachedCocktails(cocktailName: String): Resource<List<Cocktail>> {
         return localDataSource.getCachedCocktails(cocktailName)
+    }
+
+    /*------------------------------ Random ------------------------------*/
+    override suspend fun getRandomCocktails(): CocktailList {
+        return remoteDataSource.getRandomCocktails()
     }
 }
