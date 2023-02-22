@@ -3,7 +3,6 @@ package com.mydrinksapp.ui.home
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -117,13 +116,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupCocktailsByCategories(){
+    private fun setupCocktailsByCategories() {
         val categoriesNames = arrayOf(
             "Ordinary Drink", "Cocktail", "Shake", "Other / Unknown", "Cocoa", "Shot",
             "Coffee / Tea", "Homemade Liqueur", "Punch / Party Drink", "Beer", "Soft Drink"
         )
         val randomCategory = categoriesNames[Random.nextInt(categoriesNames.size)]
-        val titleCocktailsByCategories = "${getString(R.string.title_cocktails_by_categories)} $randomCategory "
+        val titleCocktailsByCategories =
+            "${getString(R.string.title_cocktails_by_categories)} $randomCategory "
 
         viewModel.fetchCocktailsByCategories(randomCategory).observe(viewLifecycleOwner) {
             when (it) {
@@ -168,22 +168,21 @@ class HomeFragment : Fragment() {
             "Highball glass", "Cocktail glass", "Old-fashioned glass", "Whiskey Glass",
             "Collins glass", "Pousse cafe glass", "Champagne flute", "Whiskey sour glass",
             "Cordial glass", "Brandy snifter", "White wine glass", "Nick and Nora Glass",
-            "Hurricane glass","Coffee mug","Shot glass","Jar","Irish coffee cup","Punch bowl",
-            "Pitcher","Pint glass","Copper Mug","Wine Glass","Beer mug",
-            "Margarita/Coupette glass","Beer pilsner","Beer Glass","Parfait glass","Mason jar",
-            "Margarita glass","Martini Glass","Balloon Glass","Coupe Glass"
+            "Hurricane glass", "Coffee mug", "Shot glass", "Jar", "Irish coffee cup", "Punch bowl",
+            "Pitcher", "Pint glass", "Copper Mug", "Wine Glass", "Beer mug",
+            "Margarita/Coupette glass", "Beer pilsner", "Beer Glass", "Parfait glass", "Mason jar",
+            "Margarita glass", "Martini Glass", "Balloon Glass", "Coupe Glass"
         )
         val randomCategory = glassNames[Random.nextInt(glassNames.size)]
-        val titleCocktailsByGlass = "${getString(R.string.title_cocktails_by_glass)} $randomCategory "
+        val titleCocktailsByGlass =
+            "${getString(R.string.title_cocktails_by_glass)} $randomCategory "
 
         viewModel.fetchCocktailsByGlass(randomCategory).observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
-                    Log.d("STATUSSS", "Loading")
                     binding.progressBar.show()
                 }
                 is Resource.Success -> {
-                    Log.d("STATUSSS", "OK")
                     binding.progressBar.hide()
                     if (it.data.drinks.isEmpty()) {
                         binding.rvCocktailsByGlass.hide()
@@ -194,7 +193,6 @@ class HomeFragment : Fragment() {
                     binding.txtTitleCocktailsByGlass.text = titleCocktailsByGlass
                 }
                 is Resource.Failure -> {
-                    Log.d("STATUSSS", "Error  ${it.exception}")
                     binding.progressBar.hide()
                 }
             }
