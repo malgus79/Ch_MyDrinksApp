@@ -2,8 +2,10 @@ package com.mydrinksapp.ui.viewmodel
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.lifecycle.*
-import com.mydrinksapp.base.Resource
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mydrinksapp.domain.CocktailRepository
 import com.mydrinksapp.model.data.Cocktail
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,9 +33,10 @@ class DetailViewModel @Inject constructor(private val repo: CocktailRepository) 
         repo.isCocktailFavorite(cocktail)
 
 
-
+    /*------------------------------ Detail cocktails by Id ------------------------------*/
     private var _cocktailByLetterDetailMutableLiveData = MutableLiveData<Cocktail>()
     val cocktailByLetterDetailMutableLiveData: LiveData<Cocktail> = _cocktailByLetterDetailMutableLiveData
+
     fun fetchCocktailDetailsById(idDrink: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -46,23 +49,6 @@ class DetailViewModel @Inject constructor(private val repo: CocktailRepository) 
                 }
             } catch (e: Exception) {
                 Log.d(TAG, "fetchCocktailDetailsById: ${e.message}")
-            }
-        }
-    }
-
-
-    private val mutableCocktailsById = MutableLiveData<String>()
-    fun setCocktailById(letter: String) {
-        mutableCocktailsById.value = letter
-    }
-
-    val fetchCocktailById = mutableCocktailsById.distinctUntilChanged().switchMap {
-        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-            emit(Resource.Loading)
-            try {
-                emit(Resource.Success(repo.getCocktailByLetter(it)))
-            } catch (e: Exception) {
-                emit(Resource.Failure(e))
             }
         }
     }

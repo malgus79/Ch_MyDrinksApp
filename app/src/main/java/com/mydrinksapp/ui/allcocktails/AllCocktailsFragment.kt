@@ -11,7 +11,7 @@ import com.mydrinksapp.R
 import com.mydrinksapp.base.Resource
 import com.mydrinksapp.databinding.FragmentAllCocktailsBinding
 import com.mydrinksapp.model.data.Cocktail
-import com.mydrinksapp.ui.viewmodel.DetailViewModel
+import com.mydrinksapp.ui.viewmodel.AllCocktailsViewModel
 import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
 import com.mydrinksapp.utils.showToast
@@ -29,7 +29,7 @@ class AllCocktailsFragment : Fragment(), LetterAdapter.OnLetterClickListener {
 
     private lateinit var cocktail: Cocktail
 
-    private val viewModel: DetailViewModel by viewModels()
+    private val viewModel: AllCocktailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,12 +55,12 @@ class AllCocktailsFragment : Fragment(), LetterAdapter.OnLetterClickListener {
     }
 
     override fun onCocktailClick(letter: String) {
-        viewModel.setCocktailById(letter)
-        showDataCocktailsById()
+        viewModel.setCocktailByLetter(letter)
+        showDataCocktailsByLetter()
     }
 
-    private fun showDataCocktailsById() {
-        viewModel.fetchCocktailById.observe(viewLifecycleOwner) {
+    private fun showDataCocktailsByLetter() {
+        viewModel.fetchCocktailByLetter.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
                     binding.progressBar.show()
