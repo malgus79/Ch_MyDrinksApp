@@ -21,11 +21,21 @@ class HomeViewModel @Inject constructor(private val repo: CocktailRepository) : 
         }
     }
 
-    fun fetchPopularCocktails(categoryName: String) =
+    fun fetchCocktailsByCategories(categoryName: String) =
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
         emit(Resource.Loading)
             try {
-                emit(Resource.Success(repo.getPopularCocktails(categoryName)))
+                emit(Resource.Success(repo.getCocktailsByCategories(categoryName)))
+            } catch (e:Exception) {
+                emit(Resource.Failure(e))
+            }
+        }
+
+    fun fetchCocktailsByGlass(glassName: String) =
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+            emit(Resource.Loading)
+            try {
+                emit(Resource.Success(repo.getCocktailsByGlass(glassName)))
             } catch (e:Exception) {
                 emit(Resource.Failure(e))
             }

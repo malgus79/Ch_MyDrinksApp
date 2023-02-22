@@ -24,7 +24,11 @@ class RemoteDataSource @Inject constructor(private val api: ApiService) {
         return api.getRandomCocktails()
     }
 
-    suspend fun getPopularCocktails(categoryName: String): CocktailByCategoryList {
-        return api.getPopularCocktails(categoryName)
+    suspend fun getCocktailsByCategories(categoryName: String): CocktailByCategoryList {
+        return api.getCocktailsByCategories(categoryName)
+    }
+
+    suspend fun getCocktailsByGlass(glassName: String): CocktailByCategoryList {
+        return api.getCocktailsByGlass(glassName)
     }
 }

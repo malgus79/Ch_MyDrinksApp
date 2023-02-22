@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="columns_popular">1</integer>
+    <integer name="columns_cocktails_by_categories">1</integer>
+    <integer name="columns_cocktails_by_glass">1</integer>
 </resources>

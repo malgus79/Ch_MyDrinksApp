@@ -7,42 +7,47 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.mydrinksapp.R
-import com.mydrinksapp.databinding.ItemPopularBinding
+import com.mydrinksapp.databinding.ItemCocktailsByCategoriesBinding
 import com.mydrinksapp.model.data.CocktailByCategory
 
-class PopularAdapter : RecyclerView.Adapter<PopularAdapter.VieHolder>() {
+class CocktailsByCategoriesAdapter :
+    RecyclerView.Adapter<CocktailsByCategoriesAdapter.VieHolder>() {
 
-    private var cocktailPopularList = listOf<CocktailByCategory>()
+    private var cocktailsByCategoriesList = listOf<CocktailByCategory>()
 
-    fun setCocktailPopularList(cocktailPopularList: List<CocktailByCategory>) {
-        this.cocktailPopularList = cocktailPopularList
+    fun setCocktailsByCategoriesList(cocktailsByCategoriesList: List<CocktailByCategory>) {
+        this.cocktailsByCategoriesList = cocktailsByCategoriesList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VieHolder {
         val itemBinding =
-            ItemPopularBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCocktailsByCategoriesBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         return VieHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: VieHolder, position: Int) {
-        holder.setData(cocktailPopularList[position])
+        holder.setData(cocktailsByCategoriesList[position])
     }
 
-    override fun getItemCount(): Int = cocktailPopularList.size
+    override fun getItemCount(): Int = cocktailsByCategoriesList.size
 
-    inner class VieHolder(private val binding: ItemPopularBinding) :
+    inner class VieHolder(private val binding: ItemCocktailsByCategoriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(cocktailPopular: CocktailByCategory) {
+        fun setData(item: CocktailByCategory) {
             Glide.with(binding.root.context)
-                .load(cocktailPopular.image)
+                .load(item.image)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.gradient)
                 .centerCrop()
                 .into(binding.imgCocktail)
 
-            binding.txtTitle.text = cocktailPopular.name
+            binding.txtTitle.text = item.name
 
             //TODO conectar con detalle
 //            binding.mcvCocktail.setOnClickListener {

@@ -32,7 +32,8 @@ import kotlin.random.Random
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private val adapterPopular: PopularAdapter = PopularAdapter()
+    private val adapterByCategories: CocktailsByCategoriesAdapter = CocktailsByCategoriesAdapter()
+    private val adapterByGlass: CocktailsByGlassAdapter = CocktailsByGlassAdapter()
 
     private val viewModel: HomeViewModel by viewModels()
 
@@ -44,7 +45,8 @@ class HomeFragment : Fragment() {
 
         swipeRefresh()
         setupRandomCocktails()
-        setupPopularCocktails()
+        setupCocktailsByCategories()
+        setupCocktailsByGlass()
         onBackPressedCallback()
 
         return binding.root
@@ -58,7 +60,8 @@ class HomeFragment : Fragment() {
             )
             Handler(Looper.getMainLooper()).postDelayed({
                 setupRandomCocktails()
-                setupPopularCocktails()
+                setupCocktailsByCategories()
+                setupCocktailsByGlass()
             }, 500)
         }
     }
@@ -114,46 +117,97 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupPopularCocktails(){
+    private fun setupCocktailsByCategories(){
         val categoriesNames = arrayOf(
             "Ordinary Drink", "Cocktail", "Shake", "Other / Unknown", "Cocoa", "Shot",
             "Coffee / Tea", "Homemade Liqueur", "Punch / Party Drink", "Beer", "Soft Drink"
         )
         val randomCategory = categoriesNames[Random.nextInt(categoriesNames.size)]
-        val titlePopularMeals = "${getString(R.string.title_popular_cocktail)} $randomCategory "
+        val titleCocktailsByCategories = "${getString(R.string.title_cocktails_by_categories)} $randomCategory "
 
-        viewModel.fetchPopularCocktails(randomCategory).observe(viewLifecycleOwner) {
+        viewModel.fetchCocktailsByCategories(randomCategory).observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
-                    Log.d("STATUSSS","Loading")
                     binding.progressBar.show()
                 }
                 is Resource.Success -> {
-                    Log.d("STATUSSS","OK")
                     binding.progressBar.hide()
                     if (it.data.drinks.isEmpty()) {
-                        binding.rvPopularCocktail.hide()
+                        binding.rvCocktailsByCategories.hide()
                         return@observe
                     }
-                    setupPopularCocktailsRecyclerView()
-                    adapterPopular.setCocktailPopularList(it.data.drinks)
-                    binding.txtTitlePopular.text = titlePopularMeals
+                    setupCocktailsByCategoriesRecyclerView()
+                    adapterByCategories.setCocktailsByCategoriesList(it.data.drinks)
+                    binding.txtTitleCocktailsByCategories.text = titleCocktailsByCategories
                 }
                 is Resource.Failure -> {
-                    Log.d("STATUSSS","Error ${it.exception}")
                     binding.progressBar.hide()
                 }
             }
         }
     }
 
-    private fun setupPopularCocktailsRecyclerView() {
-        binding.rvPopularCocktail.apply {
-            adapter = adapterPopular
+    private fun setupCocktailsByCategoriesRecyclerView() {
+        binding.rvCocktailsByCategories.apply {
+            adapter = adapterByCategories
             layoutManager =
                 GridLayoutManager(
                     requireContext(),
-                    resources.getInteger(R.integer.columns_popular),
+                    resources.getInteger(R.integer.columns_cocktails_by_categories),
+                    GridLayoutManager.HORIZONTAL,
+                    false
+                )
+            itemAnimator = LandingAnimator().apply { addDuration = 300 }
+            setHasFixedSize(true)
+            show()
+        }
+    }
+
+    private fun setupCocktailsByGlass() {
+        val glassNames = arrayOf(
+            "Highball glass", "Cocktail glass", "Old-fashioned glass", "Whiskey Glass",
+            "Collins glass", "Pousse cafe glass", "Champagne flute", "Whiskey sour glass",
+            "Cordial glass", "Brandy snifter", "White wine glass", "Nick and Nora Glass",
+            "Hurricane glass","Coffee mug","Shot glass","Jar","Irish coffee cup","Punch bowl",
+            "Pitcher","Pint glass","Copper Mug","Wine Glass","Beer mug",
+            "Margarita/Coupette glass","Beer pilsner","Beer Glass","Parfait glass","Mason jar",
+            "Margarita glass","Martini Glass","Balloon Glass","Coupe Glass"
+        )
+        val randomCategory = glassNames[Random.nextInt(glassNames.size)]
+        val titleCocktailsByGlass = "${getString(R.string.title_cocktails_by_glass)} $randomCategory "
+
+        viewModel.fetchCocktailsByGlass(randomCategory).observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> {
+                    Log.d("STATUSSS", "Loading")
+                    binding.progressBar.show()
+                }
+                is Resource.Success -> {
+                    Log.d("STATUSSS", "OK")
+                    binding.progressBar.hide()
+                    if (it.data.drinks.isEmpty()) {
+                        binding.rvCocktailsByGlass.hide()
+                        return@observe
+                    }
+                    setupCocktailsByGlassRecyclerView()
+                    adapterByGlass.setCocktailsByGlassList(it.data.drinks)
+                    binding.txtTitleCocktailsByGlass.text = titleCocktailsByGlass
+                }
+                is Resource.Failure -> {
+                    Log.d("STATUSSS", "Error  ${it.exception}")
+                    binding.progressBar.hide()
+                }
+            }
+        }
+    }
+
+    private fun setupCocktailsByGlassRecyclerView() {
+        binding.rvCocktailsByGlass.apply {
+            adapter = adapterByGlass
+            layoutManager =
+                GridLayoutManager(
+                    requireContext(),
+                    resources.getInteger(R.integer.columns_cocktails_by_glass),
                     GridLayoutManager.HORIZONTAL,
                     false
                 )

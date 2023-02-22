@@ -72,8 +72,13 @@ class CocktailRepository @Inject constructor(
         return remoteDataSource.getRandomCocktails()
     }
 
-    /*------------------------------ Random ------------------------------*/
-    override suspend fun getPopularCocktails(categoryName: String): CocktailByCategoryList {
-        return remoteDataSource.getPopularCocktails(categoryName)
+    /*------------------------------ Cocktails By Categories ------------------------------*/
+    override suspend fun getCocktailsByCategories(categoryName: String): CocktailByCategoryList {
+        return remoteDataSource.getCocktailsByCategories(categoryName)
+    }
+
+    /*------------------------------ Cocktails By Glass ------------------------------*/
+    override suspend fun getCocktailsByGlass(glassName: String): CocktailByCategoryList {
+        return remoteDataSource.getCocktailsByGlass(glassName)
     }
 }

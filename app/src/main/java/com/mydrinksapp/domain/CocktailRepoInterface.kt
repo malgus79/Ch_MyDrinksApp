@@ -23,6 +23,9 @@ interface CocktailRepoInterface {
     /*------------------------------ Random ------------------------------*/
     suspend fun getRandomCocktails(): CocktailList
 
-    /*------------------------------ Popular ------------------------------*/
-    suspend fun getPopularCocktails(categoryName: String): CocktailByCategoryList
+    /*------------------------------ Cocktails By Categories ------------------------------*/
+    suspend fun getCocktailsByCategories(categoryName: String): CocktailByCategoryList
+
+    /*------------------------------ Cocktails By Glass ------------------------------*/
+    suspend fun getCocktailsByGlass(glassName: String): CocktailByCategoryList
 }
