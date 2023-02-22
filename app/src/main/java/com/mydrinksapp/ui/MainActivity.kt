@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.homeFragment -> navController.navigate(R.id.homeFragment)
+            R.id.allCocktailsFragment -> navController.navigate(R.id.allCocktailsFragment)
             R.id.searchFragment -> navController.navigate(R.id.searchFragment)
             R.id.favoritesFragment -> navController.navigate(R.id.favoritesFragment)
             R.id.exit -> finish()

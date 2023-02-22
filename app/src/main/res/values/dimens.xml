@@ -12,11 +12,13 @@
     <dimen name="common_size_normal">15sp</dimen>
     <dimen name="common_size_default">20sp</dimen>
     <dimen name="common_size_title">25sp</dimen>
+    <dimen name="common_size_letter">50sp</dimen>
 
     <!-- Dimens CornerRadius -->
     <dimen name="common_corner_min">8dp</dimen>
     <dimen name="common_corner_default">16dp</dimen>
     <dimen name="search_view_radius">20dp</dimen>
+    <dimen name="common_corner_letter">50dp</dimen>
 
     <!-- Dimens Padding -->
     <dimen name="common_padding_min">8dp</dimen>

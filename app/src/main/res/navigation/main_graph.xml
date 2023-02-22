@@ -67,5 +67,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_allCocktailsFragment"
+            app:destination="@id/allCocktailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/allCocktailsFragment"
+        android:name="com.mydrinksapp.ui.allcocktails.AllCocktailsFragment"
+        android:label="@string/all_cocktails"
+        tools:layout="@layout/fragment_all_cocktails" />
 </navigation>
