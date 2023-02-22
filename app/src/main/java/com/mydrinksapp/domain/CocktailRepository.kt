@@ -81,4 +81,13 @@ class CocktailRepository @Inject constructor(
     override suspend fun getCocktailsByGlass(glassName: String): CocktailByCategoryList {
         return remoteDataSource.getCocktailsByGlass(glassName)
     }
+
+    /*------------------------------ Detail cocktails by letters ------------------------------*/
+    override suspend fun getCocktailById(idDrink: String): CocktailList {
+        return remoteDataSource.getCocktailById(idDrink)
+    }
+
+    override suspend fun getCocktailByLetter(letter: String): CocktailList {
+        return remoteDataSource.getCocktailByLetter(letter)
+    }
 }

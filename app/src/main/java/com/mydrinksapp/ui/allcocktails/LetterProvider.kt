@@ -23,10 +23,8 @@ class LetterProvider {
             Letter("R"),
             Letter("S"),
             Letter("T"),
-            Letter("U"),
             Letter("V"),
             Letter("W"),
-            Letter("X"),
             Letter("Y"),
             Letter("Z")
         )

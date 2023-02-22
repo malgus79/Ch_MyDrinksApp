@@ -28,4 +28,8 @@ interface CocktailRepoInterface {
 
     /*------------------------------ Cocktails By Glass ------------------------------*/
     suspend fun getCocktailsByGlass(glassName: String): CocktailByCategoryList
+
+    /*------------------------------ Detail cocktails by letters ------------------------------*/
+    suspend fun getCocktailById(idDrink: String): CocktailList
+    suspend fun getCocktailByLetter(idDrink: String): CocktailList
 }

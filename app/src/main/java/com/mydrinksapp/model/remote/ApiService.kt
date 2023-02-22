@@ -17,4 +17,11 @@ interface ApiService {
 
     @GET("filter.php")
     suspend fun getCocktailsByGlass(@Query(value = "g") glassName: String): CocktailByCategoryList
+
+    @GET("lookup.php")
+    suspend fun getCocktailById(@Query(value = "i") idDrink: String): CocktailList
+
+
+    @GET("search.php")
+    suspend fun getCocktailByLetter(@Query(value = "f") letter: String): CocktailList
 }

@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="300dp"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/common_margin_max" />
+
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_letter"
         android:layout_width="match_parent"
@@ -17,7 +32,7 @@
         tools:listitem="@layout/item_all_cocktails"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_all_cocktails"
+        android:id="@+id/rv_cocktails_by_letter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_margin_default"

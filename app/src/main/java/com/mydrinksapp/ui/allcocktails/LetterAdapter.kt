@@ -5,7 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mydrinksapp.databinding.ItemAllCocktailsBinding
 
-class LetterAdapter(private var letterMutableList: MutableList<Letter>) : RecyclerView.Adapter<LetterAdapter.VieHolder>() {
+class LetterAdapter(
+    private var letterMutableList: MutableList<Letter>,
+    private val itemClickListener: OnLetterClickListener
+    ) : RecyclerView.Adapter<LetterAdapter.VieHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VieHolder {
         val itemBinding =
@@ -26,17 +29,22 @@ class LetterAdapter(private var letterMutableList: MutableList<Letter>) : Recycl
     inner class VieHolder(private val binding: ItemAllCocktailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(item: Letter) {
-            binding.txtLetter.text = item.letter
+        fun setData(letter: Letter) {
+            binding.txtLetter.text = letter.letter
 
-            //TODO conectar con detalle
-//            binding.mcvCocktail.setOnClickListener {
+            binding.mcvLetter.setOnClickListener {
+                itemClickListener.onCocktailClick(letter.letter)
+
 //                val action =
-//                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-//                        cocktailPopular.cocktailId.toString()
+//                    AllCocktailsFragmentDirections.actionAllCocktailsFragmentToDetailByLetterFragment(
+//                        item.letter
 //                    )
 //                this.itemView.findNavController().navigate(action)
-//            }
+            }
         }
+    }
+
+    interface OnLetterClickListener {
+        fun onCocktailClick(letter: String)
     }
 }

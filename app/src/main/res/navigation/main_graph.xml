@@ -75,5 +75,18 @@
         android:id="@+id/allCocktailsFragment"
         android:name="com.mydrinksapp.ui.allcocktails.AllCocktailsFragment"
         android:label="@string/all_cocktails"
-        tools:layout="@layout/fragment_all_cocktails" />
+        tools:layout="@layout/fragment_all_cocktails" >
+        <action
+            android:id="@+id/action_allCocktailsFragment_to_detailByLetterFragment"
+            app:destination="@id/detailByLetterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailByLetterFragment"
+        android:name="com.mydrinksapp.ui.detail.DetailByLetterFragment"
+        android:label="fragment_detail_by_letter"
+        tools:layout="@layout/fragment_detail_by_letter" >
+        <argument
+            android:name="idDrink"
+            app:argType="string" />
+    </fragment>
 </navigation>
