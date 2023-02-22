@@ -11,6 +11,9 @@ import com.mydrinksapp.R
 import com.mydrinksapp.base.Resource
 import com.mydrinksapp.databinding.FragmentAllCocktailsBinding
 import com.mydrinksapp.model.data.Cocktail
+import com.mydrinksapp.ui.allcocktails.letter.Letter
+import com.mydrinksapp.ui.allcocktails.letter.LetterAdapter
+import com.mydrinksapp.ui.allcocktails.letter.LetterProvider
 import com.mydrinksapp.ui.viewmodel.AllCocktailsViewModel
 import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
@@ -39,6 +42,7 @@ class AllCocktailsFragment : Fragment(), LetterAdapter.OnLetterClickListener {
         cocktail = Cocktail()
 
         setupLetterRecyclerView()
+        showDataCocktailsByLetter()
 
         return binding.root
     }

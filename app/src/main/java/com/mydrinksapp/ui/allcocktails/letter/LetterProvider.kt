@@ -1,4 +1,4 @@
-package com.mydrinksapp.ui.allcocktails
+package com.mydrinksapp.ui.allcocktails.letter
 
 class LetterProvider {
     companion object {

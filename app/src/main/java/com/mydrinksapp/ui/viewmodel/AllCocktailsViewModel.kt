@@ -11,6 +11,11 @@ import javax.inject.Inject
 class AllCocktailsViewModel @Inject constructor(private val repo: CocktailRepository) : ViewModel() {
 
     private val mutableCocktailsByLetter = MutableLiveData<String>()
+
+    init {
+        mutableCocktailsByLetter.value = "A"
+    }
+
     fun setCocktailByLetter(letter: String) {
         mutableCocktailsByLetter.value = letter
     }

@@ -1,4 +1,4 @@
-package com.mydrinksapp.ui.allcocktails
+package com.mydrinksapp.ui.allcocktails.letter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
