@@ -12,7 +12,7 @@
 
     <com.jackandphantom.carouselrecyclerview.view.ReflectionViewContainer
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:reflect_gap="10dp">
 

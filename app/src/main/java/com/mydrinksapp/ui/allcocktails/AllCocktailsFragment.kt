@@ -66,6 +66,7 @@ class AllCocktailsFragment : Fragment(), LetterAdapter.OnLetterClickListener {
             when (it) {
                 is Resource.Loading -> {
                     binding.progressBar.show()
+                    binding.rvCocktailsByLetter.hide()
                 }
                 is Resource.Success -> {
                     binding.progressBar.hide()

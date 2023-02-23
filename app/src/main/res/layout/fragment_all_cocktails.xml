@@ -24,8 +24,9 @@
     <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
         android:id="@+id/rv_letter"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="90dp"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/common_margin_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
