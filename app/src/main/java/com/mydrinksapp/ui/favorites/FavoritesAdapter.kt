@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mydrinksapp.databinding.ItemCocktailBinding
+import com.mydrinksapp.databinding.ItemFavoriteCocktailBinding
 import com.mydrinksapp.model.data.Cocktail
 
 class FavoritesAdapter(
@@ -27,7 +27,7 @@ class FavoritesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = ItemCocktailBinding.inflate(LayoutInflater.from(context), parent, false)
+        val itemBinding = ItemFavoriteCocktailBinding.inflate(LayoutInflater.from(context), parent, false)
 //        return MainViewHolder(itemBinding)
 
         val holder = ViewHolder(itemBinding)
@@ -57,12 +57,11 @@ class FavoritesAdapter(
         holder.setData(cocktailList[position])
     }
 
-    inner class ViewHolder(private val binding: ItemCocktailBinding) :
+    inner class ViewHolder(private val binding: ItemFavoriteCocktailBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(item: Cocktail) = with(binding) {
-            Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
-            txtTitle.text = item.name
-            txtDescription.text = item.description
+            Glide.with(context).load(item.image).centerCrop().into(imgFavoriteCocktail)
+            txtFavoriteTitle.text = item.name
         }
     }
 }

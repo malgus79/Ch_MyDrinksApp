@@ -12,9 +12,10 @@
         layout="@layout/empty_container"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_tragos_favoritos"
+        android:id="@+id/rv_favorite_cocktail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_cocktail" />
+        android:stateListAnimator="@null"
+        tools:listitem="@layout/item_favorite_cocktail" />
 
 </FrameLayout>

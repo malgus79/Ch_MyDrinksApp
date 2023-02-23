@@ -9,25 +9,27 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.base.Resource
-import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.databinding.FragmentFavoriteBinding
+import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.ui.viewmodel.FavoritesViewModel
+import com.mydrinksapp.utils.show
+import com.mydrinksapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.LandingAnimator
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
 
     private lateinit var binding: FragmentFavoriteBinding
-    private lateinit var favoritesAdapter: FavoritesAdapter
+    private lateinit var adapterFavorites: FavoritesAdapter
     private val viewModel: FavoritesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        favoritesAdapter = FavoritesAdapter(requireContext(), this)
+        adapterFavorites = FavoritesAdapter(requireContext(), this)
     }
 
     override fun onCreateView(
@@ -54,7 +56,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
                         binding.emptyContainer.root.visibility = View.VISIBLE
                         return@Observer
                     }
-                    favoritesAdapter.setCocktailList(result.data)
+                    adapterFavorites.setCocktailList(result.data)
                 }
                 is Resource.Failure -> {
                     Toast.makeText(
@@ -68,14 +70,16 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
     }
 
     private fun setupRecyclerView() {
-        binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragosFavoritos.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.HORIZONTAL
+        binding.rvFavoriteCocktail.apply {
+            adapter = adapterFavorites
+            layoutManager = StaggeredGridLayoutManager(
+                resources.getInteger(R.integer.columns_favorite),
+                StaggeredGridLayoutManager.VERTICAL
             )
-        )
-        binding.rvTragosFavoritos.adapter = favoritesAdapter
+            itemAnimator = LandingAnimator().apply { addDuration = 300 }
+            setHasFixedSize(true)
+            show()
+        }
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
@@ -84,36 +88,10 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener {
                 cocktail
             )
         )
-//        val bundle = Bundle()
-//        bundle.putParcelable("drink", cocktail)
-//        findNavController().navigate(R.id.action_favoritosFragment_to_tragosDetalleFragment, bundle)
     }
 
     override fun onCocktailLongClick(cocktail: Cocktail, position: Int) {
         viewModel.deleteFavoriteCocktail(cocktail)
-        Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
+        showToast(getString(R.string.removed_cocktail))
     }
-
-//    override fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int) {
-//        viewModel.deleteCocktail(favorites).observe(viewLifecycleOwner, Observer { result ->
-//            when (result) {
-//                is Resource.Loading -> {}
-//                is Resource.Success -> {
-//                    if (result.data.isEmpty()) {
-//                        binding.emptyContainer.root.visibility = View.VISIBLE
-//                        return@Observer
-//                    }
-//                    Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
-//                    favoritesAdapter.setCocktailList(result.data)
-//                }
-//                is Resource.Failure -> {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "An error occurred ${result.exception}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        })
-//    }
 }
