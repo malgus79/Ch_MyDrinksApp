@@ -1,6 +1,10 @@
 package com.mydrinksapp.ui.detail
 
+import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +47,7 @@ class DetailFragment : Fragment() {
 
         setupShowCocktailDetails()
         isFavoriteCocktails()
+        onClickShareCocktails()
 
         return binding.root
     }
@@ -84,5 +89,28 @@ class DetailFragment : Fragment() {
                 else -> R.drawable.ic_add
             }
         )
+    }
+
+    private fun onClickShareCocktails() {
+        binding.btnShareCocktail.setOnClickListener {
+            try {
+                val bitmapDrawable = binding.imgCocktail.drawable as BitmapDrawable
+                val bitmap = bitmapDrawable.bitmap
+                val bitmapPath =
+                    MediaStore.Images.Media.insertImage(
+                        context?.contentResolver,
+                        bitmap,
+                        "IMAGE" + System.currentTimeMillis(),
+                        null
+                    )
+                val bitmapUri = Uri.parse(bitmapPath.toString())
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "image/*"
+                intent.putExtra(Intent.EXTRA_STREAM, bitmapUri)
+                startActivity(Intent.createChooser(intent, "My Meal App"))
+            } catch (e: Exception) {
+                showToast(getString(R.string.share_error))
+            }
+        }
     }
 }

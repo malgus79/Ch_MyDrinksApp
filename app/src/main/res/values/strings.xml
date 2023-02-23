@@ -23,6 +23,7 @@
     <string name="added_cocktail">Added to favorite</string>
     <!-- Detail -->
     <string name="detail">Detail</string>
+    <string name="share_error">Failed to share</string>
 
 
 </resources>
