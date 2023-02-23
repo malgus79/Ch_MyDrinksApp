@@ -12,6 +12,7 @@ import com.mydrinksapp.R
 import com.mydrinksapp.databinding.FragmentDetailBinding
 import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.ui.viewmodel.DetailViewModel
+import com.mydrinksapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -20,10 +21,9 @@ class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
     private val viewModel: DetailViewModel by viewModels()
-//    private val args by navArgs<FavoritesFragmentArgs>()
 
     private lateinit var cocktail: Cocktail
-    private var isCocktailFavorited: Boolean? = null
+    private var isFavoriteCocktail: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,56 +38,51 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+    ): View {
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        setupShowCocktailDetails()
+        isFavoriteCocktails()
+
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentDetailBinding.bind(view)
+    private fun setupShowCocktailDetails() {
         Glide.with(requireContext())
             .load(cocktail.image)
             .centerCrop()
             .into(binding.imgCocktail)
         binding.cocktailTitle.text = cocktail.name
         binding.cocktailDesc.text = cocktail.description
+    }
 
-//        binding.btnSaveCocktail.setOnClickListener {
-//            viewModel.saveCocktail(
-//                FavoritesEntity(
-//                    cocktail.cocktailId,
-//                    cocktail.image,
-//                    cocktail.name,
-//                    cocktail.description,
-//                    cocktail.hasAlcohol
-//                )
-//            )
-//            Toast.makeText(requireContext(), "Se guardó el trago en favoritos", Toast.LENGTH_SHORT)
-//                .show()
-//        }
-
-        fun updateButtonIcon() {
-            val isCocktailFavorited = isCocktailFavorited ?: return
-
-            binding.btnSaveOrDeleteCocktail.setImageResource(
-                when {
-                    isCocktailFavorited -> R.drawable.ic_baseline_delete_24
-                    else -> R.drawable.ic_baseline_save_24
-                }
-            )
-        }
-
+    private fun isFavoriteCocktails() {
         binding.btnSaveOrDeleteCocktail.setOnClickListener {
-            val isCocktailFavorited = isCocktailFavorited ?: return@setOnClickListener
+            val isFavoriteCocktail = isFavoriteCocktail ?: return@setOnClickListener
 
+            if (isFavoriteCocktail) {
+                showToast(getString(R.string.removed_cocktail))
+            } else {
+                showToast(getString(R.string.added_cocktail))
+            }
             viewModel.saveOrDeleteFavoriteCocktail(cocktail)
-            this.isCocktailFavorited = !isCocktailFavorited
+            this.isFavoriteCocktail = !isFavoriteCocktail
             updateButtonIcon()
         }
-
         viewLifecycleOwner.lifecycleScope.launch {
-            isCocktailFavorited = viewModel.isCocktailFavorite(cocktail)
+            isFavoriteCocktail = viewModel.isCocktailFavorite(cocktail)
             updateButtonIcon()
         }
+    }
+
+    private fun updateButtonIcon() {
+        val isFavoriteCocktail = isFavoriteCocktail ?: return
+
+        binding.btnSaveOrDeleteCocktail.setImageResource(
+            when {
+                isFavoriteCocktail -> R.drawable.ic_delete
+                else -> R.drawable.ic_add
+            }
+        )
     }
 }

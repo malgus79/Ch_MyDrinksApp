@@ -20,6 +20,7 @@
     <!-- Favorite -->
     <string name="favorites">Favorites</string>
     <string name="removed_cocktail">Removed from favorite</string>
+    <string name="added_cocktail">Added to favorite</string>
     <!-- Detail -->
     <string name="detail">Detail</string>
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,6 +18,7 @@ import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.ui.viewmodel.DetailViewModel
 import com.mydrinksapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailByLetterFragment : Fragment() {
@@ -26,7 +28,7 @@ class DetailByLetterFragment : Fragment() {
     private val viewModel: DetailViewModel by viewModels()
 
     private lateinit var cocktail: Cocktail
-//    private var isCocktailFavorited: Boolean? = null
+    private var isFavoriteCocktail: Boolean? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +49,8 @@ class DetailByLetterFragment : Fragment() {
             if (it != null) {
                 cocktail = it
                 loadData(it)
-//                isCocktailFavorited()
-//                updateButtonIcon()
+                isFavoriteCocktail()
+                updateButtonIcon()
             }
         }
     }
@@ -77,5 +79,35 @@ class DetailByLetterFragment : Fragment() {
         binding.btnSaveOrDeleteCocktail.isVisible = !loading
         binding.cocktailTitle.isVisible = !loading
         binding.cocktailDesc.isVisible = !loading
+    }
+
+    private fun isFavoriteCocktail() {
+        binding.btnSaveOrDeleteCocktail.setOnClickListener {
+            val isFavoriteCocktail = isFavoriteCocktail ?: return@setOnClickListener
+
+            if (isFavoriteCocktail) {
+                showToast(getString(R.string.removed_cocktail))
+            } else {
+                showToast(getString(R.string.added_cocktail))
+            }
+            viewModel.saveOrDeleteFavoriteCocktail(cocktail)
+            this.isFavoriteCocktail = !isFavoriteCocktail
+            updateButtonIcon()
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            isFavoriteCocktail = viewModel.isCocktailFavorite(cocktail)
+            updateButtonIcon()
+        }
+    }
+
+    private fun updateButtonIcon() {
+        val isFavoriteCocktail = isFavoriteCocktail ?: return
+
+        binding.btnSaveOrDeleteCocktail.setImageResource(
+            when {
+                isFavoriteCocktail -> R.drawable.ic_delete
+                else -> R.drawable.ic_add
+            }
+        )
     }
 }
