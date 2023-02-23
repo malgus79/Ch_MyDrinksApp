@@ -41,29 +41,27 @@ class AllCocktailsFragment : Fragment(), LetterAdapter.OnLetterClickListener {
         binding = FragmentAllCocktailsBinding.inflate(inflater, container, false)
         cocktail = Cocktail()
 
-        setupLetterRecyclerView()
-        showDataCocktailsByLetter()
+        setupLettersCarousel()
+        setupCocktailsByLetter()
 
         return binding.root
     }
 
-    private fun setupLetterRecyclerView() {
+    private fun setupLettersCarousel() {
+        adapterLetter = LetterAdapter(letterMutableList, this)
         binding.rvLetter.apply {
-            binding.rvLetter.adapter = adapterLetter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            itemAnimator = LandingAnimator().apply { addDuration = 300 }
-            setHasFixedSize(true)
-            show()
+            this.adapter = adapterLetter
+            set3DItem(true)
+            setAlpha(true)
         }
     }
 
-    override fun onCocktailClick(letter: String) {
+    override fun onLetterClick(letter: String) {
         viewModel.setCocktailByLetter(letter)
-        showDataCocktailsByLetter()
+        setupCocktailsByLetter()
     }
 
-    private fun showDataCocktailsByLetter() {
+    private fun setupCocktailsByLetter() {
         viewModel.fetchCocktailByLetter.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {

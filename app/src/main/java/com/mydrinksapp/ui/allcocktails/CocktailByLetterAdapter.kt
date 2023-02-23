@@ -46,7 +46,7 @@ class CocktailByLetterAdapter : RecyclerView.Adapter<CocktailByLetterAdapter.Vie
             binding.txtTitle.text = cocktail.name
             binding.txtDescription.text = cocktail.description
 
-            binding.mcvCocktail.setOnClickListener {
+            binding.mcvContainer.setOnClickListener {
                 val action =
                     AllCocktailsFragmentDirections.actionAllCocktailsFragmentToDetailByLetterFragment(
                         cocktail.cocktailId

@@ -8,7 +8,7 @@ import com.mydrinksapp.databinding.ItemAllCocktailsBinding
 class LetterAdapter(
     private var letterMutableList: MutableList<Letter>,
     private val itemClickListener: OnLetterClickListener
-    ) : RecyclerView.Adapter<LetterAdapter.VieHolder>() {
+) : RecyclerView.Adapter<LetterAdapter.VieHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VieHolder {
         val itemBinding =
@@ -30,21 +30,15 @@ class LetterAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(letter: Letter) {
-            binding.txtLetter.text = letter.letter
+            binding.btnLetter.text = letter.letter
 
-            binding.mcvLetter.setOnClickListener {
-                itemClickListener.onCocktailClick(letter.letter)
-
-//                val action =
-//                    AllCocktailsFragmentDirections.actionAllCocktailsFragmentToDetailByLetterFragment(
-//                        item.letter
-//                    )
-//                this.itemView.findNavController().navigate(action)
+            binding.btnLetter.setOnClickListener {
+                itemClickListener.onLetterClick(letter.letter)
             }
         }
     }
 
     interface OnLetterClickListener {
-        fun onCocktailClick(letter: String)
+        fun onLetterClick(letter: String)
     }
 }

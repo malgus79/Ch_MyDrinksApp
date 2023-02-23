@@ -83,7 +83,7 @@
     <fragment
         android:id="@+id/detailByLetterFragment"
         android:name="com.mydrinksapp.ui.detail.DetailByLetterFragment"
-        android:label="fragment_detail_by_letter"
+        android:label="@string/detail"
         tools:layout="@layout/fragment_detail_by_letter" >
         <argument
             android:name="idDrink"

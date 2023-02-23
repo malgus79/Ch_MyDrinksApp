@@ -97,6 +97,8 @@ dependencies {
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.10"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
+    // Carousel
+    implementation 'com.github.sparrow007:carouselrecyclerview:1.2.4'
 
     // Local Unit Tests
     testImplementation "com.google.truth:truth:1.1.3"
