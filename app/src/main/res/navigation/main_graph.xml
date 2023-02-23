@@ -69,7 +69,18 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_allCocktailsFragment"
-            app:destination="@id/allCocktailsFragment" />
+            app:destination="@id/allCocktailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailByLetterFragment"
+            app:destination="@id/detailByLetterFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/allCocktailsFragment"
@@ -78,7 +89,11 @@
         tools:layout="@layout/fragment_all_cocktails" >
         <action
             android:id="@+id/action_allCocktailsFragment_to_detailByLetterFragment"
-            app:destination="@id/detailByLetterFragment" />
+            app:destination="@id/detailByLetterFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/detailByLetterFragment"

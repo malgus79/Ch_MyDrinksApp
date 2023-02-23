@@ -12,7 +12,19 @@ fun List<CocktailEntity>.asCocktailList(): List<Cocktail> = this.map {
 }
 
 fun Cocktail.asCocktailEntity(): CocktailEntity =
-    CocktailEntity(this.cocktailId, this.image, this.name, this.description, this.hasAlcohol)
+    CocktailEntity(
+        this.cocktailId.toString(),
+        this.image.toString(),
+        this.name.toString(),
+        this.description.toString(),
+        this.hasAlcohol.toString()
+    )
 
 fun Cocktail.asFavoriteEntity(): FavoritesEntity =
-    FavoritesEntity(this.cocktailId, this.image, this.name, this.description, this.hasAlcohol)
+    FavoritesEntity(
+        this.cocktailId.toString(),
+        this.image.toString(),
+        this.name.toString(),
+        this.description.toString(),
+        this.hasAlcohol.toString()
+    )

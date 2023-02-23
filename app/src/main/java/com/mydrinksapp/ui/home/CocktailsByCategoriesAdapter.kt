@@ -2,6 +2,7 @@ package com.mydrinksapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -49,14 +50,13 @@ class CocktailsByCategoriesAdapter :
 
             binding.txtTitle.text = item.name
 
-            //TODO conectar con detalle
-//            binding.mcvCocktail.setOnClickListener {
-//                val action =
-//                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-//                        cocktailPopular.cocktailId.toString()
-//                    )
-//                this.itemView.findNavController().navigate(action)
-//            }
+            binding.mcvCocktail.setOnClickListener {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToDetailByLetterFragment(
+                        item.cocktailId.toString()
+                    )
+                this.itemView.findNavController().navigate(action)
+            }
         }
     }
 }

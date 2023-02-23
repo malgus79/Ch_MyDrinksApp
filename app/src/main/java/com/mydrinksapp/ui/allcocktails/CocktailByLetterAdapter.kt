@@ -49,7 +49,7 @@ class CocktailByLetterAdapter : RecyclerView.Adapter<CocktailByLetterAdapter.Vie
             binding.mcvContainer.setOnClickListener {
                 val action =
                     AllCocktailsFragmentDirections.actionAllCocktailsFragmentToDetailByLetterFragment(
-                        cocktail.cocktailId
+                        cocktail.cocktailId.toString()
                     )
                 this.itemView.findNavController().navigate(action)
             }

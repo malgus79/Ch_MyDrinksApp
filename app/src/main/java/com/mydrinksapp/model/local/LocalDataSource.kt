@@ -31,6 +31,6 @@ class LocalDataSource @Inject constructor(private val dao: CocktailDao) {
     }
 
     suspend fun isCocktailFavorite(cocktail: Cocktail): Boolean {
-        return dao.getCocktailById(cocktail.cocktailId) != null
+        return dao.getCocktailById(cocktail.cocktailId.toString()) != null
     }
 }
