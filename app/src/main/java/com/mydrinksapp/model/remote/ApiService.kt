@@ -1,9 +1,6 @@
 package com.mydrinksapp.model.remote
 
-import com.mydrinksapp.model.data.AllIngredientList
-import com.mydrinksapp.model.data.CocktailByCategoryList
-import com.mydrinksapp.model.data.CocktailList
-import com.mydrinksapp.model.data.IngredientList
+import com.mydrinksapp.model.data.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -23,7 +20,6 @@ interface ApiService {
     @GET("lookup.php")
     suspend fun getCocktailById(@Query(value = "i") idDrink: String): CocktailList
 
-
     @GET("search.php")
     suspend fun getCocktailByLetter(@Query(value = "f") letter: String): CocktailList
 
@@ -35,4 +31,7 @@ interface ApiService {
 
     @GET("list.php")
     suspend fun getAllIngredientsList(@Query(value = "i") ingredient: String): AllIngredientList
+
+    @GET("list.php")
+    suspend fun getAllCategoriesList(@Query(value = "c") categoryName: String): CategoriesList
 }

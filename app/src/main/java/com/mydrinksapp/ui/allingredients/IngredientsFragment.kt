@@ -26,7 +26,8 @@ class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClick
 
     private var ingredientsMutableList: MutableList<AllIngredient> = mutableListOf()
 
-    private var adapterAllIngredients: AllIngredientsAdapter = AllIngredientsAdapter(ingredientsMutableList, this)
+    private var adapterAllIngredients: AllIngredientsAdapter =
+        AllIngredientsAdapter(ingredientsMutableList, this)
 
     private var adapterCocktailByIngredients: CocktailByIngredientsAdapter =
         CocktailByIngredientsAdapter()
@@ -50,7 +51,7 @@ class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClick
     }
 
     private fun setupAllIngredientList() {
-        viewModel.fetchAllIngredientList().observe(viewLifecycleOwner){
+        viewModel.fetchAllIngredientList().observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
                     binding.progressBarCocktailsByIngredients.show()

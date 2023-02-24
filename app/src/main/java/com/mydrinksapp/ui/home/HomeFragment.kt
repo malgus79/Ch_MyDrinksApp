@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val adapterByCategories: CocktailsByCategoriesAdapter = CocktailsByCategoriesAdapter()
     private val adapterByGlass: CocktailsByGlassAdapter = CocktailsByGlassAdapter()
+    private val adapterCategories: CategoriesAdapter = CategoriesAdapter()
 
     private val viewModel: HomeViewModel by viewModels()
 
@@ -44,6 +45,7 @@ class HomeFragment : Fragment() {
 
         swipeRefresh()
         setupRandomCocktails()
+        setupCategories()
         setupCocktailsByCategories()
         setupCocktailsByGlass()
         onBackPressedCallback()
@@ -59,6 +61,7 @@ class HomeFragment : Fragment() {
             )
             Handler(Looper.getMainLooper()).postDelayed({
                 setupRandomCocktails()
+                setupCategories()
                 setupCocktailsByCategories()
                 setupCocktailsByGlass()
             }, 500)
@@ -106,13 +109,54 @@ class HomeFragment : Fragment() {
             .into(binding.imgRandomCocktail)
 
         binding.txtTitleRandom.show()
-        binding.cardViewHomeRandom.show()
-        binding.cardViewHomeRandom.setOnClickListener {
+        binding.mcvHomeRandom.show()
+        binding.mcvHomeRandom.setOnClickListener {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToDetailFragment(
                     item
                 )
             )
+        }
+    }
+
+    private fun setupCategories() {
+        viewModel.fetchAllCategories().observe(viewLifecycleOwner) {
+            with(binding) {
+                when (it) {
+                    is Resource.Loading -> {
+                        binding.progressBar.show()
+                    }
+                    is Resource.Success -> {
+                        binding.progressBar.hide()
+                        if (it.data.drinks.isEmpty()) {
+                            binding.rvCocktailsByCategories.hide()
+                            return@observe
+                        }
+                        setupCategoriesRecyclerView()
+                        adapterCategories.setCategoriesList(it.data.drinks)
+                        binding.txtTitleCategories.show()
+                    }
+                    is Resource.Failure -> {
+                        binding.progressBar.hide()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupCategoriesRecyclerView() {
+        binding.rvCategories.apply {
+            adapter = adapterCategories
+            layoutManager =
+                GridLayoutManager(
+                    requireContext(),
+                    resources.getInteger(R.integer.columns_categories),
+                    GridLayoutManager.VERTICAL,
+                    false
+                )
+            itemAnimator = LandingAnimator().apply { addDuration = 300 }
+            setHasFixedSize(true)
+            show()
         }
     }
 
@@ -138,7 +182,7 @@ class HomeFragment : Fragment() {
                     }
                     setupCocktailsByCategoriesRecyclerView()
                     adapterByCategories.setCocktailsByCategoriesList(it.data.drinks)
-                    binding.txtTitleCocktailsByCategories.text = titleCocktailsByCategories
+//                    binding.txtTitleCocktailsByCategories.text = titleCocktailsByCategories
                 }
                 is Resource.Failure -> {
                     binding.progressBar.hide()
@@ -154,7 +198,7 @@ class HomeFragment : Fragment() {
                 GridLayoutManager(
                     requireContext(),
                     resources.getInteger(R.integer.columns_cocktails_by_categories),
-                    GridLayoutManager.HORIZONTAL,
+                    GridLayoutManager.VERTICAL,
                     false
                 )
             itemAnimator = LandingAnimator().apply { addDuration = 300 }
@@ -190,7 +234,7 @@ class HomeFragment : Fragment() {
                     }
                     setupCocktailsByGlassRecyclerView()
                     adapterByGlass.setCocktailsByGlassList(it.data.drinks)
-                    binding.txtTitleCocktailsByGlass.text = titleCocktailsByGlass
+//                    binding.txtTitleCocktailsByGlass.text = titleCocktailsByGlass
                 }
                 is Resource.Failure -> {
                     binding.progressBar.hide()
@@ -206,7 +250,7 @@ class HomeFragment : Fragment() {
                 GridLayoutManager(
                     requireContext(),
                     resources.getInteger(R.integer.columns_cocktails_by_glass),
-                    GridLayoutManager.HORIZONTAL,
+                    GridLayoutManager.VERTICAL,
                     false
                 )
             itemAnimator = LandingAnimator().apply { addDuration = 300 }

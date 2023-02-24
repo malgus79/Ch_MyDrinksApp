@@ -42,7 +42,7 @@
             android:maxLines="1"
             android:textStyle="italic"
             android:ellipsize="end"
-            android:textSize="@dimen/common_size_normal"
+            android:textSize="@dimen/common_size_min"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/mcv_cocktail"

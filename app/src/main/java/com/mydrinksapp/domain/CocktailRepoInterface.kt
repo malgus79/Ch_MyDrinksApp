@@ -41,4 +41,8 @@ interface CocktailRepoInterface {
 
     /*------------------------------ All ingredients list ------------------------------*/
     suspend fun getAllIngredientsList(ingredient: String): AllIngredientList
+
+    /*------------------------------ All categories list ------------------------------*/
+    suspend fun getAllCategoriesList(categoryName: String): CategoriesList
+
 }

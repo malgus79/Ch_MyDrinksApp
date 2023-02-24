@@ -40,4 +40,13 @@ class HomeViewModel @Inject constructor(private val repo: CocktailRepository) : 
                 emit(Resource.Failure(e))
             }
         }
+
+    fun fetchAllCategories() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+        emit(Resource.Loading)
+        try {
+            emit(Resource.Success(repo.getAllCategoriesList("list")))
+        } catch (e:Exception) {
+            emit(Resource.Failure(e))
+        }
+    }
 }

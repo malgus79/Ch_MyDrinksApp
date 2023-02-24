@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mcv_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/common_margin_min"
+    app:cardCornerRadius="@dimen/common_corner_default">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/teal_700">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorOnPrimary"
+            android:clipToPadding="true"
+            android:elevation="@dimen/common_margin_default"
+            app:cardCornerRadius="@dimen/common_corner_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txt_title_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_margin_min"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="@dimen/common_padding_min"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/common_size_default"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/mcv_categories"
+                app:layout_constraintStart_toStartOf="@id/mcv_categories"
+                app:layout_constraintTop_toBottomOf="@id/mcv_categories"
+                tools:text="Shake" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/mcv_categories"
+            app:layout_constraintStart_toStartOf="@id/mcv_categories"
+            app:layout_constraintTop_toBottomOf="@id/mcv_categories" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
