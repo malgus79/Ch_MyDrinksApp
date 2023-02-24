@@ -19,6 +19,7 @@
     <dimen name="common_corner_min">8dp</dimen>
     <dimen name="common_corner_default">16dp</dimen>
     <dimen name="search_view_radius">20dp</dimen>
+    <dimen name="common_corner_middle">32dp</dimen>
     <dimen name="common_corner_letter">50dp</dimen>
 
     <!-- Dimens Padding -->

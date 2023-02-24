@@ -2,10 +2,7 @@ package com.mydrinksapp.domain
 
 import androidx.lifecycle.LiveData
 import com.mydrinksapp.base.Resource
-import com.mydrinksapp.model.data.Cocktail
-import com.mydrinksapp.model.data.CocktailByCategoryList
-import com.mydrinksapp.model.data.CocktailList
-import com.mydrinksapp.model.data.asCocktailEntity
+import com.mydrinksapp.model.data.*
 import com.mydrinksapp.model.local.CocktailEntity
 import com.mydrinksapp.model.local.LocalDataSource
 import com.mydrinksapp.model.remote.RemoteDataSource
@@ -90,5 +87,15 @@ class CocktailRepository @Inject constructor(
     /*------------------------------ Detail cocktails by Letter ------------------------------*/
     override suspend fun getCocktailByLetter(letter: String): CocktailList {
         return remoteDataSource.getCocktailByLetter(letter)
+    }
+
+    /*------------------------------ Cocktails by Ingredients ------------------------------*/
+    override suspend fun getCocktailByIngredients(ingredients: String): CocktailList {
+        return remoteDataSource.getCocktailByIngredients(ingredients)
+    }
+
+    /*------------------------------ Ingredients by Name ------------------------------*/
+    override suspend fun getIngredientsByName(ingredients: String): IngredientList {
+        return remoteDataSource.getIngredientsByName(ingredients)
     }
 }

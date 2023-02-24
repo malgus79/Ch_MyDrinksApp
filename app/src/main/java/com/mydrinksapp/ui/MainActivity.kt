@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.homeFragment -> navController.navigate(R.id.homeFragment)
             R.id.allCocktailsFragment -> navController.navigate(R.id.allCocktailsFragment)
+            R.id.ingredientsFragment -> navController.navigate(R.id.ingredientsFragment)
             R.id.searchFragment -> navController.navigate(R.id.searchFragment)
             R.id.favoritesFragment -> navController.navigate(R.id.favoritesFragment)
             R.id.exit -> finish()

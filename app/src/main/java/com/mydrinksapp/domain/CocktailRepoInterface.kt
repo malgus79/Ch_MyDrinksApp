@@ -5,6 +5,7 @@ import com.mydrinksapp.base.Resource
 import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.model.data.CocktailByCategoryList
 import com.mydrinksapp.model.data.CocktailList
+import com.mydrinksapp.model.data.IngredientList
 import com.mydrinksapp.model.local.CocktailEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -34,4 +35,10 @@ interface CocktailRepoInterface {
 
     /*------------------------------ Detail cocktails by Letter ------------------------------*/
     suspend fun getCocktailByLetter(letter: String): CocktailList
+
+    /*------------------------------ Cocktails by Ingredients ------------------------------*/
+    suspend fun getCocktailByIngredients(ingredients: String): CocktailList
+
+    /*------------------------------ Ingredients by name ------------------------------*/
+    suspend fun getIngredientsByName(ingredients: String): IngredientList
 }

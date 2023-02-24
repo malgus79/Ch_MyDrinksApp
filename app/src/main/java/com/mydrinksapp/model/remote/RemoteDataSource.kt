@@ -4,6 +4,7 @@ import com.mydrinksapp.base.Resource
 import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.model.data.CocktailByCategoryList
 import com.mydrinksapp.model.data.CocktailList
+import com.mydrinksapp.model.data.IngredientList
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -38,5 +39,13 @@ class RemoteDataSource @Inject constructor(private val api: ApiService) {
 
     suspend fun getCocktailByLetter(letter: String): CocktailList {
         return api.getCocktailByLetter(letter)
+    }
+
+    suspend fun getCocktailByIngredients(ingredients: String): CocktailList {
+        return api.getCocktailByIngredients(ingredients)
+    }
+
+    suspend fun getIngredientsByName(ingredients: String): IngredientList {
+        return api.getIngredientsByName(ingredients)
     }
 }

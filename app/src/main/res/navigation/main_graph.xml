@@ -81,6 +81,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_ingredientsFragment"
+            app:destination="@id/ingredientsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/allCocktailsFragment"
@@ -103,5 +110,18 @@
         <argument
             android:name="idDrink"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingredientsFragment"
+        android:name="com.mydrinksapp.ui.allingredients.IngredientsFragment"
+        android:label="@string/ingredients"
+        tools:layout="@layout/fragment_ingredients" >
+        <action
+            android:id="@+id/action_ingredientsFragment_to_detailByLetterFragment"
+            app:destination="@id/detailByLetterFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>
