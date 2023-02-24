@@ -1,5 +1,6 @@
 package com.mydrinksapp.model.remote
 
+import com.mydrinksapp.model.data.AllIngredientList
 import com.mydrinksapp.model.data.CocktailByCategoryList
 import com.mydrinksapp.model.data.CocktailList
 import com.mydrinksapp.model.data.IngredientList
@@ -31,4 +32,7 @@ interface ApiService {
 
     @GET("search.php")
     suspend fun getIngredientsByName(@Query(value = "i") ingredients: String): IngredientList
+
+    @GET("list.php")
+    suspend fun getAllIngredientsList(@Query(value = "i") ingredient: String): AllIngredientList
 }

@@ -55,4 +55,15 @@ class IngredientsViewModel @Inject constructor(private val repo: CocktailReposit
                 }
             }
         }
+
+    /*------------------------------ All ingredients list ------------------------------*/
+    fun fetchAllIngredientList() =
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+        emit(Resource.Loading)
+            try {
+                emit(Resource.Success(repo.getAllIngredientsList("list")))
+            } catch (e:Exception) {
+                Resource.Failure(e)
+            }
+        }
 }

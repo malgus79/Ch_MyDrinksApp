@@ -1,14 +1,21 @@
-package com.mydrinksapp.ui.allingredients.ingredients
+package com.mydrinksapp.ui.allingredients
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mydrinksapp.databinding.ItemAllIngredientsBinding
+import com.mydrinksapp.model.data.AllIngredient
 
-class IngredientsAdapter(
-    private var ingredientsMutableList: MutableList<Ingredients>,
+class AllIngredientsAdapter(
+    private var ingredientsList: MutableList<AllIngredient>,
     private val itemClickListener: OnIngredientsClickListener
-) : RecyclerView.Adapter<IngredientsAdapter.VieHolder>() {
+) : RecyclerView.Adapter<AllIngredientsAdapter.VieHolder>() {
+
+    fun setAllIngredientList(ingredient: MutableList<AllIngredient>) {
+        this.ingredientsList = ingredient
+        ingredientsList.sortBy { it.ingredientName }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VieHolder {
         val itemBinding =
@@ -21,19 +28,19 @@ class IngredientsAdapter(
     }
 
     override fun onBindViewHolder(holder: VieHolder, position: Int) {
-        holder.setData(ingredientsMutableList[position])
+        holder.setData(ingredientsList[position])
     }
 
-    override fun getItemCount(): Int = ingredientsMutableList.size
+    override fun getItemCount(): Int = ingredientsList.size
 
     inner class VieHolder(private val binding: ItemAllIngredientsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(ingredients: Ingredients) {
-            binding.btnIngredients.text = ingredients.ingredients
+        fun setData(ingredient: AllIngredient) {
+            binding.btnIngredients.text = ingredient.ingredientName
 
             binding.btnIngredients.setOnClickListener {
-                itemClickListener.onIngredientsClick(ingredients.ingredients)
+                itemClickListener.onIngredientsClick(ingredient.ingredientName.toString())
             }
         }
     }

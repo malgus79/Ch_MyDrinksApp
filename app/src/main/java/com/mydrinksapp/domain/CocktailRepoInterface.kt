@@ -2,10 +2,7 @@ package com.mydrinksapp.domain
 
 import androidx.lifecycle.LiveData
 import com.mydrinksapp.base.Resource
-import com.mydrinksapp.model.data.Cocktail
-import com.mydrinksapp.model.data.CocktailByCategoryList
-import com.mydrinksapp.model.data.CocktailList
-import com.mydrinksapp.model.data.IngredientList
+import com.mydrinksapp.model.data.*
 import com.mydrinksapp.model.local.CocktailEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -41,4 +38,7 @@ interface CocktailRepoInterface {
 
     /*------------------------------ Ingredients by name ------------------------------*/
     suspend fun getIngredientsByName(ingredients: String): IngredientList
+
+    /*------------------------------ All ingredients list ------------------------------*/
+    suspend fun getAllIngredientsList(ingredient: String): AllIngredientList
 }

@@ -1,10 +1,7 @@
 package com.mydrinksapp.model.remote
 
 import com.mydrinksapp.base.Resource
-import com.mydrinksapp.model.data.Cocktail
-import com.mydrinksapp.model.data.CocktailByCategoryList
-import com.mydrinksapp.model.data.CocktailList
-import com.mydrinksapp.model.data.IngredientList
+import com.mydrinksapp.model.data.*
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -47,5 +44,9 @@ class RemoteDataSource @Inject constructor(private val api: ApiService) {
 
     suspend fun getIngredientsByName(ingredients: String): IngredientList {
         return api.getIngredientsByName(ingredients)
+    }
+
+    suspend fun getAllIngredientsList(ingredient: String): AllIngredientList {
+        return api.getAllIngredientsList(ingredient)
     }
 }

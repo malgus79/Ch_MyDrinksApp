@@ -98,4 +98,9 @@ class CocktailRepository @Inject constructor(
     override suspend fun getIngredientsByName(ingredients: String): IngredientList {
         return remoteDataSource.getIngredientsByName(ingredients)
     }
+
+    /*------------------------------ All ingredients list ------------------------------*/
+    override suspend fun getAllIngredientsList(ingredient: String): AllIngredientList {
+        return remoteDataSource.getAllIngredientsList(ingredient)
+    }
 }

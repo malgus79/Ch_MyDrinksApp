@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.base.Resource
 import com.mydrinksapp.databinding.FragmentIngredientsBinding
-import com.mydrinksapp.ui.allingredients.ingredients.Ingredients
-import com.mydrinksapp.ui.allingredients.ingredients.IngredientsAdapter
-import com.mydrinksapp.ui.allingredients.ingredients.IngredientsProvider
+import com.mydrinksapp.model.data.AllIngredient
 import com.mydrinksapp.ui.viewmodel.IngredientsViewModel
 import com.mydrinksapp.utils.hide
 import com.mydrinksapp.utils.show
@@ -22,15 +20,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.LandingAnimator
 
 @AndroidEntryPoint
-class IngredientsFragment : Fragment(), IngredientsAdapter.OnIngredientsClickListener {
+class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClickListener {
 
     private lateinit var binding: FragmentIngredientsBinding
 
-    private var ingredientsMutableList: MutableList<Ingredients> =
-        IngredientsProvider.ingredienstList.toMutableList()
+    private var ingredientsMutableList: MutableList<AllIngredient> = mutableListOf()
 
-    private var adapterAllIngredients: IngredientsAdapter =
-        IngredientsAdapter(ingredientsMutableList, this)
+    private var adapterAllIngredients: AllIngredientsAdapter = AllIngredientsAdapter(ingredientsMutableList, this)
 
     private var adapterCocktailByIngredients: CocktailByIngredientsAdapter =
         CocktailByIngredientsAdapter()
@@ -45,14 +41,36 @@ class IngredientsFragment : Fragment(), IngredientsAdapter.OnIngredientsClickLis
     ): View {
         binding = FragmentIngredientsBinding.inflate(inflater, container, false)
 
-        ingredientsMutableList.sortBy { it.ingredients }
-
-        setupIngredientsRecyclerView()
+        setupAllIngredientList()
         setupCocktailsByLetter()
         setupIngredientsByName()
         showIngredientSelected()
 
         return binding.root
+    }
+
+    private fun setupAllIngredientList() {
+        viewModel.fetchAllIngredientList().observe(viewLifecycleOwner){
+            when (it) {
+                is Resource.Loading -> {
+                    binding.progressBarCocktailsByIngredients.show()
+                    binding.rvAllIngredients.hide()
+                }
+                is Resource.Success -> {
+                    binding.progressBarCocktailsByIngredients.hide()
+                    if (it.data.drinks.isEmpty()) {
+                        binding.rvAllIngredients.hide()
+                        return@observe
+                    }
+                    setupIngredientsRecyclerView()
+                    adapterAllIngredients.setAllIngredientList(it.data.drinks.toMutableList())
+                }
+                is Resource.Failure -> {
+                    binding.progressBarCocktailsByIngredients.hide()
+                    showToast(getString(R.string.error_detail))
+                }
+            }
+        }
     }
 
     private fun setupIngredientsRecyclerView() {
