@@ -18,7 +18,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_cocktail"
             android:layout_width="@dimen/home_image_size"
-            android:layout_height="@dimen/home_image_size"
+            android:layout_height="100dp"
             android:layout_margin="@dimen/common_margin_item"
             app:cardCornerRadius="@dimen/common_corner_default"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             android:id="@+id/txt_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/common_margin_default"
+            android:layout_marginHorizontal="@dimen/common_margin_item"
             android:maxLines="1"
             android:textStyle="italic"
             android:ellipsize="end"

@@ -32,7 +32,8 @@
     <string name="cocktails_by_category_title">Cocktails by category title</string>
     <string name="count_of_cocktails_by_category">Count of cocktails by category\"</string>
     <string name="categories">Categories</string>
-
+    <!-- Name of categories -->
+    <string name="name_categories">Name Categories</string>
 
 
 </resources>

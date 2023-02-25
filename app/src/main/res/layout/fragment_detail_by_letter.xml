@@ -1,90 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.search.SearchFragment">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/detail_image_size"
-        android:layout_marginHorizontal="@dimen/common_margin_min"
-        android:layout_marginTop="@dimen/common_margin_min"
-        app:cardCornerRadius="@dimen/common_corner_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_cocktail"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="@dimen/detail_image_size"
+            android:layout_marginHorizontal="@dimen/common_margin_min"
+            android:layout_marginTop="@dimen/common_margin_min"
+            app:cardCornerRadius="@dimen/common_corner_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.card.MaterialCardView>
+            <ImageView
+                android:id="@+id/img_cocktail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/common_margin_min"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:indicatorColor="?attr/colorPrimary"
-        app:layout_anchor="@id/materialCardView"
-        app:layout_anchorGravity="bottom"
-        app:layout_constraintTop_toBottomOf="@id/materialCardView" />
+        </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_share_cocktail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_margin_default"
-        android:layout_marginHorizontal="@dimen/common_margin_default"
-        android:src="@drawable/ic_share"
-        app:tint="?attr/colorOnSecondary"
-        android:backgroundTint="?attr/colorSecondary"
-        app:layout_constraintEnd_toStartOf="@id/btn_save_or_delete_cocktail"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        tools:ignore="ContentDescription" />
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/common_margin_min"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="?attr/colorPrimary"
+            app:layout_anchor="@id/materialCardView"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintTop_toBottomOf="@id/materialCardView" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save_or_delete_cocktail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_margin_default"
-        android:src="@drawable/ic_add"
-        app:tint="?attr/colorOnSecondary"
-        android:backgroundTint="?attr/colorSecondary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        tools:ignore="ContentDescription" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_share_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin_default"
+            android:layout_marginHorizontal="@dimen/common_margin_default"
+            android:backgroundTint="?attr/colorSecondary"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toStartOf="@id/btn_save_or_delete_cocktail"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+            app:tint="?attr/colorOnSecondary"
+            tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/cocktail_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_margin_default"
-        android:textSize="@dimen/common_size_normal"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_save_or_delete_cocktail"
-        app:layout_constraintEnd_toStartOf="@+id/btn_save_or_delete_cocktail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_save_or_delete_cocktail"
-        tools:text="Margarita Blue" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_save_or_delete_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin_default"
+            android:backgroundTint="?attr/colorSecondary"
+            android:src="@drawable/ic_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+            app:tint="?attr/colorOnSecondary"
+            tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/cocktail_desc"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/common_margin_default"
-        android:layout_marginVertical="@dimen/common_margin_min"
-        android:textSize="@dimen/common_size_normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save_or_delete_cocktail"
-        tools:text="@tools:sample/lorem/random" />
+        <TextView
+            android:id="@+id/cocktail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin_default"
+            android:textSize="@dimen/common_size_default"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_save_or_delete_cocktail"
+            app:layout_constraintEnd_toStartOf="@+id/btn_share_cocktail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_save_or_delete_cocktail"
+            tools:text="Margarita Blue" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/cocktail_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/common_margin_default"
+            android:layout_marginVertical="@dimen/common_margin_min"
+            android:textSize="@dimen/common_size_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_save_or_delete_cocktail"
+            tools:text="@tools:sample/lorem/random" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -48,8 +48,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mcv_home_random"
-                android:layout_width="300dp"
-                android:layout_height="250dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/common_margin_max"
                 android:layout_marginTop="@dimen/common_margin_min"
                 android:visibility="gone"
@@ -62,8 +62,8 @@
 
                 <ImageView
                     android:id="@+id/img_random_cocktail"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
                     android:layout_gravity="center"
                     android:background="?attr/colorPrimaryVariant"
                     android:contentDescription="@string/img_random_cocktail"
