@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val adapterByCategories: CocktailsByCategoriesAdapter = CocktailsByCategoriesAdapter()
     private val adapterByGlass: CocktailsByGlassAdapter = CocktailsByGlassAdapter()
-    private val adapterCategories: CategoriesAdapter = CategoriesAdapter()
+    private val adapterCategories: CategoriesListAdapter = CategoriesListAdapter()
 
     private val viewModel: HomeViewModel by viewModels()
 

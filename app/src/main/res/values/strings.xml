@@ -24,11 +24,15 @@
     <!-- Detail -->
     <string name="detail">Detail</string>
     <string name="share_error">Failed to share</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Ingredients -->
     <string name="ingredients">Ingredients</string>
     <string name="ingredient_description">"Description: "</string>
     <string name="ingredient_no_description">No data</string>
+    <!-- Categories -->
+    <string name="cocktails_by_category_title">Cocktails by category title</string>
+    <string name="count_of_cocktails_by_category">Count of cocktails by category\"</string>
+    <string name="categories">Categories</string>
+
 
 
 </resources>

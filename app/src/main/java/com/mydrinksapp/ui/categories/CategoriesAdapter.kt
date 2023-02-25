@@ -1,4 +1,4 @@
-package com.mydrinksapp.ui.home
+package com.mydrinksapp.ui.categories
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,21 +8,21 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.mydrinksapp.R
-import com.mydrinksapp.databinding.ItemCocktailsByCategoriesInHomeBinding
+import com.mydrinksapp.databinding.ItemCocktailsByCategoryInCategoriesBinding
 import com.mydrinksapp.model.data.CocktailByCategory
 
-class CocktailsByCategoriesAdapter :
-    RecyclerView.Adapter<CocktailsByCategoriesAdapter.VieHolder>() {
+class CategoriesAdapter :
+    RecyclerView.Adapter<CategoriesAdapter.VieHolder>() {
 
     private var cocktailsByCategoriesList = listOf<CocktailByCategory>()
 
-    fun setCocktailsByCategoriesList(cocktailsByCategoriesList: List<CocktailByCategory>) {
+    fun setCocktailsByCategories(cocktailsByCategoriesList: List<CocktailByCategory>) {
         this.cocktailsByCategoriesList = cocktailsByCategoriesList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VieHolder {
         val itemBinding =
-            ItemCocktailsByCategoriesInHomeBinding.inflate(
+            ItemCocktailsByCategoryInCategoriesBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -36,7 +36,7 @@ class CocktailsByCategoriesAdapter :
 
     override fun getItemCount(): Int = cocktailsByCategoriesList.size
 
-    inner class VieHolder(private val binding: ItemCocktailsByCategoriesInHomeBinding) :
+    inner class VieHolder(private val binding: ItemCocktailsByCategoryInCategoriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(item: CocktailByCategory) {
@@ -46,13 +46,13 @@ class CocktailsByCategoriesAdapter :
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.gradient)
                 .centerCrop()
-                .into(binding.imgCocktail)
+                .into(binding.imgCocktailsByCategories)
 
-            binding.txtTitle.text = item.name
+            binding.txtCocktailsByCategoryName.text = item.name
 
-            binding.mcvCocktail.setOnClickListener {
+            binding.mcvContainerItemCocktailsByCategory.setOnClickListener {
                 val action =
-                    HomeFragmentDirections.actionHomeFragmentToDetailByLetterFragment(
+                    CategoriesFragmentDirections.actionCategoriesFragmentToDetailByLetterFragment(
                         item.cocktailId.toString()
                     )
                 this.itemView.findNavController().navigate(action)

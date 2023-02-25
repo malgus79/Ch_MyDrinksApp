@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.mydrinksapp.R
-import com.mydrinksapp.databinding.ItemCocktailsByCategoriesBinding
+import com.mydrinksapp.databinding.ItemCocktailsByCategoriesInHomeBinding
 import com.mydrinksapp.model.data.CocktailByCategory
 
 class CocktailsByGlassAdapter :
@@ -22,7 +22,7 @@ class CocktailsByGlassAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VieHolder {
         val itemBinding =
-            ItemCocktailsByCategoriesBinding.inflate(
+            ItemCocktailsByCategoriesInHomeBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -36,7 +36,7 @@ class CocktailsByGlassAdapter :
 
     override fun getItemCount(): Int = cocktailsByGlassList.size
 
-    inner class VieHolder(private val binding: ItemCocktailsByCategoriesBinding) :
+    inner class VieHolder(private val binding: ItemCocktailsByCategoriesInHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(item: CocktailByCategory) {

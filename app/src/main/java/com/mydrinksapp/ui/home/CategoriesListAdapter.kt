@@ -2,12 +2,13 @@ package com.mydrinksapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.mydrinksapp.databinding.ItemCategoriesBinding
+import com.mydrinksapp.databinding.ItemCategoriesInHomeBinding
 import com.mydrinksapp.model.data.Categories
 
-class CategoriesAdapter :
-    RecyclerView.Adapter<CategoriesAdapter.VieHolder>() {
+class CategoriesListAdapter :
+    RecyclerView.Adapter<CategoriesListAdapter.VieHolder>() {
 
     private var categoriesList = listOf<Categories>()
 
@@ -17,7 +18,7 @@ class CategoriesAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VieHolder {
         val itemBinding =
-            ItemCategoriesBinding.inflate(
+            ItemCategoriesInHomeBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -31,19 +32,19 @@ class CategoriesAdapter :
 
     override fun getItemCount(): Int = categoriesList.size
 
-    inner class VieHolder(private val binding: ItemCategoriesBinding) :
+    inner class VieHolder(private val binding: ItemCategoriesInHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(item: Categories) {
             binding.txtTitleCategories.text = item.category
 
-//            binding.mcvContainer.setOnClickListener {
-//                val action =
-//                    HomeFragmentDirections.actionHomeFragmentToDetailByLetterFragment(
-//                        item.category.toString()
-//                    )
-//                this.itemView.findNavController().navigate(action)
-//            }
+            binding.mcvContainer.setOnClickListener {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToCategoriesFragment(
+                        item.category.toString()
+                    )
+                this.itemView.findNavController().navigate(action)
+            }
         }
     }
 }
