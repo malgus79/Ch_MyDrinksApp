@@ -7,6 +7,7 @@
     android:layout_marginHorizontal="@dimen/common_margin_min"
     android:layout_marginVertical="@dimen/common_margin_min"
     android:padding="@dimen/common_margin_min"
+    android:backgroundTint="?attr/colorPrimary"
     app:cardCornerRadius="@dimen/common_corner_default"
     app:cardElevation="@dimen/common_margin_min">
 
@@ -29,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@mipmap/ic_launcher"
+                android:background="?attr/colorPrimary"
                 tools:ignore="ContentDescription" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -41,6 +43,7 @@
             android:maxLines="1"
             android:textSize="@dimen/common_size_normal"
             android:textStyle="bold"
+            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBottom_toTopOf="@+id/txt_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/mcv_cocktail"
@@ -54,6 +57,7 @@
             android:layout_marginEnd="@dimen/common_margin_min"
             android:ellipsize="end"
             android:maxLines="2"
+            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/mcv_cocktail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/txt_title"

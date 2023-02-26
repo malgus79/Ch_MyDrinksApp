@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_700">
+        android:background="?attr/colorOnSecondary">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_cocktail"
@@ -31,8 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/teal_700"
-                android:scaleType="centerCrop"
+                android:background="?attr/colorPrimaryVariant"                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher"
                 tools:ignore="ContentDescription" />
 

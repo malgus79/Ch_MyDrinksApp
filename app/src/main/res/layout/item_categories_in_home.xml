@@ -11,13 +11,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_700">
+        android:background="?attr/colorOnSecondary">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorOnPrimary"
+            android:backgroundTint="?attr/colorOnPrimary"
             android:clipToPadding="true"
             android:elevation="@dimen/common_margin_default"
             app:cardCornerRadius="@dimen/common_corner_default"

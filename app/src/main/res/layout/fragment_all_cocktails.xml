@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryVariant"
     tools:context=".ui.MainActivity">
 
     <RelativeLayout
@@ -40,6 +41,7 @@
         android:layout_marginTop="@dimen/common_margin_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_letter" />
+        app:layout_constraintTop_toBottomOf="@id/rv_letter"
+        tools:listitem="@layout/item_cocktails_by_letter"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

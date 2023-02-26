@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="@dimen/common_margin_min"
     android:layout_marginVertical="@dimen/common_margin_min"
     android:padding="@dimen/common_margin_min"
-    android:background="@color/white"
+    android:backgroundTint="?attr/colorOnSecondary"
     app:cardCornerRadius="@dimen/common_corner_default"
     app:cardElevation="@dimen/common_margin_min">
 
@@ -27,6 +27,7 @@
 
             <ImageView
                 android:id="@+id/img_cocktail"
+                android:background="?attr/colorPrimaryVariant"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@mipmap/ic_launcher"
@@ -44,6 +45,7 @@
             android:ellipsize="end"
             android:textSize="@dimen/common_size_min"
             android:gravity="center"
+            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/mcv_cocktail"
             app:layout_constraintStart_toStartOf="@id/mcv_cocktail"

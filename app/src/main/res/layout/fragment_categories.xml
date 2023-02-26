@@ -25,12 +25,13 @@
         android:id="@+id/linear_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_margin_min"
+        android:layout_marginVertical="@dimen/common_margin_min"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_cocktails_by_categories">
 
         <TextView
             android:id="@+id/txt_cocktails_by_category_title"

@@ -60,11 +60,11 @@ class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
                 }
                 is Resource.Success -> {
                     if (result.data.isEmpty()) {
-                        binding.rvTragos.hide()
+                        binding.rvSearch.hide()
                         binding.emptyContainer.root.show()
                         return@Observer
                     }
-                    binding.rvTragos.show()
+                    binding.rvSearch.show()
                     searchAdapter.setCocktailList(result.data)
                     binding.emptyContainer.root.hide()
                 }
@@ -118,7 +118,7 @@ class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
     }
 
     private fun setupRecyclerView() {
-        binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragos.adapter = searchAdapter
+        binding.rvSearch.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSearch.adapter = searchAdapter
     }
 }

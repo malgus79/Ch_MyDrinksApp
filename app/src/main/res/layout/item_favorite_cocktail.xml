@@ -8,7 +8,7 @@
     android:layout_marginVertical="@dimen/common_margin_min"
     android:padding="@dimen/common_margin_min"
     app:cardCornerRadius="@dimen/common_corner_default"
-    android:backgroundTint="@color/teal_200"
+    android:backgroundTint="?attr/colorOnSecondary"
     app:cardElevation="@dimen/common_margin_min">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +47,7 @@
             android:textSize="@dimen/common_size_normal"
             android:textStyle="bold"
             android:gravity="center"
+            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/mcv_favorite_cocktail"
             app:layout_constraintStart_toStartOf="@id/mcv_favorite_cocktail"

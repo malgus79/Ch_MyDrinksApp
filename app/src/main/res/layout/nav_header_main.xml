@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:srcCompat="@drawable/my_drinks_app"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>
