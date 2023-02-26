@@ -12,41 +12,21 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repo: CocktailRepository) : ViewModel() {
 
-    fun fetchRandomCocktails() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-        emit(Resource.Loading)
-        try {
-            emit(Resource.Success(repo.getRandomCocktails()))
-        } catch (e: Exception) {
-            emit(Resource.Failure(e))
-        }
-    }
-
-    fun fetchCocktailsByCategories(categoryName: String) =
-        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-        emit(Resource.Loading)
-            try {
-                emit(Resource.Success(repo.getCocktailsByCategories(categoryName)))
-            } catch (e:Exception) {
-                emit(Resource.Failure(e))
-            }
-        }
-
-    fun fetchCocktailsByGlass(glassName: String) =
+    fun fetchAllCocktailsInHome(categoryName: String) =
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading)
             try {
-                emit(Resource.Success(repo.getCocktailsByGlass(glassName)))
-            } catch (e:Exception) {
-                emit(Resource.Failure(e))
+                emit(
+                    Resource.Success(
+                        Triple(
+                            repo.getRandomCocktails(),
+                            repo.getCocktailsByCategories(categoryName),
+                            repo.getAllCategoriesList("list")
+                        )
+                    )
+                )
+            } catch (e: Exception) {
+                Resource.Failure(e)
             }
         }
-
-    fun fetchAllCategories() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-        emit(Resource.Loading)
-        try {
-            emit(Resource.Success(repo.getAllCategoriesList("list")))
-        } catch (e:Exception) {
-            emit(Resource.Failure(e))
-        }
-    }
 }

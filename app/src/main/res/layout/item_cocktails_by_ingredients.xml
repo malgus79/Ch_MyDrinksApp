@@ -31,7 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="?attr/colorPrimaryVariant"                android:scaleType="centerCrop"
+                android:background="?attr/colorPrimaryVariant"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher"
                 tools:ignore="ContentDescription" />
 

@@ -34,6 +34,7 @@
     <string name="categories">Categories</string>
     <!-- Name of categories -->
     <string name="name_categories">Name Categories</string>
+    <string name="cocktails">Cocktails</string>
 
 
 </resources>

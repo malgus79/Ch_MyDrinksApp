@@ -32,7 +32,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val adapterByCategories: CocktailsByCategoriesAdapter = CocktailsByCategoriesAdapter()
-    private val adapterByGlass: CocktailsByGlassAdapter = CocktailsByGlassAdapter()
     private val adapterCategories: CategoriesListAdapter = CategoriesListAdapter()
 
     private val viewModel: HomeViewModel by viewModels()
@@ -44,10 +43,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         swipeRefresh()
-        setupRandomCocktails()
-        setupCategories()
-        setupCocktailsByCategories()
-        setupCocktailsByGlass()
+        fetchAllCocktailsInHome()
         onBackPressedCallback()
 
         return binding.root
@@ -57,13 +53,10 @@ class HomeFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.setColorSchemeResources(R.color.purple_700)
             binding.swipeRefreshLayout.setProgressBackgroundColorSchemeColor(
-                ContextCompat.getColor(requireContext(), R.color.teal_200)
+                ContextCompat.getColor(requireContext(), R.color.pink_light)
             )
             Handler(Looper.getMainLooper()).postDelayed({
-                setupRandomCocktails()
-                setupCategories()
-                setupCocktailsByCategories()
-                setupCocktailsByGlass()
+                fetchAllCocktailsInHome()
             }, 500)
         }
     }
@@ -73,8 +66,15 @@ class HomeFragment : Fragment() {
         binding.swipeRefreshLayout.isRefreshing = false
     }
 
-    private fun setupRandomCocktails() {
-        viewModel.fetchRandomCocktails().observe(viewLifecycleOwner) {
+    private fun fetchAllCocktailsInHome() {
+
+        val categoriesNames = arrayOf(
+            "Ordinary Drink", "Cocktail", "Shake", "Other / Unknown", "Cocoa", "Shot",
+            "Coffee / Tea", "Homemade Liqueur", "Punch / Party Drink", "Beer", "Soft Drink"
+        )
+        val randomCategory = categoriesNames[Random.nextInt(categoriesNames.size)]
+
+        viewModel.fetchAllCocktailsInHome(randomCategory).observe(viewLifecycleOwner) {
             with(binding) {
                 when (it) {
                     is Resource.Loading -> {
@@ -82,12 +82,16 @@ class HomeFragment : Fragment() {
                         progressBar.show()
                     }
                     is Resource.Success -> {
+                        binding.swipeRefreshLayout.isRefreshing = false
                         binding.progressBar.hide()
-                        if (it.data.drinks.isEmpty()) {
-                            binding.imgRandomCocktail.hide()
-                            return@observe
-                        }
-                        setupShowRandomMeals(it.data.drinks.first())
+
+                        setupShowRandomCocktails(it.data.first.drinks.first())
+
+                        setupCocktailsByCategoriesRecyclerView()
+                        adapterByCategories.setCocktailsByCategoriesList(it.data.second.drinks)
+
+                        setupCategoriesRecyclerView()
+                        adapterCategories.setCategoriesList(it.data.third.drinks)
                     }
                     is Resource.Failure -> {
                         swipeRefreshLayout.isRefreshing = false
@@ -99,7 +103,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupShowRandomMeals(item: Cocktail) {
+    private fun setupShowRandomCocktails(item: Cocktail) {
         Glide.with(binding.root.context)
             .load(item.image)
             .transition(DrawableTransitionOptions.withCrossFade())
@@ -119,31 +123,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupCategories() {
-        viewModel.fetchAllCategories().observe(viewLifecycleOwner) {
-            with(binding) {
-                when (it) {
-                    is Resource.Loading -> {
-                        binding.progressBar.show()
-                    }
-                    is Resource.Success -> {
-                        binding.progressBar.hide()
-                        if (it.data.drinks.isEmpty()) {
-                            binding.rvCocktailsByCategories.hide()
-                            return@observe
-                        }
-                        setupCategoriesRecyclerView()
-                        adapterCategories.setCategoriesList(it.data.drinks)
-                        binding.txtTitleCategories.show()
-                    }
-                    is Resource.Failure -> {
-                        binding.progressBar.hide()
-                    }
-                }
-            }
-        }
-    }
-
     private fun setupCategoriesRecyclerView() {
         binding.rvCategories.apply {
             adapter = adapterCategories
@@ -158,37 +137,7 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             show()
         }
-    }
-
-    private fun setupCocktailsByCategories() {
-        val categoriesNames = arrayOf(
-            "Ordinary Drink", "Cocktail", "Shake", "Other / Unknown", "Cocoa", "Shot",
-            "Coffee / Tea", "Homemade Liqueur", "Punch / Party Drink", "Beer", "Soft Drink"
-        )
-        val randomCategory = categoriesNames[Random.nextInt(categoriesNames.size)]
-        val titleCocktailsByCategories =
-            "${getString(R.string.title_cocktails_by_categories)} $randomCategory "
-
-        viewModel.fetchCocktailsByCategories(randomCategory).observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> {
-                    binding.progressBar.show()
-                }
-                is Resource.Success -> {
-                    binding.progressBar.hide()
-                    if (it.data.drinks.isEmpty()) {
-                        binding.rvCocktailsByCategories.hide()
-                        return@observe
-                    }
-                    setupCocktailsByCategoriesRecyclerView()
-                    adapterByCategories.setCocktailsByCategoriesList(it.data.drinks)
-//                    binding.txtTitleCocktailsByCategories.text = titleCocktailsByCategories
-                }
-                is Resource.Failure -> {
-                    binding.progressBar.hide()
-                }
-            }
-        }
+        binding.txtTitleCategories.show()
     }
 
     private fun setupCocktailsByCategoriesRecyclerView() {
@@ -205,58 +154,7 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             show()
         }
-    }
-
-    private fun setupCocktailsByGlass() {
-        val glassNames = arrayOf(
-            "Highball glass", "Cocktail glass", "Old-fashioned glass", "Whiskey Glass",
-            "Collins glass", "Pousse cafe glass", "Champagne flute", "Whiskey sour glass",
-            "Cordial glass", "Brandy snifter", "White wine glass", "Nick and Nora Glass",
-            "Hurricane glass", "Coffee mug", "Shot glass", "Jar", "Irish coffee cup", "Punch bowl",
-            "Pitcher", "Pint glass", "Copper Mug", "Wine Glass", "Beer mug",
-            "Margarita/Coupette glass", "Beer pilsner", "Beer Glass", "Parfait glass", "Mason jar",
-            "Margarita glass", "Martini Glass", "Balloon Glass", "Coupe Glass"
-        )
-        val randomCategory = glassNames[Random.nextInt(glassNames.size)]
-        val titleCocktailsByGlass =
-            "${getString(R.string.title_cocktails_by_glass)} $randomCategory "
-
-        viewModel.fetchCocktailsByGlass(randomCategory).observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> {
-                    binding.progressBar.show()
-                }
-                is Resource.Success -> {
-                    binding.progressBar.hide()
-                    if (it.data.drinks.isEmpty()) {
-                        binding.rvCocktailsByGlass.hide()
-                        return@observe
-                    }
-                    setupCocktailsByGlassRecyclerView()
-                    adapterByGlass.setCocktailsByGlassList(it.data.drinks)
-//                    binding.txtTitleCocktailsByGlass.text = titleCocktailsByGlass
-                }
-                is Resource.Failure -> {
-                    binding.progressBar.hide()
-                }
-            }
-        }
-    }
-
-    private fun setupCocktailsByGlassRecyclerView() {
-        binding.rvCocktailsByGlass.apply {
-            adapter = adapterByGlass
-            layoutManager =
-                GridLayoutManager(
-                    requireContext(),
-                    resources.getInteger(R.integer.columns_cocktails_by_glass),
-                    GridLayoutManager.VERTICAL,
-                    false
-                )
-            itemAnimator = LandingAnimator().apply { addDuration = 300 }
-            setHasFixedSize(true)
-            show()
-        }
+        binding.txtTitleCocktailsByCategories.show()
     }
 
     private fun onBackPressedCallback() {

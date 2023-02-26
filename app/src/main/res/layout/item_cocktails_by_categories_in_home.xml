@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/common_margin_min"
+    android:layout_marginHorizontal="@dimen/common_margin_default"
     android:layout_marginVertical="@dimen/common_margin_min"
-    android:padding="@dimen/common_margin_min"
     android:backgroundTint="?attr/colorOnSecondary"
+    android:padding="@dimen/common_margin_min"
     app:cardCornerRadius="@dimen/common_corner_default"
     app:cardElevation="@dimen/common_margin_min">
 
@@ -18,7 +18,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_cocktail"
             android:layout_width="@dimen/home_image_size"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/home_image_size"
             android:layout_margin="@dimen/common_margin_item"
             app:cardCornerRadius="@dimen/common_corner_default"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,9 +27,9 @@
 
             <ImageView
                 android:id="@+id/img_cocktail"
-                android:background="?attr/colorPrimaryVariant"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?attr/colorPrimaryVariant"
                 android:src="@mipmap/ic_launcher"
                 tools:ignore="ContentDescription" />
 
@@ -40,12 +40,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/common_margin_item"
-            android:maxLines="1"
-            android:textStyle="italic"
             android:ellipsize="end"
-            android:textSize="@dimen/common_size_min"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/common_size_min"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/mcv_cocktail"
             app:layout_constraintStart_toStartOf="@id/mcv_cocktail"

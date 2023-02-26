@@ -6,9 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/common_margin_default"
     android:layout_marginVertical="@dimen/common_margin_min"
+    android:backgroundTint="?attr/colorOnSecondary"
     android:padding="@dimen/common_margin_min"
     app:cardCornerRadius="@dimen/common_corner_default"
-    android:backgroundTint="?attr/colorOnSecondary"
     app:cardElevation="@dimen/common_margin_min">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,9 +31,9 @@
                 android:id="@+id/img_favorite_cocktail"
                 android:layout_width="180dp"
                 android:layout_height="200dp"
-                android:src="@mipmap/ic_launcher"
-                android:scaleType="centerCrop"
                 android:background="?attr/colorPrimaryVariant"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
                 tools:ignore="ContentDescription" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -43,11 +43,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/common_margin_default"
+            android:gravity="center"
             android:maxLines="1"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/common_size_normal"
             android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/mcv_favorite_cocktail"
             app:layout_constraintStart_toStartOf="@id/mcv_favorite_cocktail"

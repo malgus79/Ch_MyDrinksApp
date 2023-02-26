@@ -23,9 +23,9 @@
 
             <ImageView
                 android:id="@+id/img_cocktail"
-                android:background="?attr/colorPrimaryVariant"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimaryVariant" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -59,9 +59,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_margin_default"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/common_size_default"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/btn_save_or_delete_cocktail"
             app:layout_constraintEnd_toStartOf="@+id/btn_share_cocktail"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/common_margin_default"
             android:layout_marginVertical="@dimen/common_margin_min"
-            android:textSize="@dimen/common_size_normal"
             android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/common_size_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

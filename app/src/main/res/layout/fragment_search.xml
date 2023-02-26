@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryVariant"
     tools:context=".ui.search.SearchFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -13,7 +14,6 @@
         android:layout_marginHorizontal="@dimen/common_margin_min"
         android:layout_marginVertical="@dimen/common_margin_min"
         app:cardCornerRadius="@dimen/search_view_radius"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,9 +22,9 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/grey_light"
             android:iconifiedByDefault="false"
             android:imeOptions="actionDone|flagNoExtractUi"
-            android:background="@color/grey_light"
             android:queryHint="Search cocktail"
             android:searchHintIcon="@null"
             android:searchIcon="@null"
@@ -56,10 +56,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginVertical="@dimen/common_margin_min"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mcv_search_view"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_search_cocktail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

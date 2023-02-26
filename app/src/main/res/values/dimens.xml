@@ -24,12 +24,15 @@
 
     <!-- Dimens Padding -->
     <dimen name="common_padding_min">8dp</dimen>
+    <dimen name="common_padding_12">12dp</dimen>
     <dimen name="common_padding_default">16dp</dimen>
+    <dimen name="common_padding_24">24dp</dimen>
+    <dimen name="common_padding_40">40dp</dimen>
 
     <!-- Other -->
     <dimen name="error_image_size">50dp</dimen>
     <dimen name="margin_app_bar">57dp</dimen>
-    <dimen name="home_image_size">80dp</dimen>
+    <dimen name="home_image_size">120dp</dimen>
     <dimen name="detail_image_size">500dp</dimen>
 
 </resources>
