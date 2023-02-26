@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ProgressBar
-            android:id="@+id/progress_bar_cocktails_by_ingredients"
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -23,20 +23,6 @@
             app:layout_constraintStart_toStartOf="@id/guideline_vertical"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar_ingredient_selected"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/common_margin_middle"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline_horizontal"
-            tools:visibility="visible" />
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_all_ingredients"

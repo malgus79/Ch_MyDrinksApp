@@ -42,23 +42,47 @@ class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClick
     ): View {
         binding = FragmentIngredientsBinding.inflate(inflater, container, false)
 
+        setupAllIngredient()
         setupAllIngredientList()
-        setupCocktailsByLetter()
-        setupIngredientsByName()
         showIngredientSelected()
 
         return binding.root
+    }
+
+    private fun setupAllIngredient() {
+        viewModel.fetchAllIngredients().observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> {
+                    binding.progressBar.show()
+                    binding.rvCocktailsByIngredients.hide()
+                }
+                is Resource.Success -> {
+                    binding.progressBar.hide()
+
+                    setupCocktailsByIngredientsRecyclerView()
+                    adapterCocktailByIngredients.setCocktailByIngredientsList(it.data.first.drinks)
+
+                    showIngredientSelected()
+                    adapterIngredientSelected.setIngredientsByNameList(it.data.second.ingredients)
+
+                }
+                is Resource.Failure -> {
+                    binding.progressBar.hide()
+                    showToast(getString(R.string.error_detail))
+                }
+            }
+        }
     }
 
     private fun setupAllIngredientList() {
         viewModel.fetchAllIngredientList().observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
-                    binding.progressBarCocktailsByIngredients.show()
+                    binding.progressBar.show()
                     binding.rvAllIngredients.hide()
                 }
                 is Resource.Success -> {
-                    binding.progressBarCocktailsByIngredients.hide()
+                    binding.progressBar.hide()
                     if (it.data.drinks.isEmpty()) {
                         binding.rvAllIngredients.hide()
                         return@observe
@@ -67,7 +91,7 @@ class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClick
                     adapterAllIngredients.setAllIngredientList(it.data.drinks.toMutableList())
                 }
                 is Resource.Failure -> {
-                    binding.progressBarCocktailsByIngredients.hide()
+                    binding.progressBar.hide()
                     showToast(getString(R.string.error_detail))
                 }
             }
@@ -86,58 +110,8 @@ class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClick
     }
 
     override fun onIngredientsClick(ingredients: String) {
-        viewModel.setCocktailByIngredients(ingredients)
-        setupCocktailsByLetter()
-        viewModel.setIngredientsByName(ingredients)
-        setupIngredientsByName()
-    }
-
-    private fun setupCocktailsByLetter() {
-        viewModel.fetchCocktailByIngredients.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> {
-                    binding.progressBarCocktailsByIngredients.show()
-                    binding.rvCocktailsByIngredients.hide()
-                }
-                is Resource.Success -> {
-                    binding.progressBarCocktailsByIngredients.hide()
-                    if (it.data.drinks.isEmpty()) {
-                        binding.rvCocktailsByIngredients.hide()
-                        return@observe
-                    }
-                    setupCocktailsByIngredientsRecyclerView()
-                    adapterCocktailByIngredients.setCocktailByIngredientsList(it.data.drinks)
-                }
-                is Resource.Failure -> {
-                    binding.progressBarCocktailsByIngredients.hide()
-                    showToast(getString(R.string.error_detail))
-                }
-            }
-        }
-    }
-
-    private fun setupIngredientsByName() {
-        viewModel.fetchIngredientsByName.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Loading -> {
-                    binding.progressBarIngredientSelected.show()
-                    binding.rvIngredientSelected.hide()
-                }
-                is Resource.Success -> {
-                    binding.progressBarIngredientSelected.hide()
-                    if (it.data.ingredients.isEmpty()) {
-                        binding.rvIngredientSelected
-                        return@observe
-                    }
-                    showIngredientSelected()
-                    adapterIngredientSelected.setIngredientsByNameList(it.data.ingredients)
-                }
-                is Resource.Failure -> {
-                    binding.progressBarIngredientSelected.hide()
-                    showToast(getString(R.string.error_detail))
-                }
-            }
-        }
+        viewModel.setAllIngredients(ingredients)
+        setupAllIngredient()
     }
 
     private fun setupCocktailsByIngredientsRecyclerView() {
