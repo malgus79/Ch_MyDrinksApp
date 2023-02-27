@@ -23,7 +23,6 @@ class SearchAdapter(
 
     fun setCocktailList(cocktailList: List<Cocktail>) {
         this.cocktailList = cocktailList
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

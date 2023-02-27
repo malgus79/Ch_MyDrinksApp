@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.base.Resource
 import com.mydrinksapp.databinding.FragmentSearchBinding
@@ -20,6 +20,7 @@ import com.mydrinksapp.utils.show
 import com.mydrinksapp.utils.showIf
 import com.mydrinksapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.LandingAnimator
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
@@ -28,27 +29,39 @@ class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
     private lateinit var searchAdapter: SearchAdapter
     private val viewModel by activityViewModels<SearchViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        setHasOptionsMenu(true)
-        searchAdapter = SearchAdapter(requireContext(), this)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    ): View {
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        searchAdapter = SearchAdapter(requireContext(), this)
+
+        binding.searchView.setQuery("", true)
+        setupSearView()
+
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSearchBinding.bind(view)
+    private fun setupSearView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
-        setupRecyclerView()
-        setupSearView()
-        setupObserver()
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setCocktail(query!!)
+                setupObserver()
+                return false
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText!!.isNotEmpty()) {
+                    viewModel.setCocktail(newText)
+                } else {
+                    binding.rvSearch.hide()
+                }
+                setupObserver()
+                return true
+            }
+        })
     }
 
     private fun setupObserver() {
@@ -64,47 +77,29 @@ class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
                         binding.emptyContainer.root.show()
                         return@Observer
                     }
-                    binding.rvSearch.show()
+                    setupSearchRecyclerView()
                     searchAdapter.setCocktailList(result.data)
                     binding.emptyContainer.root.hide()
                 }
                 is Resource.Failure -> {
-                    showToast("Ocurrió un error al traer los datos ${result.exception}")
+                    showToast(getString(R.string.error_detail))
                 }
             }
         })
     }
 
-    private fun setupSearView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.setCocktail(query!!)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-
-        })
+    private fun setupSearchRecyclerView() {
+        binding.rvSearch.apply {
+            adapter = searchAdapter
+            layoutManager = StaggeredGridLayoutManager(
+                resources.getInteger(R.integer.columns_search),
+                StaggeredGridLayoutManager.VERTICAL
+            )
+            itemAnimator = LandingAnimator().apply { addDuration = 300 }
+            setHasFixedSize(true)
+            show()
+        }
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.main_menu, menu)
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.favoritos -> {
-//                findNavController().navigate(R.id.action_searchFragment_to_favoritesFragment)
-//                false
-//            }
-//            else -> false
-//        }
-//    }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
         findNavController().navigate(
@@ -112,13 +107,5 @@ class SearchFragment : Fragment(), SearchAdapter.OnTragoClickListener {
                 cocktail
             )
         )
-//        val bundle = Bundle()
-//        bundle.putParcelable("drink", cocktail)
-//        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
-    }
-
-    private fun setupRecyclerView() {
-        binding.rvSearch.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvSearch.adapter = searchAdapter
     }
 }

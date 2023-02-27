@@ -6,4 +6,5 @@
     <integer name="columns_cocktails_by_ingredients">2</integer>
     <integer name="columns_categories">1</integer>
     <integer name="columns_cocktails_by_categories_in_categories">1</integer>
+    <integer name="columns_search">1</integer>
 </resources>

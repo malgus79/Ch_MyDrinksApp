@@ -16,9 +16,9 @@ class SearchViewModel @Inject constructor(private val repo: CocktailRepository) 
         mutableCocktailName.value = cocktailName
     }
 
-    init {
-        setCocktail("margarita")
-    }
+//    init {
+//        setCocktail("margarita")
+//    }
 
     val fetchCocktailList = mutableCocktailName.distinctUntilChanged().switchMap { cocktailName ->
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
