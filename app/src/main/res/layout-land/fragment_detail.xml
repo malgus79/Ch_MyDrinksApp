@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryVariant">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="@dimen/common_margin_min"
+            android:layout_marginVertical="@dimen/common_margin_default"
+            app:cardCornerRadius="@dimen/common_corner_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_cocktail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimaryVariant" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_share_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin_min"
+            android:layout_marginHorizontal="@dimen/common_margin_default"
+            android:backgroundTint="?attr/colorSecondary"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toStartOf="@id/btn_save_or_delete_cocktail"
+            app:layout_constraintTop_toTopOf="@id/materialCardView"
+            app:tint="?attr/colorOnSecondary"
+            tools:ignore="ContentDescription" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_save_or_delete_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin_min"
+            android:backgroundTint="?attr/colorSecondary"
+            android:src="@drawable/ic_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/materialCardView"
+            app:tint="?attr/colorOnSecondary"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/cocktail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin_default"
+            android:layout_marginTop="@dimen/common_margin_min"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/common_size_default"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btn_share_cocktail"
+            app:layout_constraintEnd_toStartOf="@+id/btn_share_cocktail"
+            app:layout_constraintStart_toEndOf="@id/materialCardView"
+            app:layout_constraintTop_toTopOf="@id/btn_share_cocktail"
+            tools:text="Margarita Blue" />
+
+        <TextView
+            android:id="@+id/cocktail_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/common_margin_default"
+            android:layout_marginVertical="@dimen/common_margin_min"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/common_size_normal"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/materialCardView"
+            app:layout_constraintTop_toBottomOf="@id/btn_share_cocktail"
+            tools:text="@tools:sample/lorem/random" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

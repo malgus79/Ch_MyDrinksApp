@@ -104,8 +104,10 @@ class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClick
     private fun setupIngredientsRecyclerView() {
         binding.rvAllIngredients.apply {
             adapter = adapterAllIngredients
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =StaggeredGridLayoutManager(
+                resources.getInteger(R.integer.columns_all_ingredients),
+                StaggeredGridLayoutManager.VERTICAL
+            )
             itemAnimator = LandingAnimator().apply { addDuration = 300 }
             setHasFixedSize(true)
             show()

@@ -20,7 +20,6 @@ import com.mydrinksapp.R
 import com.mydrinksapp.base.utils.showToast
 import com.mydrinksapp.databinding.FragmentDetailByLetterBinding
 import com.mydrinksapp.model.data.Cocktail
-import com.mydrinksapp.ui.fragments.detail.DetailByLetterFragmentArgs
 import com.mydrinksapp.viewmodel.fragments.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -81,7 +80,7 @@ class DetailByLetterFragment : Fragment() {
     }
 
     private fun isLoading(loading: Boolean) {
-        binding.progressBar.isVisible = loading
+        binding.progressBar?.isVisible = loading
         binding.btnShareCocktail.isVisible = !loading
         binding.btnSaveOrDeleteCocktail.isVisible = !loading
         binding.cocktailTitle.isVisible = !loading

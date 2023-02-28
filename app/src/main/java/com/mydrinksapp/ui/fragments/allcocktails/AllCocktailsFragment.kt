@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.mydrinksapp.R
 import com.mydrinksapp.base.Resource
 import com.mydrinksapp.base.utils.hide
@@ -89,8 +89,12 @@ class AllCocktailsFragment : Fragment(), LetterAdapter.OnLetterClickListener {
     private fun setupCocktailsByLetterRecyclerView() {
         binding.rvCocktailsByLetter.apply {
             binding.rvCocktailsByLetter.adapter = adapterCocktailByLetter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(
+                requireContext(),
+                resources.getInteger(R.integer.columns_all_cocktails_by_letter),
+                GridLayoutManager.VERTICAL,
+                false
+            )
             itemAnimator = LandingAnimator().apply { addDuration = 300 }
             setHasFixedSize(true)
             show()

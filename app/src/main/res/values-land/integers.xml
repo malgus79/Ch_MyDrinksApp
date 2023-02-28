@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="columns_cocktails_by_categories">2</integer>
+    <integer name="columns_all_cocktails_by_letter">2</integer>
+    <integer name="columns_cocktails_by_ingredients">4</integer>
+    <integer name="columns_all_ingredients">2</integer>
+    <integer name="columns_search">2</integer>
+    <integer name="columns_favorite">4</integer>
+    <integer name="columns_cocktails_by_categories_in_categories">2</integer>
+</resources>
