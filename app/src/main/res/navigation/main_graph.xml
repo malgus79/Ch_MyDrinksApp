@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.mydrinksapp.ui.search.SearchFragment"
+        android:name="com.mydrinksapp.ui.fragments.search.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.mydrinksapp.ui.detail.DetailFragment"
+        android:name="com.mydrinksapp.ui.fragments.detail.DetailFragment"
         android:label="@string/detail"
         tools:layout="@layout/fragment_detail">
 
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.mydrinksapp.ui.favorites.FavoritesFragment"
+        android:name="com.mydrinksapp.ui.fragments.favorites.FavoritesFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorite">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.mydrinksapp.ui.home.HomeFragment"
+        android:name="com.mydrinksapp.ui.fragments.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -98,7 +98,7 @@
     </fragment>
     <fragment
         android:id="@+id/allCocktailsFragment"
-        android:name="com.mydrinksapp.ui.allcocktails.AllCocktailsFragment"
+        android:name="com.mydrinksapp.ui.fragments.allcocktails.AllCocktailsFragment"
         android:label="@string/all_cocktails"
         tools:layout="@layout/fragment_all_cocktails" >
         <action
@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailByLetterFragment"
-        android:name="com.mydrinksapp.ui.detail.DetailByLetterFragment"
+        android:name="com.mydrinksapp.ui.fragments.detail.DetailByLetterFragment"
         android:label="@string/detail"
         tools:layout="@layout/fragment_detail_by_letter" >
         <argument
@@ -120,7 +120,7 @@
     </fragment>
     <fragment
         android:id="@+id/ingredientsFragment"
-        android:name="com.mydrinksapp.ui.allingredients.IngredientsFragment"
+        android:name="com.mydrinksapp.ui.fragments.allingredients.IngredientsFragment"
         android:label="@string/ingredients"
         tools:layout="@layout/fragment_ingredients" >
         <action
@@ -133,7 +133,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.mydrinksapp.ui.categories.CategoriesFragment"
+        android:name="com.mydrinksapp.ui.fragments.categories.CategoriesFragment"
         android:label="@string/categories"
         tools:layout="@layout/fragment_categories">
         <action
