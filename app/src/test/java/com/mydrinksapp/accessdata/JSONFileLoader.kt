@@ -3,6 +3,7 @@ package com.mydrinksapp.accessdata
 import com.google.gson.Gson
 import com.mydrinksapp.model.data.CategoriesList
 import com.mydrinksapp.model.data.CocktailByCategoryList
+import com.mydrinksapp.model.data.CocktailList
 import java.io.InputStreamReader
 
 class JSONFileLoader {
@@ -29,11 +30,11 @@ class JSONFileLoader {
         return Gson().fromJson(jsonStr, CategoriesList::class.java)
     }
 
-//    fun loadCategoriesList(file: String): CategoriesList? {
-//        val loader = InputStreamReader(this.javaClass.classLoader?.getResourceAsStream(file))
-//        jsonStr = loader.readText()
-//        loader.close()
-//        return Gson().fromJson(jsonStr, CategoriesList::class.java)
-//    }
+    fun loadCocktailById(file: String): CocktailList? {
+        val loader = InputStreamReader(this.javaClass.classLoader?.getResourceAsStream(file))
+        jsonStr = loader.readText()
+        loader.close()
+        return Gson().fromJson(jsonStr, CocktailList::class.java)
+    }
 
 }
