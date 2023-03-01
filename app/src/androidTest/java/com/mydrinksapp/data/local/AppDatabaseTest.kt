@@ -51,7 +51,7 @@ class AppDatabaseTest {
     @Test
     fun testDatabaseVersionIsCurrent() = runTest {
         executeDatabaseFunction()
-        assertThat(database.openHelper.readableDatabase.version).isEqualTo(3)
+        assertThat(database.openHelper.readableDatabase.version).isEqualTo(4)
     }
 
     @ExperimentalCoroutinesApi
