@@ -69,13 +69,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchAllCocktailsInHome() {
-
-        val categoriesNames = arrayOf(
-            "Ordinary Drink", "Cocktail", "Shake", "Other / Unknown", "Cocoa", "Shot",
-            "Coffee / Tea", "Homemade Liqueur", "Punch / Party Drink", "Beer", "Soft Drink"
-        )
-        val randomCategory = categoriesNames[Random.nextInt(categoriesNames.size)]
-
         viewModel.fetchAllCocktailsInHome(randomCategory).observe(viewLifecycleOwner) {
             with(binding) {
                 when (it) {
@@ -168,5 +161,13 @@ class HomeFragment : Fragment() {
                 }
             }
         )
+    }
+
+    companion object {
+        private val categoriesNames = arrayOf(
+            "Ordinary Drink", "Cocktail", "Shake", "Other / Unknown", "Cocoa", "Shot",
+            "Coffee / Tea", "Homemade Liqueur", "Punch / Party Drink", "Beer", "Soft Drink"
+        )
+        val randomCategory = categoriesNames[Random.nextInt(categoriesNames.size)]
     }
 }

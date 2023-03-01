@@ -20,11 +20,8 @@ class DetailViewModel @Inject constructor(private val repo: CocktailRepository) 
         viewModelScope.launch {
             if (repo.isCocktailFavorite(cocktail)) {
                 repo.deleteFavoriteCocktail(cocktail)
-//                Toast.makeText(this@MainViewModel, "", Toast.LENGTH_SHORT).show()
-//                toastHelper.sendToast("Cocktail deleted from favorites")
             } else {
                 repo.saveFavoriteCocktail(cocktail)
-//                toastHelper.sendToast("Cocktail saved to favorites")
             }
         }
     }
@@ -35,7 +32,8 @@ class DetailViewModel @Inject constructor(private val repo: CocktailRepository) 
 
     /*------------------------------ Detail cocktails by Id ------------------------------*/
     private var _cocktailByLetterDetailMutableLiveData = MutableLiveData<Cocktail>()
-    val cocktailByLetterDetailMutableLiveData: LiveData<Cocktail> = _cocktailByLetterDetailMutableLiveData
+    val cocktailByLetterDetailMutableLiveData: LiveData<Cocktail> =
+        _cocktailByLetterDetailMutableLiveData
 
     fun fetchCocktailDetailsById(idDrink: String) {
         viewModelScope.launch(Dispatchers.IO) {

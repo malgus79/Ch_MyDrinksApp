@@ -15,7 +15,6 @@ import com.mydrinksapp.base.utils.hide
 import com.mydrinksapp.base.utils.show
 import com.mydrinksapp.base.utils.showToast
 import com.mydrinksapp.databinding.FragmentCategoriesBinding
-import com.mydrinksapp.ui.fragments.categories.CategoriesFragmentArgs
 import com.mydrinksapp.ui.fragments.categories.adapter.CategoriesAdapter
 import com.mydrinksapp.viewmodel.fragments.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint

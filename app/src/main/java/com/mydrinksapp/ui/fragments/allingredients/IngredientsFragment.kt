@@ -104,7 +104,7 @@ class IngredientsFragment : Fragment(), AllIngredientsAdapter.OnIngredientsClick
     private fun setupIngredientsRecyclerView() {
         binding.rvAllIngredients.apply {
             adapter = adapterAllIngredients
-            layoutManager =StaggeredGridLayoutManager(
+            layoutManager = StaggeredGridLayoutManager(
                 resources.getInteger(R.integer.columns_all_ingredients),
                 StaggeredGridLayoutManager.VERTICAL
             )

@@ -27,7 +27,8 @@ class FavoritesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = ItemFavoriteCocktailBinding.inflate(LayoutInflater.from(context), parent, false)
+        val itemBinding =
+            ItemFavoriteCocktailBinding.inflate(LayoutInflater.from(context), parent, false)
 //        return MainViewHolder(itemBinding)
 
         val holder = ViewHolder(itemBinding)

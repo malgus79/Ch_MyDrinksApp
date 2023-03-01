@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimaryVariant"
-    android:orientation="vertical"
-    tools:context=".ui.favorites.FavoritesFragment">
+    android:orientation="vertical">
 
     <include
         android:id="@+id/empty_container"

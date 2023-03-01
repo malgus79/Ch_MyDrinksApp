@@ -24,7 +24,8 @@
                 android:id="@+id/img_cocktail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/colorPrimaryVariant" />
+                android:background="?attr/colorPrimaryVariant"
+                android:contentDescription="@string/img_detail_cocktail" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -35,11 +36,11 @@
             android:layout_margin="@dimen/common_margin_min"
             android:layout_marginHorizontal="@dimen/common_margin_default"
             android:backgroundTint="?attr/colorSecondary"
+            android:contentDescription="@string/fab_share"
             android:src="@drawable/ic_share"
             app:layout_constraintEnd_toStartOf="@id/btn_save_or_delete_cocktail"
             app:layout_constraintTop_toTopOf="@id/materialCardView"
-            app:tint="?attr/colorOnSecondary"
-            tools:ignore="ContentDescription" />
+            app:tint="?attr/colorOnSecondary" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_save_or_delete_cocktail"
@@ -47,11 +48,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin_min"
             android:backgroundTint="?attr/colorSecondary"
+            android:contentDescription="@string/fab_delete_or_save"
             android:src="@drawable/ic_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/materialCardView"
-            app:tint="?attr/colorOnSecondary"
-            tools:ignore="ContentDescription" />
+            app:tint="?attr/colorOnSecondary" />
 
         <TextView
             android:id="@+id/cocktail_title"

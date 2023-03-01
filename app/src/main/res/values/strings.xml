@@ -28,6 +28,10 @@
     <!-- Detail -->
     <string name="detail">Detail</string>
     <string name="share_error">Failed to share</string>
+    <string name="fab_share">Fab_share</string>
+    <string name="fab_delete_or_save">Fab delete or save</string>
+    <string name="img_detail_cocktail">Image detail cocktail</string>
+    <string name="cocktails_description">Cocktails description</string>
     <!-- Ingredients -->
     <string name="ingredients">Ingredients</string>
     <string name="ingredient_description">"Description: "</string>
@@ -39,6 +43,6 @@
     <!-- Name of categories -->
     <string name="name_categories">Name Categories</string>
     <string name="cocktails">Cocktails</string>
-
+<!---->
 
 </resources>

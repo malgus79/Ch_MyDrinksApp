@@ -2,7 +2,7 @@ package com.mydrinksapp.ui.fragments.allcocktails.letter
 
 class LetterProvider {
     companion object {
-        val letterList = listOf<Letter>(
+        val letterList = listOf(
             Letter("A"),
             Letter("B"),
             Letter("C"),

@@ -5,8 +5,8 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.mydrinksapp.base.Resource
-import com.mydrinksapp.model.data.Cocktail
 import com.mydrinksapp.domain.CocktailRepository
+import com.mydrinksapp.model.data.Cocktail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

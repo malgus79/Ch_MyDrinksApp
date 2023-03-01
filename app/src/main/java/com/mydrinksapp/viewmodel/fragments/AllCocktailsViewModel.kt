@@ -8,7 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
-class AllCocktailsViewModel @Inject constructor(private val repo: CocktailRepository) : ViewModel() {
+class AllCocktailsViewModel @Inject constructor(private val repo: CocktailRepository) :
+    ViewModel() {
 
     private val mutableCocktailsByLetter = MutableLiveData<String>()
 

@@ -24,7 +24,8 @@
                 android:id="@+id/img_cocktail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/colorPrimaryVariant" />
+                android:background="?attr/colorPrimaryVariant"
+                android:contentDescription="@string/img_detail_cocktail"/>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -39,7 +40,7 @@
             app:layout_constraintEnd_toStartOf="@id/btn_save_or_delete_cocktail"
             app:layout_constraintTop_toTopOf="@id/materialCardView"
             app:tint="?attr/colorOnSecondary"
-            tools:ignore="ContentDescription" />
+            android:contentDescription="@string/fab_share" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_save_or_delete_cocktail"
@@ -51,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/materialCardView"
             app:tint="?attr/colorOnSecondary"
-            tools:ignore="ContentDescription" />
+            android:contentDescription="@string/fab_delete_or_save" />
 
         <TextView
             android:id="@+id/cocktail_title"
@@ -76,11 +77,10 @@
             android:layout_marginVertical="@dimen/common_margin_min"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/common_size_normal"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/materialCardView"
             app:layout_constraintTop_toBottomOf="@id/btn_share_cocktail"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@string/cocktails_description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
