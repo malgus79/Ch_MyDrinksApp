@@ -44,4 +44,11 @@ class JSONFileLoader {
         return Gson().fromJson(jsonStr, CocktailList::class.java)
     }
 
+    fun loadCocktailByLetter(file: String): CocktailList? {
+        val loader = InputStreamReader(this.javaClass.classLoader?.getResourceAsStream(file))
+        jsonStr = loader.readText()
+        loader.close()
+        return Gson().fromJson(jsonStr, CocktailList::class.java)
+    }
+
 }
