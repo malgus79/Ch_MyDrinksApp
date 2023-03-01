@@ -68,7 +68,7 @@ class SearchViewModelTest {
         runBlocking {
             val remoteResult = api.getCocktailByName("margarita")
             val localResult =
-                JSONFileLoader().loadCocktailByName("cocktail_by_name_response_success")
+                JSONFileLoader().loadCocktail("cocktail_by_name_response_success")
 
             assertThat(
                 localResult?.drinks?.size,

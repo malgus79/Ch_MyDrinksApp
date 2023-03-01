@@ -85,7 +85,7 @@ class AllCocktailsViewModelTest {
         runBlocking {
             val remoteResult = api.getCocktailByLetter("A")
             val localResult =
-                JSONFileLoader().loadCocktailByLetter("cocktail_by_letter_response_success")
+                JSONFileLoader().loadCocktail("cocktail_by_letter_response_success")
 
             assertThat(
                 localResult?.drinks?.size,

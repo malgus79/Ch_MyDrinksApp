@@ -67,7 +67,7 @@ class DetailViewModelTest {
         runBlocking {
             val remoteResult = api.getCocktailById("11007")
             val localResult =
-                JSONFileLoader().loadCocktailById("cocktail_by_id_response_success")
+                JSONFileLoader().loadCocktail("cocktail_by_id_response_success")
 
             MatcherAssert.assertThat(
                 localResult?.drinks?.size,
