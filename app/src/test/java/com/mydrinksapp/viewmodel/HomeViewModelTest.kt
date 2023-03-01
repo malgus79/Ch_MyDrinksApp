@@ -1,6 +1,7 @@
 package com.mydrinksapp.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.mydrinksapp.accessdata.JSONFileLoader
 import com.mydrinksapp.base.AppConstants.BASE_URL
 import com.mydrinksapp.model.data.Categories
 import com.mydrinksapp.model.data.CocktailByCategory
@@ -123,6 +124,65 @@ class HomeViewModelTest {
                         "Ordinary Drink"
                     )
                 )
+            )
+        }
+    }
+
+    /*------------------------------ check remote with local test ------------------------------*/
+    @Test
+    fun `check cocktails by category remote with local test`() {
+        runBlocking {
+            val remoteResult = api.getCocktailsByCategories("Shake")
+            val localResult =
+                JSONFileLoader().loadCocktailByCategoryList("category_response_success")
+
+            assertThat(
+                localResult?.drinks?.size,
+                `is`(remoteResult.drinks.size)
+            )
+
+            assertThat(
+                localResult?.drinks.isNullOrEmpty(),
+                `is`(remoteResult.drinks.isEmpty())
+            )
+
+            assertThat(
+                localResult?.drinks?.contains(CocktailByCategory()),
+                `is`(remoteResult.drinks.contains(CocktailByCategory()))
+            )
+
+            assertThat(
+                localResult?.drinks?.indices,
+                `is`(remoteResult.drinks.indices)
+            )
+        }
+    }
+
+    @Test
+    fun `check all categories list remote with local test`() {
+        runBlocking {
+            val remoteResult = api.getAllCategoriesList("list")
+            val localResult =
+                JSONFileLoader().loadCocktailList("categories_list_response_success")
+
+            assertThat(
+                localResult?.drinks?.size,
+                `is`(remoteResult.drinks.size)
+            )
+
+            assertThat(
+                localResult?.drinks.isNullOrEmpty(),
+                `is`(remoteResult.drinks.isEmpty())
+            )
+
+            assertThat(
+                localResult?.drinks?.contains(Categories()),
+                `is`(remoteResult.drinks.contains(Categories()))
+            )
+
+            assertThat(
+                localResult?.drinks?.indices,
+                `is`(remoteResult.drinks.indices)
             )
         }
     }
