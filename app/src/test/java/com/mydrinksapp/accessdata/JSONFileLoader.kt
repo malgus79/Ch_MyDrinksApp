@@ -16,7 +16,7 @@ class JSONFileLoader {
         return jsonStr
     }
 
-    fun loadCocktailByCategoryList(file: String): CocktailByCategoryList? {
+    fun loadCocktailByCategory(file: String): CocktailByCategoryList? {
         val loader = InputStreamReader(this.javaClass.classLoader?.getResourceAsStream(file))
         jsonStr = loader.readText()
         loader.close()

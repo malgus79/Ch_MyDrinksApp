@@ -135,7 +135,7 @@ class HomeViewModelTest {
         runBlocking {
             val remoteResult = api.getCocktailsByCategories("Shake")
             val localResult =
-                JSONFileLoader().loadCocktailByCategoryList("category_response_success")
+                JSONFileLoader().loadCocktailByCategory("category_response_success")
 
             assertThat(
                 localResult?.drinks?.size,
