@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.mydrinksapp.model.data.CategoriesList
 import com.mydrinksapp.model.data.CocktailByCategoryList
 import com.mydrinksapp.model.data.CocktailList
+import com.mydrinksapp.model.data.IngredientList
 import java.io.InputStreamReader
 
 class JSONFileLoader {
@@ -35,5 +36,12 @@ class JSONFileLoader {
         jsonStr = loader.readText()
         loader.close()
         return Gson().fromJson(jsonStr, CocktailList::class.java)
+    }
+
+    fun loadIngredient(file: String): IngredientList? {
+        val loader = InputStreamReader(this.javaClass.classLoader?.getResourceAsStream(file))
+        jsonStr = loader.readText()
+        loader.close()
+        return Gson().fromJson(jsonStr, IngredientList::class.java)
     }
 }

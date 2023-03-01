@@ -12,5 +12,5 @@ data class Ingredient(
 )
 
 data class IngredientList(
-    val ingredients: List<Ingredient> = listOf()
+    @SerializedName("ingredients") val ingredients: List<Ingredient> = listOf()
 )
