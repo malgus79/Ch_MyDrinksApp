@@ -1,4 +1,4 @@
-package com.mydrinksapp.viewmodel
+package com.mydrinksapp.viewmodel.fragments
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.mydrinksapp.accessdata.JSONFileLoader
@@ -6,6 +6,7 @@ import com.mydrinksapp.base.AppConstants.BASE_URL
 import com.mydrinksapp.model.data.Categories
 import com.mydrinksapp.model.data.CocktailByCategory
 import com.mydrinksapp.model.remote.ApiService
+import com.mydrinksapp.viewmodel.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
