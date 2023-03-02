@@ -4,6 +4,8 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +20,12 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.mydrinksapp.R
+import com.mydrinksapp.base.utils.showToast
 import com.mydrinksapp.databinding.ActivityMainBinding
 import com.mydrinksapp.viewmodel.activities.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -68,6 +72,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun initNavigationView() {
         val navigationView: NavigationView = binding.navView
         navigationView.setNavigationItemSelectedListener(this)
+
+        val headerView: View = navigationView.getHeaderView(0)
+        val header = headerView.findViewById<View>(R.id.nav_header) as LinearLayout
+        header.setOnClickListener {
+            showToast(getString(R.string.choose_option))
+        }
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

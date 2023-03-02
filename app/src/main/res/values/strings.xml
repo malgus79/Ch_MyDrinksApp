@@ -43,6 +43,9 @@
     <!-- Name of categories -->
     <string name="name_categories">Name Categories</string>
     <string name="cocktails">Cocktails</string>
-<!---->
+    <!-- Splash -->
+    <string name="logo_splash">Logo Splash</string>
+    <string name="choose_option">Choose an option</string>
+
 
 </resources>
