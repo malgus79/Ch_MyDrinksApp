@@ -73,7 +73,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     // Room
@@ -90,11 +89,13 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     // RecyclerView Animators
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
-    // OkHttp
-    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.10"
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
     // Carousel
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.4'
+
+//    // OkHttp
+//    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.10"
+//    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
+//    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
 
 
     testImplementation 'junit:junit:4.13.2'
