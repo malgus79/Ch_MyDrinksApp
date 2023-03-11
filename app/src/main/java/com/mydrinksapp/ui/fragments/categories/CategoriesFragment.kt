@@ -2,9 +2,12 @@ package com.mydrinksapp.ui.fragments.categories
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -34,9 +37,27 @@ class CategoriesFragment : Fragment() {
     ): View {
         binding = FragmentCategoriesBinding.inflate(inflater, container, false)
 
+        swipeRefresh()
         setupCocktailsByCategories()
 
         return binding.root
+    }
+
+    private fun swipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.setColorSchemeResources(R.color.purple_700)
+            binding.swipeRefreshLayout.setProgressBackgroundColorSchemeColor(
+                ContextCompat.getColor(requireContext(), R.color.pink_light)
+            )
+            Handler(Looper.getMainLooper()).postDelayed({
+                setupCocktailsByCategories()
+            }, 500)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     private fun setupCocktailsByCategories() {
@@ -49,9 +70,14 @@ class CategoriesFragment : Fragment() {
             with(binding) {
                 when (it) {
                     is Resource.Loading -> {
-                        progressBar.show()
+                        if (swipeRefreshLayout.isRefreshing) {
+                            progressBar.hide()
+                        } else {
+                            progressBar.show()
+                        }
                     }
                     is Resource.Success -> {
+                        swipeRefreshLayout.isRefreshing = false
                         progressBar.hide()
                         if (it.data.drinks.isEmpty()) {
                             rvCocktailsByCategories.hide()
@@ -63,6 +89,7 @@ class CategoriesFragment : Fragment() {
                         showTitleCocktailsByCategory()
                     }
                     is Resource.Failure -> {
+                        swipeRefreshLayout.isRefreshing = false
                         progressBar.hide()
                         showToast(getString(R.string.error_detail))
                     }

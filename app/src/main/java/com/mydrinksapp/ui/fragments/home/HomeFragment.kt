@@ -80,8 +80,11 @@ class HomeFragment : Fragment() {
             with(binding) {
                 when (it) {
                     is Resource.Loading -> {
-                        binding.swipeRefreshLayout.isRefreshing = false
-                        progressBar.show()
+                        if (swipeRefreshLayout.isRefreshing) {
+                            progressBar.hide()
+                        } else {
+                            progressBar.show()
+                        }
                     }
                     is Resource.Success -> {
                         binding.swipeRefreshLayout.isRefreshing = false
