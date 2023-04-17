@@ -1,9 +1,14 @@
 package com.mydrinksapp.domain
 
 import androidx.lifecycle.LiveData
-import com.mydrinksapp.base.Resource
-import com.mydrinksapp.model.data.*
-import com.mydrinksapp.model.local.CocktailEntity
+import com.mydrinksapp.core.Resource
+import com.mydrinksapp.data.local.CocktailEntity
+import com.mydrinksapp.data.model.AllIngredientList
+import com.mydrinksapp.data.model.CategoriesList
+import com.mydrinksapp.data.model.Cocktail
+import com.mydrinksapp.data.model.CocktailByCategoryList
+import com.mydrinksapp.data.model.CocktailList
+import com.mydrinksapp.data.model.IngredientList
 import kotlinx.coroutines.flow.Flow
 
 interface CocktailRepoInterface {

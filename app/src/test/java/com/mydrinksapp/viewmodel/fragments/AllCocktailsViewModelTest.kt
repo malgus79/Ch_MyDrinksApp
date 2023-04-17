@@ -1,9 +1,9 @@
 package com.mydrinksapp.viewmodel.fragments
 
 import com.mydrinksapp.accessdata.JSONFileLoader
-import com.mydrinksapp.base.AppConstants.BASE_URL
-import com.mydrinksapp.model.data.Cocktail
-import com.mydrinksapp.model.remote.ApiService
+import com.mydrinksapp.app.AppConstants.BASE_URL
+import com.mydrinksapp.data.model.Cocktail
+import com.mydrinksapp.data.remote.ApiService
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`

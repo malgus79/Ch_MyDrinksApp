@@ -1,10 +1,10 @@
 package com.mydrinksapp.accessdata
 
 import com.google.gson.Gson
-import com.mydrinksapp.model.data.CategoriesList
-import com.mydrinksapp.model.data.CocktailByCategoryList
-import com.mydrinksapp.model.data.CocktailList
-import com.mydrinksapp.model.data.IngredientList
+import com.mydrinksapp.data.model.CategoriesList
+import com.mydrinksapp.data.model.CocktailByCategoryList
+import com.mydrinksapp.data.model.CocktailList
+import com.mydrinksapp.data.model.IngredientList
 import java.io.InputStreamReader
 
 class JSONFileLoader {

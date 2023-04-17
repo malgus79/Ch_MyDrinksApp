@@ -1,7 +1,7 @@
 package com.mydrinksapp.accessdata
 
 import com.google.gson.Gson
-import com.mydrinksapp.model.data.CategoriesList
+import com.mydrinksapp.data.model.CategoriesList
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.MatcherAssert.assertThat
