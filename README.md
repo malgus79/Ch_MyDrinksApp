@@ -1,7 +1,5 @@
 # Drinks App
 
-Aplicación bebidas y cócteles de todo el mundo.
-
 Herramientas utilizadas:
 - Estructura de aplicaciones Android.
 - Depuración en virtual device y dispositivos físicos.
